@@ -46,6 +46,8 @@ class DatabaseSeeder extends Seeder
                 'prefix'        =>  null,
                 'divider'       =>  null,
                 'aiprefix'      =>  null,
+                'history'       =>  1,
+                'isFreechat'    =>  1,
             ],
             [
                 'name'          =>  'Q&A',
@@ -64,7 +66,9 @@ class DatabaseSeeder extends Seeder
                 'placeholder'   =>  'Ask a question...',
                 'prefix'        =>  'Q:',
                 'divider'       =>  "\n\n",
-                'aiprefix'      =>  'A:'
+                'aiprefix'      =>  'A:',
+                'history'       =>  1,
+                'isFreechat'    =>  0,
             ],
             [
                 'name'          =>  'Grammer Checker',
@@ -83,7 +87,9 @@ class DatabaseSeeder extends Seeder
                 'divider'       =>  "\n\n",
                 'style'         =>  'background-color: #d2f4d3',
                 'language'      =>  'Use language: British English',
-                'isTextarea'   =>  1
+                'history'       =>  1,
+                'isFreechat'    =>  0,
+                'isTextarea'    =>  1,
             ],
             [
                 'name'          =>  'Summary',
@@ -95,12 +101,14 @@ class DatabaseSeeder extends Seeder
                     'frequency_penalty' =>  0,
                     'presence_penalty'  =>  0
                 ]),
-                'pretext'       =>  '<p>Summarize this for a second-grade student:</p><br><p>Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a gas giant with a mass one-thousandth that of the Sun, but two-and-a-half times that of all the other planets in the Solar System combined. Jupiter is one of the brightest objects visible to the naked eye in the night sky, and has been known to ancient civilizations since before recorded history. It is named after the Roman god Jupiter.[19] When viewed from Earth, Jupiter can be bright enough for its reflected light to cast visible shadows,[20] and is on average the third-brightest natural object in the night sky after the Moon and Venus.</p>',
+                'pretext'       =>  '<p>Summarize this for a second-grade student:</p>',
                 'img'           =>  '/assets/images/freechat.svg',
                 'slug'          =>  '/model/summary',
                 'divider'       =>  "\n\n",
                 'style'         =>  'background-color: #d2f4d3',
-                'isTextarea'   =>  1
+                'isTextarea'    =>  1,
+                'history'       =>  1,
+                'isFreechat'    =>  0,
             ],
             [
                 'name'          =>  'Ad from product description',
@@ -112,12 +120,14 @@ class DatabaseSeeder extends Seeder
                     'frequency_penalty' =>  0,
                     'presence_penalty'  =>  0
                 ]),
-                'pretext'       =>  '<p>Write a creative ad for the following product to run on Facebook aimed at parents:</p><br><p>Product: Learning Room is a virtual environment to help students from kindergarten to high school excel in school.</p>',
+                'pretext'       =>  '<p>Write a creative ad for the following product:</p><p>Product title:</p><p>Product description:</p><p>Target audience:</p><p>Tone: Friendly/Proffesional</p>',
                 'img'           =>  '/assets/images/freechat.svg',
                 'slug'          =>  '/model/ad',
                 'divider'       =>  "\n\n",
                 'style'         =>  'background-color: #d2f4d3',
-                'isTextarea'   =>  1
+                'isTextarea'    =>  1,
+                'history'       =>  1,
+                'isFreechat'    =>  0,
             ],
             [
                 'name'          =>  'Keywords',
@@ -129,12 +139,14 @@ class DatabaseSeeder extends Seeder
                     'frequency_penalty' =>  0.8,
                     'presence_penalty'  =>  0
                 ]),
-                'pretext'       =>  '<p>Extract keywords from this text:</p><br><p>Black-on-black ware is a 20th- and 21st-century pottery tradition developed by the Puebloan Native American ceramic artists in Northern New Mexico. Traditional reduction-fired blackware has been made for centuries by pueblo artists. Black-on-black ware of the past century is produced with a smooth surface, with the designs applied through selective burnishing or the application of refractory slip. Another style involves carving or incising designs and selectively polishing the raised areas. For generations several families from Khapo Owingeh and Pohwhóge Owingeh pueblos have been making black-on-black ware with the techniques passed down from matriarch potters. Artists from other pueblos have also produced black-on-black ware. Several contemporary artists have created works honoring the pottery of their ancestors.</p>',
+                'pretext'       =>  '<p>Extract keywords from following text:</p>',
                 'img'           =>  '/assets/images/freechat.svg',
                 'slug'          =>  '/model/keywords',
                 'divider'       =>  "\n\n",
                 'style'         =>  'background-color: #d2f4d3',
-                'isTextarea'   =>  1
+                'isTextarea'    =>  1,
+                'history'       =>  1,
+                'isFreechat'    =>  0,
             ],
             [
                 'name'          =>  'Note to summary',
@@ -146,12 +158,14 @@ class DatabaseSeeder extends Seeder
                     'frequency_penalty' =>  0,
                     'presence_penalty'  =>  0
                 ]),
-                'pretext'       =>  '<p>Convert my short hand into a first-hand account of the meeting:</p><br><p>Tom: Profits up 50%</p><p>Jane: New servers are online</p><p>Kjel: Need more time to fix software</p><p>Jane: Happy to help</p><p>Parkman: Beta testing almost done</p>',
+                'pretext'       =>  '<p>Note:</p>',
                 'img'           =>  '/assets/images/freechat.svg',
                 'slug'          =>  '/model/note-to-summary',
                 'divider'       =>  "\n\n",
                 'style'         =>  'background-color: #d2f4d3',
-                'isTextarea'   =>  1
+                'isTextarea'    =>  1,
+                'history'       =>  1,
+                'isFreechat'    =>  0,
             ],
             [
                 'name'          =>  'Essay Outline',
@@ -163,12 +177,14 @@ class DatabaseSeeder extends Seeder
                     'frequency_penalty' =>  0,
                     'presence_penalty'  =>  0
                 ]),
-                'pretext'       =>  '<p>Create an outline for an essay about Nikola Tesla and his contributions to technology:</p>',
+                'pretext'       =>  '<p>Create an outline for an essay</p><p>Topic:</p>',
                 'img'           =>  '/assets/images/freechat.svg',
                 'slug'          =>  '/model/essay-outline',
                 'divider'       =>  "\n\n",
                 'style'         =>  'background-color: #d2f4d3',
-                'isTextarea'   =>  1
+                'isTextarea'    =>  1,
+                'history'       =>  1,
+                'isFreechat'    =>  0,
             ],
             [
                 'name'          =>  'Interview Questions',
@@ -185,7 +201,9 @@ class DatabaseSeeder extends Seeder
                 'slug'          =>  '/model/interview-question',
                 'divider'       =>  "\n\n",
                 'style'         =>  'background-color: #d2f4d3',
-                'isTextarea'   =>  1
+                'isTextarea'    =>  1,
+                'history'       =>  1,
+                'isFreechat'    =>  0,
             ],
         ];
 

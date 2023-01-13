@@ -21,6 +21,7 @@ class ChatController extends Controller
                 $array[$key] = $setting;
             }
             $msg = $request->msg;
+
             if($prompt->divider){
                 $msg = $msg.$prompt->divider;
             }
@@ -40,11 +41,12 @@ class ChatController extends Controller
                 ],
                 $array
             );
+
             $result = $client->completions()->create($data);
             $response = $result->choices[0]->text;
-            if($prompt->isTextarea){
-                $response = '<br/><p>'.$response.'</p>';
-            }
+            // if($prompt->isTextarea){
+            //     $response = '<p>'.$response.'</p>';
+            // }
 
             return ltrim($response);
         } catch (\Exception $e) {

@@ -26,6 +26,9 @@ return new class extends Migration
             $table->text('pretext')->nullable();
             $table->string('style')->nullable();
             $table->tinyInteger('isTextarea')->nullable();
+            $table->string('language')->nullable();
+            $table->tinyInteger('history')->nullable();
+            $table->tinyInteger('isFreechat')->nullable();
             $table->timestamps();
         });
     }

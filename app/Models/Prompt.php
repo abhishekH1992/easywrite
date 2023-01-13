@@ -26,6 +26,8 @@ class Prompt extends Model
         'aiprefix',
         'style',
         'isTextarea',
-        'component'
+        'language',
+        'history',
+        'isFreechat'
     ];
 }
