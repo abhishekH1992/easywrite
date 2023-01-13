@@ -1,78 +1,49 @@
 <template>
-    <div class="chat-container">
-        <chat-head :name="`Freechat`" :img="`/assets/images/freechat.svg`"/>
-        <div class="chat-body">
-            <div class="wrapper" v-for="(chat, i) in list" :key="i">
-                <div class="chat">
-                    <div class="profile user" v-if="chat.user === `user`">
-                        <img src="/assets/images/user.svg">
-                    </div>
-                    <div class="profile ai" v-else>
-                        <img src="/assets/images/bot.svg">
-                    </div>
-                    <div class="message">{{ chat.msg }}</div>
-                </div>
-            </div>
-            <div class="wrapper" v-if="isTyping">
-                <div class="chat">
-                    <div class="profile ai">
-                        <img src="/assets/images/bot.svg">
-                    </div>
-                    <div class="message">typing...</div>
-                </div>
+    <div class="chat-body" :class="{isTextarea : pageInfo.isTextarea}">
+        <div class="wrapper" v-if="pageInfo.pretext && !pageInfo.isTextarea">
+            <div class="chat">
+                <div class="message">{{ pageInfo.pretext }}</div>
             </div>
         </div>
-        <div class="bottom-bar">
+        <div class="wrapper" v-for="(chat, i) in list" :key="i">
+            <div class="chat" v-if="pageInfo.isFreechat">
+                <div class="profile user" v-if="chat.user === `user` ">
+                    <img src="/assets/images/user.svg">
+                </div>
+                <div class="profile ai" v-else>
+                    <img src="/assets/images/bot.svg">
+                </div>
+                <div class="message">{{ chat.msg }}</div>
+            </div>
+            <div class="chat" v-else>
+                <div class="message" :style="chat.user === `ai` && pageInfo.style ? pageInfo.style : ''" v-html="chat.msg"></div>
+            </div>
+        </div>
+        <div class="wrapper" v-if="typing">
             <div class="chat">
-                <input type="text" placeholder="Type a message..." v-model="msg" @keydown.enter="submit"/>
-                <button @click="submit"><i class="fas fa-paper-plane"></i></button>
+                <div class="profile ai" v-if="pageInfo.isFreechat">
+                    <img src="/assets/images/bot.svg">
+                </div>
+                <div class="message">typing...</div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import ChatHead from '../design/ChatHead.vue'
 export default {
-    data: () => ({
-        msg: '',
-        isTyping: false,
-    }),
-    components: {
-        ChatHead
+    props: {
+        pageInfo: {
+            required: true,
+        },
+        typing: {
+            required: true,
+        },
     },
     computed: {
         list() {
             return this.$store.state.chat.list;
         },
-    },
-    methods: {
-        submit() {
-            this.isTyping = true;
-            let msg = this.msg;
-            this.msg = '';
-            let user = {
-                msg: msg,
-                user: 'user'
-            }
-            this.$store
-                .dispatch('chat/set_user_msg', user).then((response) => {
-                    var container = this.$el.querySelector(".chat-body");
-                    container.scrollTop = container.scrollHeight;
-                });
-
-            let paylaod = {
-                msg: msg,
-                slug: this.$route.fullPath,
-                history: 1,
-            };
-            this.$store
-                .dispatch('chat/chat', paylaod).then((response) => {
-                    var container = this.$el.querySelector(".chat-body");
-                    container.scrollTop = container.scrollHeight;
-                    this.isTyping = false;
-                });
-        }
     },
 }
 </script>

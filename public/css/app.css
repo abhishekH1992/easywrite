@@ -11206,7 +11206,7 @@ body {
 .main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper {
   width: 100%;
   padding: 15px;
-  border-bottom: 1px solid #D8E3E9;
+  border-bottom: 1px solid #fff;
 }
 .main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat {
   width: 100%;
@@ -11248,6 +11248,11 @@ body {
   border: none;
   padding: 15px 15px 150px 15px;
 }
+@media screen and (max-width: 768px) {
+  .main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper:last-child {
+    padding: 15px 15px 100px 15px;
+  }
+}
 .main-content .chatbox-container .chatbox-body .chat-container .chat-body.is-textarea .quillWrapper {
   width: 100%;
   height: 80vh;
@@ -11266,6 +11271,14 @@ body {
 }
 .main-content .chatbox-container .chatbox-body .chat-container .chat-body.is-textarea .textarea-btn {
   padding: 0 1rem;
+}
+.main-content .chatbox-container .chatbox-body .chat-container .chat-body.isTextarea {
+  max-height: 80vh;
+}
+@media screen and (max-width: 768px) {
+  .main-content .chatbox-container .chatbox-body .chat-container .chat-body.isTextarea {
+    max-height: 75vh;
+  }
 }
 .main-content .chatbox-container .chatbox-body .chat-container .bottom-bar {
   position: absolute;
@@ -11306,6 +11319,42 @@ body {
   transform: scale(1.1);
   transition: all 0.3s ease-in-out;
   color: #0d6efd;
+}
+.main-content .chatbox-container .chatbox-body .chat-container .bottom-bar-textarea {
+  position: absolute;
+  width: 100%;
+  height: 20vh;
+  bottom: 0;
+  z-index: 1;
+}
+.main-content .chatbox-container .chatbox-body .chat-container .bottom-bar-textarea .chat .quillWrapper {
+  width: 100%;
+  height: 15vh;
+  background: #fff;
+}
+.main-content .chatbox-container .chatbox-body .chat-container .bottom-bar-textarea .chat .quillWrapper .ql-toolbar {
+  display: none;
+}
+.main-content .chatbox-container .chatbox-body .chat-container .bottom-bar-textarea .chat .quillWrapper .ql-container {
+  border-top: 1px solid #ccc;
+}
+.main-content .chatbox-container .chatbox-body .chat-container .bottom-bar-textarea .chat .quillWrapper .ql-container .ql-editor {
+  max-height: 15vh;
+  min-height: 15vh;
+}
+@media (max-width: 768px) {
+  .main-content .chatbox-container .chatbox-body .chat-container .bottom-bar-textarea .chat .quillWrapper {
+    display: block;
+  }
+}
+.main-content .chatbox-container .chatbox-body .chat-container .bottom-bar-textarea .chat .textarea-btn {
+  padding: 0.5rem;
+}
+@media screen and (max-width: 768px) {
+  .main-content .chatbox-container .chatbox-body .chat-container .bottom-bar-textarea {
+    max-height: 25vh;
+    bottom: 20px;
+  }
 }
 .main-content .chatbox-container .chatbox-body .chat-container .chat-head {
   position: absolute;
