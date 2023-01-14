@@ -196,7 +196,7 @@ class DatabaseSeeder extends Seeder
                     'frequency_penalty' =>  0,
                     'presence_penalty'  =>  0
                 ]),
-                'pretext'       =>  '<p>Create a list of 8 questions for my interview with a science fiction author:</p>',
+                'pretext'       =>  '<p>Create a list of questions for my interview:</p><p>Topic:</p><p>No. of Questions:</p>',
                 'img'           =>  '/assets/images/freechat.svg',
                 'slug'          =>  '/model/interview-question',
                 'divider'       =>  "\n\n",

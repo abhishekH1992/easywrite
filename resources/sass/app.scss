@@ -529,11 +529,6 @@ body{
                             border: none;
                             padding: 15px 15px 150px 15px;
                         }
-                        @media screen and (max-width: 768px){
-                            &:last-child{
-                                padding: 15px 15px 100px 15px;
-                            }
-                        }
                     }
                     &.is-textarea{
                         .quillWrapper{
@@ -733,8 +728,7 @@ body{
                                 }
                             }
                             .page-name{
-                                text-align: center;
-                                width: inherit;
+                                margin: 0 auto;
                             }
                         }
                     }
