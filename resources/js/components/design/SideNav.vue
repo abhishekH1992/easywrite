@@ -1,7 +1,6 @@
 <template>
 	<div class="admin sidebar" :class="{close: isActive}">
         <div class="logo-details">
-            <i class='bx bx-beer'></i>
             <span class="logo_name">EasyWrite</span>
         </div>
         <ul class="nav-links">

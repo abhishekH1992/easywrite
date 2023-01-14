@@ -6,8 +6,8 @@
             <div class="bar3"></div>
             <ul class="mobile-menu">
                 <li class="logo">
-                    <router-link :to="{ name: 'chatBox'}">
-                        <router-link class="nav-link link_name" :to="{ name: 'chatBox'}">
+                    <router-link :to="{ name: 'chatBox', params: { prompt: 'freechat' }}">
+                        <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'freechat' }}">
                             <span class="first">E</span>asyChat
                         </router-link>
                     </router-link>

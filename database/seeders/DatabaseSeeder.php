@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 
 use \App\Models\User;
 use \App\Models\Prompt;
+use App\Models\Plan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -209,6 +210,34 @@ class DatabaseSeeder extends Seeder
 
         foreach($prompts as $prompt){
             Prompt::create($prompt);
+        }
+
+        $plans = [
+            [
+                'name' => 'Basic', 
+                'slug' => 'basic', 
+                'stripe_plan' => 'price_1MQ3hsEHrPwcYHIS6YWZz3Ki', 
+                'price' => 9.99, 
+                'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+            ],
+            [
+                'name' => 'Advance', 
+                'slug' => 'advance', 
+                'stripe_plan' => 'price_1MQ3iiEHrPwcYHISg7cmbxdN', 
+                'price' => 19.99, 
+                'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+            ],
+            [
+                'name' => 'Premium', 
+                'slug' => 'premium', 
+                'stripe_plan' => 'price_1MQ3jJEHrPwcYHISnaDz6qEG', 
+                'price' => 29.99, 
+                'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+            ]
+        ];
+
+        foreach ($plans as $plan) {
+            Plan::create($plan);
         }
     }
 }

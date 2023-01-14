@@ -1,5 +1,6 @@
 import {createStore} from 'vuex'
 import chat from './modules/chat';
+import subscription from './modules/subscription';
 
 const store = createStore({
     state: {
@@ -11,5 +12,6 @@ const store = createStore({
 });
 
 store.registerModule('chat', chat);
+store.registerModule('subscription', subscription);
 
 export default store;

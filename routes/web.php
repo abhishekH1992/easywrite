@@ -29,12 +29,22 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/model/{model}', function () {
         return view('layouts.app');
     });
+    Route::get('/plans', function () {
+        return view('layouts.app');
+    });
+    Route::get('/plans/{plan}', function () {
+        return view('layouts.app');
+    });
 });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Route::get('plans', [PlanController::class, 'index']);
+    // Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
+    // Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
 });
 
 require __DIR__.'/auth.php';

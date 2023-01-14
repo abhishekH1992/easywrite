@@ -1,7 +1,7 @@
 <template>
     <div class="chat-head">
         <mobile-nav :name="name"/>
-        <img :src="img"> <span class="name">{{ name }}</span>
+        <img :src="img" v-if="img"> <span class="name">{{ name }}</span>
     </div>
 </template>
 <script>
@@ -12,7 +12,7 @@ export default {
             required: true,
         },
         img: {
-            required: true,
+            type: String,
         },
     },
     components: {
