@@ -1,58 +1,52 @@
 <template>
     <div class="chatbox-container">
         <chat-head :name="`Subscribe`"/>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header">
-                            You will be charged NZD {{ plan.price }} for {{ plan.name }} Plan
-                        </div>
-                        <div class="card-body">
-                            <form id="payment-form">
-                                <input type="hidden" name="plan" id="plan" value="{{ $plan->id }}">
-        
-                                <div class="row">
-                                    <div class="col-xl-4 col-lg-4">
-                                        <div class="form-group">
-                                            <label for="">Name</label>
-                                            <input type="text" name="name" id="card-holder-name" class="form-control" value="" placeholder="Name on the card">
-                                        </div>
+        <section class="pricing-section payment-section">
+            <div class="container">
+                <div class="sec-title text-center">
+                    <span class="title">You will be charged NZD {{ plan.price }} for {{ plan.name }} Plan</span>
+                </div>
+                <div class="outer-box">
+                    <div class="pricing-block">
+                        <div class="inner-box">
+                            <div class="fields">
+                                <div class="validate-input">
+                                    <div class="wrap-input">
+                                        <input class="block mt-1 w-full input" type="name" v-model="name" required/>
+                                        <span class="label" data-placeholder="Card Holdername"></span>
                                     </div>
                                 </div>
-        
-                                <div class="row">
-                                    <div class="col-xl-4 col-lg-4">
-                                        <div class="form-group">
-                                            <label for="">Card details</label>
-                                            <div id="card-element"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-12 col-lg-12">
-                                    <hr>
-                                        <button type="submit" class="btn btn-primary" id="card-button" :data-secret="intent">Purchase</button>
-                                    </div>
-                                </div>
-        
-                            </form>
-  
+                                <div id="card-element"></div>
+                            </div>
+                            <div class="btn-box submit-btn-block">
+                                <div class="btn-gradiant"></div>
+                                <button class="btn submit-btn" @click="submitPayment" :disabled="isDisabled">
+                                    {{ isDisabled ? btnLoading : btnLabel }}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 </template>
 <script>
 import ChatHead from '../design/ChatHead.vue'
 export default {
-    data: () => ({
-        // icon: [
-        //     'fas fa-paper-plane',
-        //     'fas fa-gem',
-        //     'fas fa-rocket'
-        // ],
-    }),
+    data(){
+        return {
+            stripeAPIToken: process.env.MIX_STRIPE_KEY,
+            stripe: '',
+            elements: '',
+            card: '',
+            name: '',
+            isDisabled: false,
+            btnLabel: 'Subscribe',
+            btnLoading: 'Subscribing...',
+            errorDisplay: true,
+        }
+    },
     components: {
         ChatHead,
     },
@@ -64,11 +58,116 @@ export default {
             return this.$store.state.subscription.intent;
         },
     },
-    mounted() {
-        let payload = {
-            slug: this.$route.params.plan
-        }
-        this.$store.dispatch('subscription/get_plan_by_slug', payload);
+    methods: {
+        includeStripe( URL, callback ){
+            var documentTag = document, tag = 'script',
+                object = documentTag.createElement(tag),
+                scriptTag = documentTag.getElementsByTagName(tag)[0];
+            object.src = '//' + URL;
+            if (callback) { object.addEventListener('load', function (e) { callback(null, e); }, false); }
+            scriptTag.parentNode.insertBefore(object, scriptTag);
+        },
+        configureStripe(){
+            console.log(this.stripeAPIToken);
+            this.stripe = Stripe( this.stripeAPIToken );
+            console.log(this.stripe);
+            this.elements = this.stripe.elements();
+            this.card = this.elements.create('card', {
+                hidePostalCode: true,
+                style: {
+                    base: {
+                        iconColor: '#666EE8',
+                        color: '#555555',
+                        lineHeight: '1.2',
+                        fontSize: '15px',
+                        '::placeholder': {
+                            color: '#CFD7E0',
+                        },
+                    },
+                }, 
+            });
+            this.card.mount('#card-element');
+        },
+        updateSubscription(payment_method){
+            let payload = {
+                plan: this.plan.id,
+                payment: payment_method
+            }
+            this.$store.dispatch('subscription/update_subscription', payload).then((response) => {
+                this.isDisabled = false;
+                this.$notify({
+                    group: 'success',
+                    text: 'Success! Subscription complete.',
+                    closeOnClick: true,
+                });
+                this.$router.push({ name: 'dashboard' });
+            });
+        },
+        submitPayment(){
+            this.isDisabled = true;
+console.log(this.intent.client_secret);
+            this.stripe.confirmCardSetup(
+                this.intent.client_secret, {
+                    payment_method: {
+                        card: this.card,
+                        billing_details: {
+                            name: this.name
+                        }
+                    }
+                }
+            ).then((response) => {
+                console.log(response);
+                if(Object.hasOwn(response, 'error')){
+                    this.$notify({
+                        group: 'error',
+                        text: response.error.message,
+                        closeOnClick: true,
+                    });
+                    this.errorDisplay = false;
+                }
+                this.updateSubscription(response.setupIntent.payment_method);
+                this.card.clear();
+                this.name = '';
+            })
+            .catch((error) => {
+                this.card.clear();
+                this.name = '';
+                this.isDisabled = false;
+                if(this.errorDisplay){
+                    this.$notify({
+                        group: 'error',
+                        text: 'Something went wrong! Please refresh the page.',
+                        closeOnClick: true,
+                    });
+                }
+                this.errorDisplay = true;
+            });
+        },
+        getPlan(){
+            let payload = {
+                id: localStorage.getItem('selectedPlanId'),
+            }
+            this.$store.dispatch('subscription/get_plan_by_id', payload);
+        },
     },
+    mounted() {
+        //Add stripe js
+        this.includeStripe('js.stripe.com/v3/', function(){
+            this.configureStripe();
+        }.bind(this));
+
+        this.getPlan();
+
+        //Setup user intent for subscription
+        this.$store.dispatch('subscription/setup_intent');
+    },
+    beforeDestroy() {
+        localStorage.removeItem('selectedPlanId');
+    },
+    watch: {
+        $route(to, from) {
+            this.getPlan();
+        }
+    }
 }
 </script>

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Chats;
+
 class Prompt extends Model
 {
     use HasFactory;
@@ -28,6 +30,13 @@ class Prompt extends Model
         'isTextarea',
         'language',
         'history',
-        'isFreechat'
+        'isFreechat',
+        'fieldset',
+        'outline',
+        'background',
+        'template',
+        'isSystem',
+        'system',
+        'isMenu',
     ];
 }

@@ -2,12 +2,8 @@
     <div class="auth-forms">
         <form method="POST" action="{{ route('login') }}">
 
-            <div class="title">
-                EasyWrite
-            </div>
-
             <div class="logo-block">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500 logo" />
+                <img src="/assets/images/EasyWrite.svg">
             </div>
 
             @csrf

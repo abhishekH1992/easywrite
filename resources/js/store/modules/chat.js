@@ -6,6 +6,11 @@ export default {
         list: [],
         prompt: '',
         pageInfo: [],
+        tone: '',
+        language: '',
+        toneList: [],
+        languageList: [],
+        translateLanguage: [],
     },
 
     getters: {},
@@ -13,6 +18,12 @@ export default {
     mutations: {
         set_chat: (state, list) => {
             state.list.push(list);
+        },
+        set_chat_list: (state, list) => {
+            state.list = list;
+        },
+        set_reset_chat: (state) => {
+            state.list = [];
         },
         set_prompt: (state, prompt) => {
             state.prompt = state.prompt+prompt;
@@ -25,6 +36,21 @@ export default {
             state.prompt = '';
             state.pageInfo = [];
         },
+        set_tone: (state, tone) => {
+            state.tone = tone;
+        },
+        set_language: (state, language) => {
+            state.language = language;
+        },
+        set_tone_list: (state, toneList) => {
+            state.toneList = toneList;
+        },
+        set_language_list: (state, languageList) => {
+            state.languageList = languageList;
+        },
+        set_translate_language: (state, translateLanguage) => {
+            state.translateLanguage = translateLanguage;
+        },
     },
 
     actions: {
@@ -33,7 +59,6 @@ export default {
                 context.commit('set_prompt',data.msg);
                 data.msg = context.state.prompt;
             }
-            console.log(data.msg);
             return axios.post('/api/chat/chat', data).then((response) => {
                 let res = context.state.pageInfo.aiprefix != null ? context.state.pageInfo.aiprefix+' '+response.data : response.data;
                 let bot = {
@@ -81,5 +106,50 @@ export default {
         reset_state: (context, data) => {
             context.commit('set_reset_state');
         },
+        clean_chat: (context, data) => {
+            context.commit('set_reset_chat');
+            context.commit('set_prompt', '');
+        },
+        save: (context, data) => {
+            return axios.post('/api/chat/save', data);
+        },
+        get_user_chat: (context, data) => {
+            return axios.get('/api/chat/get-user-chat?id='+data.id);
+        },
+        set_user_chat: (context, data) => {
+            context.commit('set_reset_chat');
+            context.commit('set_chat_list', data);
+        },
+        delete_user_chat: (context, data) => {
+            return axios.post('/api/chat/destroy', data);
+        },
+        get_tone_list: (context, data) => {
+            return axios.get('/api/site/get-tone-list').then((response) => {
+                context.commit('set_tone_list', response.data);
+            });
+        },
+        get_language_list: (context, data) => {
+            return axios.get('/api/site/get-language-list').then((response) => {
+                context.commit('set_language_list', response.data);
+            });
+        },
+        translate_chat: (context, data) => {
+            return axios.post('/api/chat/translate', data).then((response) => {
+                let list = context.state.list;
+                list.map((l, key) => {
+                    if (key == data.key) {
+                        let translate = '\n\nTranslation to '+ data.language.name +' language:\n';
+                        translate = translate + response.data;
+                        list[key].msg = l.msg + translate;
+                    }
+                });
+                context.commit('set_chat_list', list);
+            });
+        },
+        translate_language: (context, data) => {
+            return axios.post('/api/chat/translate/language', data).then((response) => {
+                context.commit('set_translate_language', response.data);
+            });
+        }
     },
 };

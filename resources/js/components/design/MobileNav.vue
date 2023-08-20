@@ -6,65 +6,52 @@
             <div class="bar3"></div>
             <ul class="mobile-menu">
                 <li class="logo">
-                    <router-link :to="{ name: 'chatBox', params: { prompt: 'freechat' }}">
-                        <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'freechat' }}">
-                            <span class="first">E</span>asyChat
-                        </router-link>
-                    </router-link>
+                    <img src="/assets/images/EasyWrite.svg">
                 </li>
-                <li>
-                    <router-link :to="{ name: 'chatBox', params: { prompt: 'freechat' }}">
-                        <img src="/assets/images/freechat.svg">
-                        <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'freechat' }}">Freechat</router-link>
-                    </router-link>
+                <li class="nav-billing">
+                    <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'chat' }}"><i class="fa fa-commenting" aria-hidden="true"></i>Chat</router-link>
                 </li>
-                <li>
-                    <router-link :to="{ name: 'chatBox', params: { prompt: 'qa' }}">
-                        <img src="/assets/images/freechat.svg">
-                        <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'qa' }}">Q&A</router-link>
-                    </router-link>
+                <li class="nav-billing">
+                    <router-link class="nav-link link_name" :to="{ name: 'documentsList'}"><i class="fa fa-book" aria-hidden="true"></i>Chat Doc</router-link>
                 </li>
-                <li>
-                    <router-link :to="{ name: 'chatBox', params: { prompt: 'grammer-checker' }}">
-                        <img src="/assets/images/freechat.svg">
-                        <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'grammer-checker' }}">Grammar Checker</router-link>
-                    </router-link>
+                <li class="nav-billing">
+                    <router-link class="nav-link link_name" :to="{ name: 'customChatList'}"><i class="fa fa-comments" aria-hidden="true"></i>Custom Chat</router-link>
                 </li>
-                <li>
-                    <router-link :to="{ name: 'chatBox', params: { prompt: 'summary' }}">
-                        <img src="/assets/images/freechat.svg">
-                        <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'summary' }}">Summary</router-link>
-                    </router-link>
+                <li class="nav-billing">
+                    <router-link class="nav-link link_name" :to="{ name: 'archive'}"><i class="fa fa-database" aria-hidden="true"></i>Project</router-link>
                 </li>
-                <li>
-                    <router-link :to="{ name: 'chatBox', params: { prompt: 'ad' }}">
-                        <img src="/assets/images/freechat.svg">
-                        <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'ad' }}">Ad from product description</router-link>
-                    </router-link>
+                <li class="nav-billing">
+                    <router-link class="nav-link link_name" :to="{ name: 'dashboard'}"><i class="fa fa-list-alt" aria-hidden="true"></i>Template</router-link>
                 </li>
-                <li>
-                    <router-link :to="{ name: 'chatBox', params: { prompt: 'keywords' }}">
-                        <img src="/assets/images/freechat.svg">
-                        <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'keywords' }}">Keywords</router-link>
-                    </router-link>
+                <li class="nav-billing">
+                    <router-link class="nav-link link_name" :to="{ name: 'plans'}"><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
                 </li>
-                <li>
-                    <router-link :to="{ name: 'chatBox', params: { prompt: 'note-to-summary' }}">
-                        <img src="/assets/images/freechat.svg">
-                        <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'note-to-summary' }}">Note to summary</router-link>
-                    </router-link>
+                <!-- <li class="nav-billing">
+                    <router-link class="nav-link link_name" :to="{ name: 'documentsList'}">Chat Doc</router-link>
                 </li>
-                <li>
-                    <router-link :to="{ name: 'chatBox', params: { prompt: 'essay-outline' }}">
-                        <img src="/assets/images/freechat.svg">
-                        <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'essay-outline' }}">Essay Outline</router-link>
-                    </router-link>
+                <li class="nav-billing">
+                    <router-link class="nav-link link_name" :to="{ name: 'customChatList'}">Custom Chat</router-link>
+                </li> -->
+                <!-- <div class="nav-font-main-section header" v-for="(navs, i) in models" :key="i">
+                    {{ i }}
+                    <li v-for="nav in navs" :key="nav.id">
+                        <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: nav.slug.split('/')[2] }}"><i class="fa-solid fa-arrow-right"></i> {{ nav.name }}</router-link>
+                    </li>
+                </div>
+                <li class="nav-billing nav-font-main-section">
+                    <router-link class="nav-link link_name" :to="{ name: 'plans'}">Billing</router-link>
                 </li>
-                <li>
-                    <router-link :to="{ name: 'chatBox', params: { prompt: 'interview-question' }}">
-                        <img src="/assets/images/freechat.svg">
-                        <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'interview-question' }}">Interview Questions</router-link>
-                    </router-link>
+                <li class="nav-font-main-section">
+                    <router-link class="nav-link link_name" :to="{ name: 'archive'}">Archive</router-link>
+                </li> -->
+                <li class="nav-billing logout-btn nav-font-main-section">
+                    <span class="text logout" @click="submit();">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Logout
+                        <form id="logout-form" action="/logout" method="POSt" style="display: none;" ref="logout">
+                            <input type="hidden" name="_token" :value="csrf">
+                        </form>
+                    </span>
                 </li>
             </ul>
         </div>
@@ -75,7 +62,11 @@
 export default {
     data() {
         return {
-            isActive: false
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            isActive: false,
+            language: '',
+            tone: '',
+            isInput: false,
         };
     },
     props: {
@@ -83,10 +74,18 @@ export default {
             required: true,
         },
     },
+    computed: {
+        models() {
+            return this.$store.state.models.list;
+        },
+    },
     methods: {
         toggleMobileMenu() {
             this.isActive = !this.isActive;
-        }
+        },
+        submit() {
+            this.$refs.logout.submit();
+        },
     },
 }
 </script>

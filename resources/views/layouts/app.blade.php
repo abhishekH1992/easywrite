@@ -10,7 +10,7 @@
         <meta name="user-id" content="{{ auth()->user()->id }}">
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="/css/app.css?id=9ad05949757f14bbcde58b0704a52774">
         
     </head>
     <body class="font-sans antialiased">
@@ -19,10 +19,11 @@
                 <side-nav></side-nav>
                 <div class="main-content">
                     <router-view></router-view>
+                    @yield('content')
                 </div>
             </div>
         </div>
 
-        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="/js/app.js?id=fd79cf3440ae0c5b50f694b4dc8cf775"></script>
     </body>
 </html>

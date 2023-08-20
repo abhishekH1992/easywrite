@@ -2,19 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 
 use \App\Models\Prompt;
+use \App\Models\Chats;
 
 class ChatController extends Controller
 {
-    // public function __construct(){
-    //     return $this->middleware('auth:api');
-    // }
-
+    public function __construct(){
+        return $this->middleware('auth:api');
+    }
+    
     public function create(Request $request, \OpenAI\Client $client){
         try{
-            $prompt = Prompt::where('slug', $request->slug)->first();
+            $slug = explode('/', $request->slug);
+            if(count($slug) == 3) {
+                $prompt = Prompt::where('slug', $request->slug)->first();
+            } else {
+                unset($slug[count($slug)-1]);
+                $str = implode('/', $slug);
+                $prompt = Prompt::where('slug', $str)->first();
+            }
             $settings = json_decode($prompt->settings);
             $array = [];
             foreach($settings as $key => $setting){
@@ -42,11 +52,28 @@ class ChatController extends Controller
                 $array
             );
 
-            $result = $client->completions()->create($data);
-            $response = $result->choices[0]->text;
-            // if($prompt->isTextarea){
-            //     $response = '<p>'.$response.'</p>';
-            // }
+            $msg = [
+                'role' => 'user',
+                'content' =>  $data['prompt'],
+            ];
+            $data = [
+                'model' =>  $data['model'],
+                'messages'  =>  [$msg],
+            ];
+
+            $auth = 'Authorization: Bearer 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';
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://api.openai.com/v1/chat/completions');
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', $auth));
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data, true));
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            $result = curl_exec($ch);
+            curl_close($ch);
+
+            $result = json_decode($result);
+            $response = $result->choices[0]->message->content;
 
             return ltrim($response);
         } catch (\Exception $e) {
@@ -55,10 +82,64 @@ class ChatController extends Controller
     }
 
     public function pageInfo(Request $request){
-        return response()->json(Prompt::where('slug', $request->slug)->first());
+        $data = $request->slug;
+        $slug = explode('/', $data);
+        if(count($slug) > 3) {
+            unset($slug[count($slug)-1]);
+            $data = implode('/', $slug);
+        }
+        return response()->json(Prompt::where('slug', $data)->first());
     }
 
     public function getModels(){
         return response()->json(Prompt::all());
+    }
+
+    public function save(Request $request){
+        $prompt = Prompt::where('slug', $request->slug)->first();
+
+        $data = Chats::updateOrCreate(
+            [
+                'id'            =>  $request->id,
+                'user_id'       =>  auth()->id(),
+            ],
+            [
+                'user_id'       =>  auth()->id(),
+                'prompt_id'     =>  $prompt->id,
+                'name'          =>  $request->name ? $request->name : $prompt->name.time(),
+                'editor'        =>  $request->editor,
+                'list'          =>  json_encode($request->list),
+                'language'      =>  $request->language,
+                'tone'          =>  $request->tone,
+            ]
+        );
+
+        return response()->json($data);
+    }
+
+    public function getUserChat(Request $request){
+        $data = Chats::where('id', $request->id)->where('user_id', auth()->id())->first();
+        
+        return response()->json($data);
+    }
+
+    public function getUserChats(Request $request){
+        $arr = [];
+        if($request->term){
+            $data = Chats::latest()->with('prompt')->where('user_id', auth()->id())->where('name', 'LIKE', "%{$request->term}%")->get();
+        } else {
+            $data = Chats::latest()->with('prompt')->where('user_id', auth()->id())->get();
+        }
+
+        foreach($data as $d) {
+            $d->human_readable_date = Carbon::parse($d->created_at)->diffForHumans();
+            array_push($arr, $d);
+        }
+
+        return response()->json($arr);
+    }
+
+    public function destroy(Request $request){
+        return response()->json(Chats::where('id', $request->id)->where('user_id', auth()->id())->delete());
     }
 }

@@ -27,6 +27,7 @@
         "vue-loader": "^16.8.3"
     },
     "dependencies": {
+        "@kyvg/vue3-notification": "^2.8.0",
         "laravel-mix": "^6.0.49",
         "vue-router": "^4.1.6",
         "vue3-editor": "^0.1.1",

@@ -29,6 +29,10 @@ return new class extends Migration
             $table->string('language')->nullable();
             $table->tinyInteger('history')->nullable();
             $table->tinyInteger('isFreechat')->nullable();
+            $table->text('fieldset')->nullable();
+            $table->text('outline')->nullable();
+            $table->string('background')->nullable();
+            $table->string('template')->nullable();
             $table->timestamps();
         });
     }

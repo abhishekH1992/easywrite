@@ -9,12 +9,22 @@
             </div>
             <div class="wrapper" v-for="(chat, i) in list" :key="i">
                 <div class="chat">
-                    <div class="message" :style="chat.user === `ai` && style ? style : ''">{{ chat.msg }}</div>
+                    <div class="message" :style="chat.user === `ai` && style ? style : ''" v-html="chat.msg"></div>
+                    <div class="copy">
+                        <span @click="copytxt(chat.msg)">Copy</span>
+                        <span @click="emailTxt(chat.msg)">Email</span>
+                        <span @click="setTranslatePayload(chat.msg, i)">Translate</span>
+                    </div>
+                    <div class="copy-inline">
+                        <span @click="copytxt(chat.msg)">Copy</span>
+                        <span @click="setTranslatePayload(chat.msg, i)">Translate</span>
+                        <span @click="emailTxt(chat.msg)">Email</span>
+                    </div>
                 </div>
             </div>
             <div class="wrapper" v-if="isTyping">
                 <div class="chat">
-                    <div class="message">typing...</div>
+                    <div class="message">typing<span>...</span></div>
                 </div>
             </div>
         </div>
@@ -28,6 +38,26 @@
             <vue-editor :editorToolbar="customToolbar" v-model="textareaChat"/>
             <div class="textarea-btn">
                 <button class="btn btn-success" @click="submitTextarea">Submit</button>
+            </div>
+        </div>
+        <div class="modal-mask" v-if="showModal">
+            <div class="modal-wrapper">
+                <div class="modal-container">
+                    <div class="modal-header">
+                        <h4>Select Language</h4>
+                    </div>  
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6" v-for="(lang, key) in translateLanguage" :key="key">
+                                <input type="radio" v-model="language" :value="{ code: lang.code, name: lang.name }"> {{ lang.name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn theme-btn" @click="translate()">Translate</button>
+                        <button class="btn theme-btn" @click="cancelTranslate()">Cancel</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -44,6 +74,13 @@ export default {
             ["bold", "italic", "underline"]
         ],
         textareaChat: '',
+        txtToTranslate: '',
+        keyToTranslate: null,
+        showModal: false,
+        language: {
+            code: 'sm',
+            name: 'Samoan'
+        },
     }),
     components: {
         ChatHead,
@@ -73,6 +110,9 @@ export default {
         },
         isTextarea() {
             return this.$store.state.chat.isTextarea;
+        },
+        translateLanguage() {
+            return this.$store.state.chat.translateLanguage;
         },
         // textareaChat() {
         //     return this.$store.state.chat.textareaChat;
@@ -136,16 +176,45 @@ export default {
                 .dispatch('chat/page_textarea_pretext', payload).then((response) => {
                     this.textareaChat = response.data.pretext;
                 });
+        },
+        copytxt(txt) {
+            navigator.clipboard.writeText(txt);
+        },
+        emailTxt(txt) {
+            var mailToLink = "mailto:?body=" + encodeURIComponent(txt);
+            window.location.href = mailToLink;
+        },
+        setTranslatePayload(txt, key) {
+            this.txtToTranslate = txt;
+            this.keyToTranslate = key;
+            this.showModal = true;
+        },
+        cancelTranslate() {
+            this.txtToTranslate = '';
+            this.keyToTranslate = null;
+            this.showModal = false;
+        },
+        translate() {
+            let payload = {
+                txt: this.txtToTranslate,
+                language: this.language,
+                key: this.keyToTranslate,
+            }
+
+            this.$store.dispatch('chat/translate_chat', payload);
+            this.showModal = false;
         }
     },
     mounted() {
         this.$store.dispatch('chat/reset_state');
+        this.$store.dispatch('chat/translate_language');
         this.getPageInfo();
         this.textareaPretext();
     },
     watch: {
         $route(to, from) {
             this.$store.dispatch('chat/reset_state');
+            this.$store.dispatch('chat/translate_language');
             this.getPageInfo();
             this.textareaPretext();
         }
