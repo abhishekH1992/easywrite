@@ -25,7 +25,7 @@ export default {
             state.chatList.push(chatList);
         },
         set_chat_list_initial: (state, chatList) => {
-            state.chatList = chatList;
+            state.chatList = chatList ? chatList : [];
         },
         set_reset_state: (state) => {
             state.chatList = [];

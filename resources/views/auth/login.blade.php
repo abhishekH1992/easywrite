@@ -35,7 +35,6 @@
             </div>
 
             <div class="flex items-center justify-end mt-4 submit-btn-block">
-                <div class="btn-gradiant"></div>
                 <x-primary-button class="submit-btn">
                     {{ __('Log in') }}
                 </x-primary-button>

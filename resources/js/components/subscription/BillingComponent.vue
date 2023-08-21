@@ -8,6 +8,9 @@
                 <div class="manage-btn">
                     <button class="btn btn-submit" @click="manageCustomer">MANAGE SUBSCRIPTION</button>
                 </div>
+                <div class="loader-container" v-if="setLoader">
+                    <div class="loader"></div>
+                </div>
             </div>
         </section>
     </div>
@@ -18,6 +21,7 @@ export default {
     data(){
         return {
             stripeAPIToken: process.env.MIX_STRIPE_KEY,
+            setLoader: false,
         }
     },
     components: {
@@ -30,6 +34,7 @@ export default {
     },
     methods: {
         manageCustomer() {
+            this.setLoader = true;
             this.$store.dispatch('subscription/billing_portal_url').then((response) => {
                 if(response.data.status) {
                     window.location.href = response.data.url;
@@ -39,6 +44,7 @@ export default {
                         text: 'Something went wrong! Please refresh the page.',
                         closeOnClick: true,
                     });
+                    this.setLoader = false;
                 }
             })
             .catch((error) => {
@@ -47,6 +53,7 @@ export default {
                     text: 'Something went wrong! Please refresh the page.',
                     closeOnClick: true,
                 });
+                this.setLoader = false;
             });
         }
     },

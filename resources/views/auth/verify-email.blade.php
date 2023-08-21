@@ -18,7 +18,6 @@
 
             @csrf
             <div class="flex items-center justify-end mt-4 submit-btn-block">
-                <div class="btn-gradiant"></div>
                 <x-primary-button class="submit-btn">
                     {{ __('Resend Verification Email') }}
                 </x-primary-button>
@@ -27,7 +26,6 @@
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <div class="flex items-center justify-end mt-4 submit-btn-block">
-                <div class="btn-gradiant"></div>
                 <x-primary-button class="submit-btn">
                     {{ __('Log Out') }}
                 </x-primary-button>

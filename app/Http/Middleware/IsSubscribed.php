@@ -24,6 +24,14 @@ class IsSubscribed
         if($isEligible > $currentDate){
             return $next($request);
         }
-        return auth()->user()->subscribed('default') ? $next($request) : redirect('plans');
+
+        if (auth()->user()->subscribed('default')) {
+            return $next($request);
+        } else {
+            if (auth()->user()->stripe_id) {
+                return redirect('manage-billing');
+            }
+            return redirect('plans');
+        }
     }
 }

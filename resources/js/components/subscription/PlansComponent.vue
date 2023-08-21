@@ -39,6 +39,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="loader-container" v-if="setLoader">
+                    <div class="loader"></div>
+                </div>
             </div>
         </section>
     </div>
@@ -57,6 +60,7 @@ export default {
             btnLabel: 'SUBSCRIBE',
             btnLoading: 'SUBSCRIBING...',
             errorDisplay: true,
+            setLoader: false,
         }
     },
     components: {
@@ -107,6 +111,7 @@ export default {
             }
             this.$store.dispatch('subscription/update_subscription', payload).then((response) => {
                 this.isDisabled = false;
+                this.setLoader = false;
                 this.$notify({
                     group: 'success',
                     text: 'Success! Subscription complete.',
@@ -117,6 +122,7 @@ export default {
         },
         submitPayment(){
             this.isDisabled = true;
+            this.setLoader = true;
             this.stripe.confirmCardSetup(
                 this.intent.client_secret, {
                     payment_method: {
@@ -145,6 +151,7 @@ export default {
                 this.card.clear();
                 this.name = '';
                 this.isDisabled = false;
+                this.setLoader = false;
                 if(this.errorDisplay){
                     this.$notify({
                         group: 'error',
