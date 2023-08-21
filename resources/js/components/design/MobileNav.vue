@@ -23,8 +23,9 @@
                 <li class="nav-billing">
                     <router-link class="nav-link link_name" :to="{ name: 'dashboard'}"><i class="fa fa-list-alt" aria-hidden="true"></i>Template</router-link>
                 </li>
-                <li class="nav-billing">
-                    <router-link class="nav-link link_name" :to="{ name: 'plans'}"><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
+                <li class="nav-billing" v-if="!isSevenDayTrial">
+                    <router-link class="nav-link link_name" :to="{ name: 'billing'}" v-if="customerStripeId"><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
+                    <router-link class="nav-link link_name" :to="{ name: 'plans'}" v-else><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
                 </li>
                 <!-- <li class="nav-billing">
                     <router-link class="nav-link link_name" :to="{ name: 'documentsList'}">Chat Doc</router-link>
@@ -75,8 +76,14 @@ export default {
         },
     },
     computed: {
-        models() {
-            return this.$store.state.models.list;
+        // models() {
+        //     return this.$store.state.models.list;
+        // },
+        customerStripeId() {
+            return this.$store.state.subscription.customerStripeId;
+        },
+        isSevenDayTrial() {
+            return this.$store.state.models.isSevenDayTrial;
         },
     },
     methods: {
@@ -86,6 +93,10 @@ export default {
         submit() {
             this.$refs.logout.submit();
         },
+    },
+    mounted() {
+        this.$store.dispatch('models/get_is_seven_day_trial');
+        this.$store.dispatch('subscription/get_customer_stripe_id');
     },
 }
 </script>

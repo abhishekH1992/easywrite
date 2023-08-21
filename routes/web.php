@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['auth', 'verified', 'isSubscribed']], function () {
     Route::get('/', function () {
         return view('layouts.app');
-    });
+    })->name('dashboard');
     Route::get('/model/{model}', function () {
         return view('layouts.app');
     });
@@ -48,6 +48,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return view('layouts.app');
     });
     Route::get('/subscription', function () {
+        return view('layouts.app');
+    });
+    Route::get('/manage-billing', function () {
         return view('layouts.app');
     });
 });

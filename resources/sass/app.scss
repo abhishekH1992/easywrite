@@ -1782,6 +1782,41 @@ body{
                 }
             }
         }
+        &.billing-section {
+            .title{
+                position: relative;
+                display: block;
+                font-size: 1.5rem;
+                line-height: 1em;
+                color: $text;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 5px;
+                margin-bottom: 15px;
+                text-align: center;
+            }
+            .title-1{
+                position: relative;
+                display: block;
+                font-size: 0.9rem;
+                line-height: 1em;
+                color: $text;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 5px;
+                margin-bottom: 15px;
+                text-align: center;
+                margin: 1rem 0;
+            }
+            .manage-btn {
+                text-align: center;
+                margin: 2.5rem 0;
+                .btn-submit {
+                    background-color: #000;
+                    color: #fff;
+                }
+            }
+        }
     }
 }
 

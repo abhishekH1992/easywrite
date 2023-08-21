@@ -3,6 +3,7 @@ import store from './store'
 import ChatBox from './components/prompt/ChatBoxComponent.vue'
 import Plans from './components/subscription/PlansComponent.vue'
 import Subscription from './components/subscription/SubscriptionComponent.vue'
+import Billing from './components/subscription/BillingComponent.vue'
 import Dashboard from './components/prompt/DashboardComponent.vue'
 import Archive from './components/prompt/ArchiveComponent.vue'
 import DocumentsList from './components/documents/DocumentsListComponent.vue'
@@ -41,6 +42,14 @@ const routes = [
         name: 'subscription',
         meta: {
             middleware: [isLoggedInUser, isValidPlanSelected],
+        },
+    },
+    {
+        path: '/manage-billing',
+        component: Billing,
+        name: 'billing',
+        meta: {
+            middleware: isLoggedInUser,
         },
     },
     {

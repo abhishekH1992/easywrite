@@ -66,12 +66,6 @@ export default {
         plans() {
             return this.$store.state.subscription.list;
         },
-        userPlan() {
-            return this.$store.state.subscription.userPlan;
-        },
-        userOnGracePeriod() {
-            return this.$store.state.subscription.userGrace;
-        },
         intent() {
             return this.$store.state.subscription.intent;
         },
@@ -172,8 +166,6 @@ export default {
         this.$store.dispatch('subscription/setup_intent');
 
         this.$store.dispatch('subscription/get_plans');
-        this.$store.dispatch('subscription/get_active_plan_user');
-        this.$store.dispatch('subscription/is_user_on_grace');
     },
 }
 </script>

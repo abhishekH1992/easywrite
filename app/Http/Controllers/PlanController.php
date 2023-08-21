@@ -86,4 +86,17 @@ class PlanController extends Controller
         $data = auth()->user()->subscribed('default') ? auth()->user()->subscription('default')->onGracePeriod() : false;
         return response()->json($data);
     }
+
+    public function getCustomerStripeId() {
+        return response()->json(auth()->user()->stripe_id);
+    }
+
+    public function getCustomerBillingPortal() {
+        try {
+            $response = auth()->user()->billingPortalUrl(route('dashboard'));
+            return response()->json(['status' => true, 'url' => $response]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => false]);
+        }
+    }
 }

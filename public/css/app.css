@@ -12421,6 +12421,39 @@ body {
     max-width: 100%;
   }
 }
+.main-content .pricing-section.billing-section .title {
+  position: relative;
+  display: block;
+  font-size: 1.5rem;
+  line-height: 1em;
+  color: #425C81;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.main-content .pricing-section.billing-section .title-1 {
+  position: relative;
+  display: block;
+  font-size: 0.9rem;
+  line-height: 1em;
+  color: #425C81;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+  margin: 1rem 0;
+}
+.main-content .pricing-section.billing-section .manage-btn {
+  text-align: center;
+  margin: 2.5rem 0;
+}
+.main-content .pricing-section.billing-section .manage-btn .btn-submit {
+  background-color: #000;
+  color: #fff;
+}
 
 .success-notification {
   background: #28a745 !important;

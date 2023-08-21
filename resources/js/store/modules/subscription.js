@@ -8,6 +8,7 @@ export default {
         intent: [],
         userPlan: [],
         userGrace: false,
+        customerStripeId: '',
     },
 
     getters: {},
@@ -27,6 +28,9 @@ export default {
         },
         set_is_user_grace: (state, userGrace) => {
             state.userGrace = userGrace;
+        },
+        set_customer_stripe_id: (state, customerStripeId) => {
+            state.customerStripeId = customerStripeId;
         },
     },
 
@@ -74,5 +78,13 @@ export default {
         is_user_logged_in: (context, data) => {
             return axios.get('/api/user/is-user-logged-in');
         },
+        get_customer_stripe_id: (context, data) => {
+            return axios.get('/api/subscription/get-customer-stripe-id').then((response) => {
+                context.commit('set_customer_stripe_id', response.data);
+            });
+        },
+        billing_portal_url: (context, data) => {
+            return axios.get('/api/subscription/get-billing-portal-url');
+        }
     },
 };

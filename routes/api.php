@@ -60,6 +60,8 @@ Route::group(['middleware' => 'user'], function () {
     Route::get('/subscription/is-valid-plan-selected', [PlanController::class, 'isValidPlanSelected']);
     Route::get('/subscription/get-active-plan-user', [PlanController::class, 'getActiveUserPlan']);
     Route::get('/subscription/is-user-on-grace', [PlanController::class, 'isUserOnGrace']);
+    Route::get('/subscription/get-customer-stripe-id', [PlanController::class, 'getCustomerStripeId']);
+    Route::get('/subscription/get-billing-portal-url', [PlanController::class, 'getCustomerBillingPortal']);
 
     Route::get('/site/get-models', [SiteController::class, 'getModels']);
     Route::get('/site/get-nav-menu-models', [SiteController::class, 'getNavMenuModels']);

@@ -25,7 +25,8 @@
             </li>
             <div class="fixed-li">
                 <li class="nav-font-main-section" v-if="!isSevenDayTrial">
-                    <router-link class="nav-link link_name" :to="{ name: 'plans'}"><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
+                    <router-link class="nav-link link_name" :to="{ name: 'billing'}" v-if="customerStripeId"><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
+                    <router-link class="nav-link link_name" :to="{ name: 'plans'}" v-else><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
                 </li>
                 <li class="nav-font-main-section">
                     <span class="text logout" @click="submit();">
@@ -69,7 +70,10 @@ export default {
         },
         modelsIsMenu() {
             return this.$store.state.models.navMenu;
-        }
+        },
+        customerStripeId() {
+            return this.$store.state.subscription.customerStripeId;
+        },
     },
     methods: {
         submit() {
@@ -96,6 +100,7 @@ export default {
         this.$store.dispatch('models/get_is_seven_day_trial');
         this.$store.dispatch('chat/get_language_list');
         this.$store.dispatch('chat/get_tone_list');
+        this.$store.dispatch('subscription/get_customer_stripe_id');
         this.setLangauge();
         this.setTone();
     },
