@@ -45,7 +45,6 @@
                                 </div>
                                 <div class="btn-box" v-else>
                                     <button class="btn theme-btn" @click="redirectTosubscription(plan.id)" :disabled="isDisabled">SUBSCRIBE NOW</button>
-                                    <span></span>
                                 </div>
                             </div>
                         </div>

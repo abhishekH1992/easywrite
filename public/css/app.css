@@ -11328,7 +11328,7 @@ body {
   padding: 0 10px;
   width: 100%;
   height: 50px;
-  background-color: #A5D4DE;
+  background-color: #F6FAFB;
   margin-right: 1rem;
 }
 .main-content .chatbox-container .chatbox-body .chat-container .action-bar .input-btn .btn-bookmark svg {
@@ -11350,7 +11350,7 @@ body {
   padding: 0 10px;
   width: 100%;
   height: 50px;
-  background-color: #A5D4DE;
+  background-color: #F6FAFB;
   margin-right: 1rem;
 }
 .main-content .chatbox-container .chatbox-body .chat-container .action-bar .input-btn .btn-clean svg {
@@ -11372,7 +11372,7 @@ body {
   padding: 0 10px;
   width: 100%;
   height: 50px;
-  background-color: #A5D4DE;
+  background-color: #F6FAFB;
 }
 .main-content .chatbox-container .chatbox-body .chat-container .action-bar .input-btn .btn-delete svg {
   padding-right: 1rem;
@@ -11434,7 +11434,7 @@ body {
      object-fit: contain;
 }
 .main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .profile.user {
-  background: #A5D4DE;
+  background: #F6FAFB;
 }
 .main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .profile.ai {
   background: #425C81;
@@ -12164,7 +12164,7 @@ body {
   padding: 0 0 30px;
   max-width: 370px;
   margin: 0 auto;
-  border-bottom: 20px solid #40cbb4;
+  border-bottom: 20px solid #3d98ad;
 }
 .main-content .pricing-section .outer-box .pricing-block .inner-box:hover .icon-box svg {
   transform: rotate(360deg);
@@ -12175,7 +12175,7 @@ body {
 .main-content .pricing-section .outer-box .pricing-block .icon-box {
   position: relative;
   padding: 50px 30px 0;
-  background-color: #40cbb4;
+  background-color: #3d98ad;
   text-align: center;
 }
 .main-content .pricing-section .outer-box .pricing-block .icon-box:before {
@@ -12203,14 +12203,14 @@ body {
   height: 130px;
   width: 130px;
   line-height: 120px;
-  border: 5px solid #40cbb4;
+  border: 5px solid #3d98ad;
   border-radius: 50%;
   font-size: 50px;
 }
 .main-content .pricing-section .outer-box .pricing-block .icon-box .icon svg {
   height: 50px;
   width: 50px;
-  color: #40cbb4;
+  color: #3d98ad;
   transition: all 600ms ease;
 }
 .main-content .pricing-section .outer-box .pricing-block .price-box {
@@ -12231,7 +12231,7 @@ body {
   font-size: 30px;
   color: #222222;
   font-weight: 700;
-  color: #40cbb4;
+  color: #3d98ad;
 }
 .main-content .pricing-section .outer-box .pricing-block .features {
   position: relative;
@@ -12247,17 +12247,16 @@ body {
   display: inline-block;
   font-size: 14px;
   line-height: 25px;
-  color: #ffffff;
-  font-weight: 500;
+  font-weight: 600;
   padding: 8px 30px;
-  background-color: #40cbb4;
-  border-radius: 10px;
-  border-top: 2px solid transparent;
-  border-bottom: 2px solid transparent;
+  border-radius: 0;
   transition: all 300ms ease;
+  border: 2px solid #3d98ad;
+  color: #3d98ad;
 }
 .main-content .pricing-section .outer-box .pricing-block .btn-box .theme-btn:hover {
   color: #ffffff;
+  background-color: #3d98ad;
 }
 .main-content .pricing-section .outer-box .pricing-block .btn-box span {
   display: block;
@@ -12290,7 +12289,7 @@ body {
 .main-content .pricing-section.payment-section .outer-box .pricing-block .inner-box {
   width: 50%;
   max-width: 50%;
-  border-bottom: 20px solid #A5D4DE;
+  border-bottom: 20px solid #3d98ad;
 }
 .main-content .pricing-section.payment-section .outer-box .pricing-block .inner-box .fields {
   padding: 2rem;
@@ -12323,8 +12322,6 @@ body {
   width: 0;
   height: 2px;
   transition: all 0.4s;
-  background: #6a7dfe;
-  background: linear-gradient(to right, #21d4fd, #b721ff);
 }
 .main-content .pricing-section.payment-section .outer-box .pricing-block .inner-box .fields .wrap-input .label:after {
   font-size: 15px;
@@ -12387,17 +12384,20 @@ body {
   transition: all 0.4s;
 }
 .main-content .pricing-section.payment-section .outer-box .pricing-block .inner-box .submit-btn-block .submit-btn {
-  font-size: 15px;
-  color: #fff;
-  line-height: 1.2;
-  text-transform: uppercase;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 20px;
-  width: 100%;
-  height: 50px;
-  background-color: transparent;
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 25px;
+  font-weight: 600;
+  padding: 8px 30px;
+  border-radius: 0;
+  transition: all 300ms ease;
+  border: 2px solid #3d98ad;
+  color: #3d98ad;
+}
+.main-content .pricing-section.payment-section .outer-box .pricing-block .inner-box .submit-btn-block .submit-btn:hover {
+  color: #ffffff;
+  background-color: #3d98ad;
 }
 .main-content .pricing-section.payment-section .outer-box .pricing-block .inner-box .submit-btn-block:hover {
   left: 0;
@@ -12799,7 +12799,7 @@ body {
 }
 .main-content .document-container-chat .loader-container .loader {
   border: 6px solid #f3f3f3;
-  border-top: 6px solid #A5D4DE;
+  border-top: 6px solid #3d98ad;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -12887,7 +12887,7 @@ body {
   color: #ffffff;
   font-weight: 500;
   padding: 8px 30px;
-  background-color: #40cbb4;
+  background-color: #3d98ad;
   border-radius: 10px;
   border-top: 2px solid transparent;
   border-bottom: 2px solid transparent;

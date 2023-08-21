@@ -19,7 +19,6 @@
                                 <div id="card-element"></div>
                             </div>
                             <div class="btn-box submit-btn-block">
-                                <div class="btn-gradiant"></div>
                                 <button class="btn submit-btn" @click="submitPayment" :disabled="isDisabled">
                                     {{ isDisabled ? btnLoading : btnLabel }}
                                 </button>
@@ -42,8 +41,8 @@ export default {
             card: '',
             name: '',
             isDisabled: false,
-            btnLabel: 'Subscribe',
-            btnLoading: 'Subscribing...',
+            btnLabel: 'SUBSCRIBE',
+            btnLoading: 'SUBSCRIBING...',
             errorDisplay: true,
         }
     },
@@ -124,8 +123,9 @@ console.log(this.intent.client_secret);
                         closeOnClick: true,
                     });
                     this.errorDisplay = false;
+                } else {
+                    this.updateSubscription(response.setupIntent.payment_method);
                 }
-                this.updateSubscription(response.setupIntent.payment_method);
                 this.card.clear();
                 this.name = '';
             })

@@ -32,8 +32,9 @@ class PlanController extends Controller
         $paymentId = $request->payment;
 
         if(!$user->subscribed('default')){
-            $data = $user->newSubscription('default', $planId)->trialDays(1)
-                 ->create($paymentId);
+            // $data = $user->newSubscription('default', $planId)->trialDays(1)
+            //      ->create($paymentId);
+            $data = $user->newSubscription('default', $planId)->create($paymentId);
         }else{
             $data = $user->subscription('default')->swap($planId);
         }

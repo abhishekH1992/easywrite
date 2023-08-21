@@ -20,6 +20,7 @@ $planeBtnBackground: rgba(228,237,241,1);
 $planeBtnBorder: rgba(204,217,224,1);
 
 $nav1: #F6FAFB;
+$contrast: #3d98ad;
 
 @font-face {
     font-family: Dekko;
@@ -628,7 +629,7 @@ body{
                             padding: 0 10px;
                             width: 100%;
                             height: 50px;
-                            background-color: $nav;
+                            background-color: $nav1;
                             margin-right: 1rem;
                             svg{
                                 padding-right: 1rem;
@@ -650,7 +651,7 @@ body{
                             padding: 0 10px;
                             width: 100%;
                             height: 50px;
-                            background-color: $nav;
+                            background-color: $nav1;
                             margin-right: 1rem;
                             svg{
                                 padding-right: 1rem;
@@ -672,7 +673,7 @@ body{
                             padding: 0 10px;
                             width: 100%;
                             height: 50px;
-                            background-color: $nav;
+                            background-color: $nav1;
                             svg{
                                 padding-right: 1rem;
                             }
@@ -733,7 +734,7 @@ body{
                                     object-fit: contain;
                                 }
                                 &.user{
-                                    background: $nav;
+                                    background: $nav1;
                                 }
                                 &.ai{
                                     background: $text;
@@ -1478,7 +1479,7 @@ body{
                     padding: 0 0 30px;
                     max-width: 370px;
                     margin: 0 auto;
-                    border-bottom: 20px solid #40cbb4;
+                    border-bottom: 20px solid $contrast;
                     &:hover{
                         .icon-box{
                             svg{
@@ -1493,7 +1494,7 @@ body{
                 .icon-box{
                     position: relative;
                     padding: 50px 30px 0;
-                    background-color: #40cbb4;
+                    background-color: $contrast;
                     text-align: center;
                     &:before{
                         position: absolute;
@@ -1520,13 +1521,13 @@ body{
                         height: 130px;
                         width: 130px;
                         line-height: 120px;
-                        border: 5px solid #40cbb4;
+                        border: 5px solid $contrast;
                         border-radius: 50%;
                         font-size: 50px;
                         svg{
                             height: 50px;
                             width: 50px;
-                            color: #40cbb4;
+                            color: $contrast;
                             -webkit-transition:all 600ms ease;
                             -ms-transition:all 600ms ease;
                             -o-transition:all 600ms ease;
@@ -1553,7 +1554,7 @@ body{
                     font-size: 30px;
                     color: #222222;
                     font-weight: 700;
-                    color: #40cbb4;
+                    color: $contrast;
                 }
                 .features{
                     position: relative;
@@ -1568,20 +1569,19 @@ body{
                         display: inline-block;
                         font-size: 14px;
                         line-height: 25px;
-                        color: #ffffff;
-                        font-weight: 500;
+                        font-weight: 600;
                         padding: 8px 30px;
-                        background-color: #40cbb4;
-                        border-radius: 10px;
-                        border-top:2px solid transparent;
-                        border-bottom:2px solid transparent;
+                        border-radius: 0;
                         -webkit-transition: all 400ms ease;
                         -moz-transition: all 400ms ease;
                         -ms-transition: all 400ms ease;
                         -o-transition: all 400ms ease;
                         transition: all 300ms ease;
+                        border: 2px solid $contrast;
+                        color: $contrast;
                         &:hover{
                             color: #ffffff;
+                            background-color: $contrast;
                         }
                     }
                     span{
@@ -1629,7 +1629,7 @@ body{
                     .inner-box{
                         width: 50%;
                         max-width: 50%;
-                        border-bottom: 20px solid $nav;
+                        border-bottom: 20px solid $contrast;
                         .fields{
                             padding: 2rem;
                             #card-element{
@@ -1661,11 +1661,6 @@ body{
                                         -o-transition: all 0.4s;
                                         -moz-transition: all 0.4s;
                                         transition: all 0.4s;
-                                        background: #6a7dfe;
-                                        background: -webkit-linear-gradient(to right, #21d4fd, #b721ff);
-                                        background: -o-linear-gradient(to right, #21d4fd, #b721ff);
-                                        background: -moz-linear-gradient(to right, #21d4fd, #b721ff);
-                                        background: linear-gradient(to right, #21d4fd, #b721ff);
                                     }
                                     &:after{
                                         font-size: 15px;
@@ -1742,17 +1737,24 @@ body{
                                 transition: all 0.4s;
                             }
                             .submit-btn{
-                                font-size: 15px;
-                                color: #fff;
-                                line-height: 1.2;
-                                text-transform: uppercase;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                padding: 0 20px;
-                                width: 100%;
-                                height: 50px;
-                                background-color: transparent;
+                                position: relative;
+                                display: inline-block;
+                                font-size: 14px;
+                                line-height: 25px;
+                                font-weight: 600;
+                                padding: 8px 30px;
+                                border-radius: 0;
+                                -webkit-transition: all 400ms ease;
+                                -moz-transition: all 400ms ease;
+                                -ms-transition: all 400ms ease;
+                                -o-transition: all 400ms ease;
+                                transition: all 300ms ease;
+                                border: 2px solid $contrast;
+                                color: $contrast;
+                                &:hover{
+                                    color: #ffffff;
+                                    background-color: $contrast;
+                                }
                             }
                             &:hover{
                                 left: 0;
@@ -2181,7 +2183,7 @@ body{
             z-index: 9999;
             .loader {
                 border: 6px solid #f3f3f3;
-                border-top: 6px solid $nav;
+                border-top: 6px solid $contrast;
                 border-radius: 50%;
                 width: 50px;
                 height: 50px;
@@ -2265,7 +2267,7 @@ body{
                     color: #ffffff;
                     font-weight: 500;
                     padding: 8px 30px;
-                    background-color: #40cbb4;
+                    background-color: $contrast;
                     border-radius: 10px;
                     border-top:2px solid transparent;
                     border-bottom:2px solid transparent;
