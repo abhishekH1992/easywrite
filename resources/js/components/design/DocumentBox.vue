@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="wrapper" v-if="typing">
+        <div class="wrapper blueBackground" v-if="typing">
             <div class="chat">
                 <div class="profile ai">
                     <img src="/assets/images/bot.svg">

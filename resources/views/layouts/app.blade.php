@@ -10,7 +10,7 @@
         <meta name="user-id" content="{{ auth()->user()->id }}">
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-        <link rel="stylesheet" href="/css/app.css?id=9ad05949757f14bbcde58b0704a52774">
+        <link rel="stylesheet" href="/css/app.css?id=d57b17e2d43ac0f7263a00d54d172b3c">
         
     </head>
     <body class="font-sans antialiased">
@@ -24,6 +24,6 @@
             </div>
         </div>
 
-        <script src="/js/app.js?id=fd79cf3440ae0c5b50f694b4dc8cf775"></script>
+        <script src="/js/app.js?id=b0d4731f32b92c55c79a8cf6c43493f3"></script>
     </body>
 </html>

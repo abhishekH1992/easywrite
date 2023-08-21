@@ -133,7 +133,6 @@ export default {
                     }
                 }
             ).then((response) => {
-                console.log(response);
                 if(Object.hasOwn(response, 'error')){
                     this.$notify({
                         group: 'error',
@@ -141,6 +140,8 @@ export default {
                         closeOnClick: true,
                     });
                     this.errorDisplay = false;
+                    this.isDisabled = false;
+                    this.setLoader = false;
                 } else {
                     this.updateSubscription(response.setupIntent.payment_method);
                 }

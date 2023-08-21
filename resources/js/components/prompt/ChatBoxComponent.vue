@@ -60,7 +60,6 @@
 import ChatHead from '../design/ChatHead.vue';
 import ChatBox from '../design/ChatBox.vue';
 import { VueEditor } from "vue3-editor";
-import { ref } from 'vue';
 
 export default {
     data: () => ({
@@ -128,7 +127,7 @@ export default {
             this.typing = true;
             let msg = this.msg;
             let user = '';
-            this.$refs.textarea.style.height="auto";
+            if (!this.pageInfo.isTextarea) this.$refs.textarea.style.height="auto";
             if(this.pageInfo.isFreechat){
                 user = {
                     msg: this.pageInfo.prefix ? this.pageInfo.prefix+' '+msg : msg,

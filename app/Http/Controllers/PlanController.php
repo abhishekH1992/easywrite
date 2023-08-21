@@ -88,14 +88,16 @@ class PlanController extends Controller
     }
 
     public function getCustomerStripeId() {
-        return response()->json(auth()->user()->stripe_id);
+        return response(auth()->user()->stripe_id);
     }
 
     public function getCustomerBillingPortal() {
         try {
             $response = auth()->user()->billingPortalUrl(route('dashboard'));
+            // \Log::info($response);
             return response()->json(['status' => true, 'url' => $response]);
         } catch (\Exception $e) {
+            // \Log::info($e);
             return response()->json(['status' => false]);
         }
     }
