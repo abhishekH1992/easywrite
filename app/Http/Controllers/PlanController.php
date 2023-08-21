@@ -13,7 +13,7 @@ class PlanController extends Controller
     }
 
     public function getPlans(){
-        return response()->json(Plan::get());
+        return response()->json(Plan::first());
     }
 
     public function getPlanById(Request $request){

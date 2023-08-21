@@ -12123,18 +12123,27 @@ body {
 }
 .main-content .pricing-section .sec-title {
   position: relative;
-  margin-bottom: 70px;
+  margin-bottom: 20px;
 }
 .main-content .pricing-section .sec-title .title {
   position: relative;
   display: block;
-  font-size: 16px;
+  font-size: 1.5rem;
   line-height: 1em;
   color: #425C81;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 5px;
   margin-bottom: 15px;
+}
+.main-content .pricing-section .sec-title .title-1 {
+  position: relative;
+  display: block;
+  font-size: 1rem;
+  color: #425C81;
+  font-weight: 600;
+  text-align: center;
+  padding: 0 0.5rem 1rem 0.5rem;
 }
 .main-content .pricing-section .sec-title h2, .main-content .pricing-section .sec-title .h2 {
   position: relative;
@@ -12164,7 +12173,7 @@ body {
   padding: 0 0 30px;
   max-width: 370px;
   margin: 0 auto;
-  border-bottom: 20px solid #3d98ad;
+  border-bottom: 20px solid #425C81;
 }
 .main-content .pricing-section .outer-box .pricing-block .inner-box:hover .icon-box svg {
   transform: rotate(360deg);
@@ -12175,7 +12184,7 @@ body {
 .main-content .pricing-section .outer-box .pricing-block .icon-box {
   position: relative;
   padding: 50px 30px 0;
-  background-color: #3d98ad;
+  background-color: #425C81;
   text-align: center;
 }
 .main-content .pricing-section .outer-box .pricing-block .icon-box:before {
@@ -12203,14 +12212,14 @@ body {
   height: 130px;
   width: 130px;
   line-height: 120px;
-  border: 5px solid #3d98ad;
+  border: 5px solid #425C81;
   border-radius: 50%;
   font-size: 50px;
 }
 .main-content .pricing-section .outer-box .pricing-block .icon-box .icon svg {
   height: 50px;
   width: 50px;
-  color: #3d98ad;
+  color: #425C81;
   transition: all 600ms ease;
 }
 .main-content .pricing-section .outer-box .pricing-block .price-box {
@@ -12221,17 +12230,18 @@ body {
 .main-content .pricing-section .outer-box .pricing-block .title {
   position: relative;
   display: block;
-  font-size: 24px;
-  line-height: 1.2em;
-  color: #222222;
+  font-size: 1rem;
+  color: #425C81;
   font-weight: 600;
+  text-align: center;
+  padding: 1rem 0.5rem;
 }
 .main-content .pricing-section .outer-box .pricing-block .price {
   display: block;
   font-size: 30px;
   color: #222222;
   font-weight: 700;
-  color: #3d98ad;
+  color: #425C81;
 }
 .main-content .pricing-section .outer-box .pricing-block .features {
   position: relative;
@@ -12251,12 +12261,12 @@ body {
   padding: 8px 30px;
   border-radius: 0;
   transition: all 300ms ease;
-  border: 2px solid #3d98ad;
-  color: #3d98ad;
+  border: 2px solid #425C81;
+  color: #425C81;
 }
 .main-content .pricing-section .outer-box .pricing-block .btn-box .theme-btn:hover {
   color: #ffffff;
-  background-color: #3d98ad;
+  background-color: #425C81;
 }
 .main-content .pricing-section .outer-box .pricing-block .btn-box span {
   display: block;
@@ -12289,7 +12299,7 @@ body {
 .main-content .pricing-section.payment-section .outer-box .pricing-block .inner-box {
   width: 50%;
   max-width: 50%;
-  border-bottom: 20px solid #3d98ad;
+  border-bottom: 20px solid #425C81;
 }
 .main-content .pricing-section.payment-section .outer-box .pricing-block .inner-box .fields {
   padding: 2rem;
@@ -12392,12 +12402,12 @@ body {
   padding: 8px 30px;
   border-radius: 0;
   transition: all 300ms ease;
-  border: 2px solid #3d98ad;
-  color: #3d98ad;
+  border: 2px solid #425C81;
+  color: #425C81;
 }
 .main-content .pricing-section.payment-section .outer-box .pricing-block .inner-box .submit-btn-block .submit-btn:hover {
   color: #ffffff;
-  background-color: #3d98ad;
+  background-color: #425C81;
 }
 .main-content .pricing-section.payment-section .outer-box .pricing-block .inner-box .submit-btn-block:hover {
   left: 0;
@@ -12799,7 +12809,7 @@ body {
 }
 .main-content .document-container-chat .loader-container .loader {
   border: 6px solid #f3f3f3;
-  border-top: 6px solid #3d98ad;
+  border-top: 6px solid #425C81;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -12887,7 +12897,7 @@ body {
   color: #ffffff;
   font-weight: 500;
   padding: 8px 30px;
-  background-color: #3d98ad;
+  background-color: #425C81;
   border-radius: 10px;
   border-top: 2px solid transparent;
   border-bottom: 2px solid transparent;

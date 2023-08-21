@@ -20,7 +20,8 @@ $planeBtnBackground: rgba(228,237,241,1);
 $planeBtnBorder: rgba(204,217,224,1);
 
 $nav1: #F6FAFB;
-$contrast: #3d98ad;
+// $contrast: #3d98ad;
+$contrast: #425C81;
 
 @font-face {
     font-family: Dekko;
@@ -1437,18 +1438,27 @@ body{
             -o-transition-duration: .2s;
         }
         .sec-title{
-            position:relative;
-            margin-bottom:70px;
+            position: relative;
+            margin-bottom: 20px;
             .title{
                 position: relative;
                 display: block;
-                font-size: 16px;
+                font-size: 1.5rem;
                 line-height: 1em;
                 color: $text;
                 font-weight: 500;
                 text-transform: uppercase;
                 letter-spacing: 5px;
                 margin-bottom: 15px;
+            }
+            .title-1 {
+                position: relative;
+                display: block;
+                font-size: 1rem;
+                color: $text;
+                font-weight: 600;
+                text-align: center;
+                padding: 0 0.5rem 1rem 0.5rem;
             }
             h2{
                 position:relative;
@@ -1544,10 +1554,11 @@ body{
                 .title{
                     position: relative;
                     display: block;
-                    font-size: 24px;
-                    line-height: 1.2em;
-                    color: #222222;
+                    font-size: 1rem;
+                    color: $text;
                     font-weight: 600;
+                    text-align: center;
+                    padding: 1rem 0.5rem;
                 }
                 .price{
                     display: block;
