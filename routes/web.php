@@ -42,6 +42,12 @@ Route::group(['middleware' => ['auth', 'verified', 'isSubscribed']], function ()
     Route::get('/custom-chat/{model}/{id}', function () {
         return view('layouts.app');
     });
+    Route::get('/speech-to-text', function () {
+        return view('layouts.app');
+    });
+    Route::get('/speech-to-text/{id}', function () {
+        return view('layouts.app');
+    });
 });
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/plans', function () {
