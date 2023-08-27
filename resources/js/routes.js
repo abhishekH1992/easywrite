@@ -9,6 +9,8 @@ import Archive from './components/prompt/ArchiveComponent.vue'
 import DocumentsList from './components/documents/DocumentsListComponent.vue'
 import SavedDocument from './components/documents/SavedDocumentComponent.vue'
 import CustomChatList from './components/custom/CustomChatComponent.vue'
+import SpeechToText from './components/speech/SpeechToTextComponent.vue'
+import SavedSpeechToText from './components/speech/SavedSpeechToTextComponent.vue'
 
 import isSubscribed from './middleware/isSubscribed'
 import isValidPlanSelected from './middleware/isValidPlanSelected'
@@ -104,6 +106,22 @@ const routes = [
         path: '/custom-chat/:prompt/:id',
         component: ChatBox,
         name: 'savedCustomChatBox',
+        meta: {
+            middleware: isSubscribed,
+        },
+    },
+    {
+        path: '/speech-to-text',
+        component: SpeechToText,
+        name: 'speechToText',
+        meta: {
+            middleware: isSubscribed,
+        },
+    },
+    {
+        path: '/speech-to-text/:id',
+        component: SavedSpeechToText,
+        name: 'savedSpeechToText',
         meta: {
             middleware: isSubscribed,
         },

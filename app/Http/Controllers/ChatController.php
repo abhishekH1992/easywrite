@@ -18,7 +18,9 @@ class ChatController extends Controller
     public function create(Request $request, \OpenAI\Client $client){
         try{
             $slug = explode('/', $request->slug);
-            if(count($slug) == 3) {
+            if($request->slug === '/speech-to-text') {
+                $prompt = Prompt::where('slug', $request->slug)->first();
+            } elseif(count($slug) == 3) {
                 $prompt = Prompt::where('slug', $request->slug)->first();
             } else {
                 unset($slug[count($slug)-1]);

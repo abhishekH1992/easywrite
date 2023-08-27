@@ -56,24 +56,34 @@ export default {
             this.$store.dispatch('documents/get_documents', this.term);
         },
         submit() {
-            this.$store.dispatch('documents/new_document', { name: this.name }).then((response) => {
-                if(response.data) {
-                    this.$notify({
-                        group: 'success',
-                        text: 'Created!',
-                        closeOnClick: true,
-                    });
-                    this.name = '';
-                    this.isStore = false;
-                    this.$store.dispatch('documents/get_documents');
-                } else {
-                    this.$notify({
-                        group: 'error',
-                        text: 'Something went wrong! Please reload the page.',
-                        closeOnClick: true,
-                    });
-                }
-            });
+            let docName = this.name.trim();
+            if(!docName) {
+                this.name = '';
+                this.$notify({
+                    group: 'error',
+                    text: 'Please type name to create new document chat!',
+                    closeOnClick: true,
+                });
+            } else {
+                this.$store.dispatch('documents/new_document', { name: docName }).then((response) => {
+                    if(response.data) {
+                        this.$notify({
+                            group: 'success',
+                            text: 'Created!',
+                            closeOnClick: true,
+                        });
+                        this.name = '';
+                        this.isStore = false;
+                        this.$store.dispatch('documents/get_documents');
+                    } else {
+                        this.$notify({
+                            group: 'error',
+                            text: 'Something went wrong! Please reload the page.',
+                            closeOnClick: true,
+                        });
+                    }
+                });
+            }
         },
     },
     mounted() {

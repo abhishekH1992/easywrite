@@ -13,6 +13,9 @@
             <li class="nav-font-main-section nav-div">
                 <router-link class="nav-link link_name" :to="{ name: 'customChatList'}"><i class="fa fa-comments" aria-hidden="true"></i>Custom Chat</router-link>
             </li>
+            <li class="nav-font-main-section nav-div">
+                <router-link class="nav-link link_name" :to="{ name: 'speechToText'}"><i class="fa fa-file-audio" aria-hidden="true"></i>Speech To Text</router-link>
+            </li>
             <li class="nav-font-main-section nav-div" v-for="(nav, i) in modelsIsMenu" :key="i">
                 <router-link class="nav-link link_name" :to="{ name: 'customChatBox', params: { prompt: nav.slug.split('/')[2] }}" v-if="nav.isSystem"><i class="fa fa-comment" aria-hidden="true"></i>{{ nav.name }}</router-link>
                 <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: nav.slug.split('/')[2] }}" v-else><i class="fa fa-comment" aria-hidden="true"></i>{{ nav.name }}</router-link>

@@ -64,7 +64,6 @@ export default {
             return this.$store.state.documents.pageInfo;
         },
         chatList() {
-            console.log(this.$store.state.documents.chatList);
             return this.$store.state.documents.chatList;
         },
         documentList() {

@@ -38,5 +38,6 @@ class Prompt extends Model
         'isSystem',
         'system',
         'isMenu',
+        'is_display_in_list',
     ];
 }

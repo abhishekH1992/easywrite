@@ -8,6 +8,7 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\TranslatorController;
+use App\Http\Controllers\SpeechToTextController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,16 @@ Route::group(['middleware' => 'user', 'isSubscribed'], function () {
 
     Route::post('/chat/translate', [TranslatorController::class, 'translate']);
     Route::post('/chat/translate/language', [TranslatorController::class, 'translateLanguage']);
+
+    Route::get('/speech-to-text/get-chat', [SpeechToTextController::class, 'getList']);
+    Route::post('/speech-to-text/new-chat', [SpeechToTextController::class, 'newChat']);
+    Route::post('/speech-to-text/page-info', [SpeechToTextController::class, 'pageInfo']);
+    Route::post('/speech-to-text/destroy', [SpeechToTextController::class, 'destroy']);
+    Route::get('/speech-to-text/get-audio-list', [SpeechToTextController::class, 'getAudioList']);
+    Route::post('/speech-to-text/upload-audio', [SpeechToTextController::class, 'uploadAudio']);
+    Route::post('/speech-to-text/remove-audio', [SpeechToTextController::class, 'removeAudio']);
+    Route::post('/speech-to-text/resend-audio', [SpeechToTextController::class, 'resendAudio']);
+    Route::post('/speech-to-text/save', [SpeechToTextController::class, 'save']);
 });
 
 Route::group(['middleware' => 'user'], function () {

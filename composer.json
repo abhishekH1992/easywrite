@@ -14,7 +14,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.1",
-        "openai-php/client": "^0.1",
+        "openai-php/client": "^0.6.4",
         "stichoza/google-translate-php": "^5.1"
     },
     "require-dev": {
