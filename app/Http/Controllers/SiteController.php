@@ -28,9 +28,9 @@ class SiteController extends Controller
 
     public function getSearchModels(Request $request){
         if($request->term){
-            $data = Prompt::whereNull('isSystem')->where('is_display_in_list', 0)->where('name', 'LIKE', "%{$request->term}%")->get();
+            $data = Prompt::whereNull('isSystem')->whereNull('is_display_in_list')->where('name', 'LIKE', "%{$request->term}%")->get();
         } else {
-            $data = Prompt::whereNull('isSystem')->where('is_display_in_list', 0)->get();
+            $data = Prompt::whereNull('isSystem')->whereNull('is_display_in_list')->get();
         }
         return response()->json($data);
     }

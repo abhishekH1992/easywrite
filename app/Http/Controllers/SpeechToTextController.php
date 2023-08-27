@@ -63,6 +63,7 @@ class SpeechToTextController extends Controller
         $data = Audio::where('speech_id', $request->speech_id)->where('user_id', auth()->id())->get();
         foreach($data as $d) {
             $d->link = Storage::url($d->link);
+            // $d->link = asset('storage/app/public/'.$d->link); // this works on server
         }
         return response()->json($data);
     }
