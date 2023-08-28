@@ -52,6 +52,15 @@ class SpeechToTextController extends Controller
 
     public function destroy(Request $request){
         try {
+            $list = Audio::where('speech_id', $request->id)->get();
+            foreach($list as $l) {
+                if(Storage::exists('/public/'.$l->link)) {
+                    Storage::delete('/public/'.$l->link);
+                }
+
+                Audio::where('id', $l->id)->delete();
+            }
+
             SpeechToText::where('id', $request->id)->where('user_id', auth()->id())->delete();
             return response()->json(true);
         } catch (\Exception $e) {
