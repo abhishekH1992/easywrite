@@ -18,6 +18,9 @@
                     <router-link class="nav-link link_name" :to="{ name: 'customChatList'}"><i class="fa fa-comments" aria-hidden="true"></i>Custom Chat</router-link>
                 </li>
                 <li class="nav-billing">
+                    <router-link class="nav-link link_name" :to="{ name: 'speechToText'}"><i class="fa fa-file-audio" aria-hidden="true"></i>Speech To Text</router-link>
+                </li>
+                <li class="nav-billing">
                     <router-link class="nav-link link_name" :to="{ name: 'archive'}"><i class="fa fa-database" aria-hidden="true"></i>Project</router-link>
                 </li>
                 <li class="nav-billing">
