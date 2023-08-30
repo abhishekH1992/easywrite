@@ -1189,6 +1189,9 @@ body{
                         }
                     }
                 }
+                &.borderRight {
+                    border-left: 1px solid #F3F4F9;
+                }
             }
         }
         .chat-head{

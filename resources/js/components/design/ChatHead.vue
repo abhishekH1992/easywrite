@@ -44,6 +44,7 @@ export default {
         savedId: {
             default: 0,
             type: Number,
+            required: false,
         }
     },
     components: {

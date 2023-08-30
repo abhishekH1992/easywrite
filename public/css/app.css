@@ -11886,6 +11886,9 @@ body {
 .main-content .chatbox-container .chatbox-body .editor-section .quillWrapper .ql-container.ql-snow {
   border: 1px solid #F3F4F9;
 }
+.main-content .chatbox-container .chatbox-body .editor-section.borderRight {
+  border-left: 1px solid #F3F4F9;
+}
 .main-content .chatbox-container .chat-head {
   position: relative;
   width: 100%;

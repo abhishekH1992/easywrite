@@ -39,5 +39,6 @@ class Prompt extends Model
         'system',
         'isMenu',
         'is_display_in_list',
+        'is_image_editor',
     ];
 }
