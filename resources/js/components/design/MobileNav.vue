@@ -20,6 +20,9 @@
                 <li class="nav-billing">
                     <router-link class="nav-link link_name" :to="{ name: 'speechToText'}"><i class="fa fa-file-audio" aria-hidden="true"></i>Speech To Text</router-link>
                 </li>
+                <li class="nav-billing" v-if="isAdmin">
+                    <router-link class="nav-link link_name" :to="{ name: 'chatSuite'}"><i class="fas fa-comment-alt" aria-hidden="true"></i>Chat Suite</router-link>
+                </li>
                 <li class="nav-billing">
                     <router-link class="nav-link link_name" :to="{ name: 'archive'}"><i class="fa fa-database" aria-hidden="true"></i>Project</router-link>
                 </li>
@@ -88,6 +91,9 @@ export default {
         isSevenDayTrial() {
             return this.$store.state.models.isSevenDayTrial;
         },
+        isAdmin() {
+            return this.$store.state.models.isAdmin;
+        },
     },
     methods: {
         toggleMobileMenu() {
@@ -98,6 +104,7 @@ export default {
         },
     },
     mounted() {
+        this.$store.dispatch('models/is_admin');
         this.$store.dispatch('models/get_is_seven_day_trial');
         this.$store.dispatch('subscription/get_customer_stripe_id');
     },

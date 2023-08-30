@@ -9,6 +9,7 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\TranslatorController;
 use App\Http\Controllers\SpeechToTextController;
+use App\Http\Controllers\ChatSuiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,12 @@ Route::group(['middleware' => 'user', 'isSubscribed'], function () {
     Route::post('/speech-to-text/remove-audio', [SpeechToTextController::class, 'removeAudio']);
     Route::post('/speech-to-text/resend-audio', [SpeechToTextController::class, 'resendAudio']);
     Route::post('/speech-to-text/save', [SpeechToTextController::class, 'save']);
+
+    Route::get('/chat-suite/get-list', [ChatSuiteController::class, 'getList']);
+    Route::get('/chat-suite/get-page-info', [ChatSuiteController::class, 'getPageInfo']);
+    Route::get('/chat-suite/get-section-list', [ChatSuiteController::class, 'getSectionList']);
+    Route::get('/chat-suite/get-page-info-section', [ChatSuiteController::class, 'getPageInfoSection']);
+    Route::post('/chat-suite/chat', [ChatSuiteController::class, 'chat']);
 });
 
 Route::group(['middleware' => 'user'], function () {
@@ -76,6 +83,7 @@ Route::group(['middleware' => 'user'], function () {
 
     Route::get('/site/get-models', [SiteController::class, 'getModels']);
     Route::get('/site/get-nav-menu-models', [SiteController::class, 'getNavMenuModels']);
+    Route::get('/site/is-admin', [SiteController::class, 'isAdmin']);
     Route::get('/site/get-search-models', [SiteController::class, 'getSearchModels']);
     Route::get('/site/get-custom-chat-search-models', [SiteController::class, 'getCustomChatSearchModels']);
     Route::get('/site/get-tone-list', [SiteController::class, 'getToneList']);
