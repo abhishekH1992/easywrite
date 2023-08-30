@@ -97,7 +97,7 @@ export default {
             required: true,
         },
         showUserIcons: {
-            required: true,
+            required: false,
         }
     },
     methods: {

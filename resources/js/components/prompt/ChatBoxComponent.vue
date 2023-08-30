@@ -6,11 +6,10 @@
                 <div class="chat-container" :class="{fillWidthChatContainer: isEditorOpen}">
                     <div class="bottom-bar" v-if="!pageInfo.isTextarea">
                         <div class="chat">
-                            <!-- <input type="text" :placeholder="pageInfo.placeholder" v-model="msg" @keydown.enter="submit"/> -->
                             <textarea ref="textarea" class="chat-textarea" :placeholder="pageInfo.placeholder" v-model="msg" rows="1" @keydown.enter.exact.prevent="submit()"></textarea>
-                            <!-- <vue-editor v-model="msg" :placeholder="pageInfo.placeholder" @keydown.enter.exact.prevent="submit()"/> -->
                             <div class="storeBtns">
                                 <div class="input-btn">
+                                    {{ pageInfo.is_image_editor }}
                                     <button class="btn btn-bookmark btn-img" @click="save"><i class='fa fa-save'></i><span> Save</span></button>
                                     <button class="btn btn-clean btn-img" @click="clean"><i class="fa fa-refresh" aria-hidden="true"></i><span> Clear</span></button>
                                     <button class="btn btn-delete" @click="destroy" v-if="savedId"><i class="fa-solid fa-trash"></i><span> Delete</span></button>
@@ -32,10 +31,14 @@
                                     <label>{{ field.label }}</label>
                                     <input type="text" :placeholder="field.placeholder" v-model="combineMsg[field.label]" class="form-control"/>
                                 </div>
+                                <div class="field" v-if="field.type == 'file'">
+                                    <label>{{ field.label }}</label>
+                                    <input type="file" :placeholder="field.placeholder" class="form-control" ref="editImage" :accept="field.accept" @change="onFileChange"/>
+                                </div>
                             </div>
                             <div class="textarea-btn">
                                 <div class="input-btn">
-                                    <button class="btn btn-bookmark btn-img" @click="save"><i class='fa fa-save'></i><span> Save</span></button>
+                                    <button class="btn btn-bookmark btn-img" @click="save" v-if="!pageInfo.is_image_editor"><i class='fa fa-save'></i><span> Save</span></button>
                                     <button class="btn btn-clean btn-img" @click="clean"><i class="fa fa-refresh" aria-hidden="true"></i><span> Clear</span></button>
                                     <button class="btn btn-delete" @click="destroy" v-if="savedId"><i class="fa-solid fa-trash"></i><span> Delete</span></button>
                                 </div>
@@ -49,8 +52,15 @@
                     <chat-box class="one" :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" v-if="pageInfo && pageInfo.isTextarea && availableHeight" :style="{ maxHeight: availableHeight + 'px' }"/>
                     <div class="edit-tab" @click="isEditorOpen = !isEditorOpen"><i class="fa fa-pencil" aria-hidden="true"></i> Editor</div>
                 </div>
-                <div class="editor-section" :class="{editorHide: isEditorOpen}">
-                    <vue-editor v-model="editor" :editorToolbar="customToolbar"/>
+                <div class="editor-section" :class="{editorHide: isEditorOpen, borderRight: pageInfo.is_image_editor}">
+                    <PinturaEditor
+                        v-bind="editorDefaults"
+                        :src="src"
+                        :imageCropAspectRatio="imageCropAspectRatio"
+                        v-on:pintura:process="handleEditorProcess($event)"
+                        v-if="pageInfo.is_image_editor"
+                    ></PinturaEditor>
+                    <vue-editor v-model="editor" :editorToolbar="customToolbar" v-else/>
                 </div>
             </div>
         </div>
@@ -60,6 +70,9 @@
 import ChatHead from '../design/ChatHead.vue';
 import ChatBox from '../design/ChatBox.vue';
 import { VueEditor } from "vue3-editor";
+import { getEditorDefaults } from '@pqina/pintura';
+import { PinturaEditor } from '@pqina/vue-pintura';
+import '../../../../node_modules/@pqina/pintura/pintura.css';
 
 export default {
     data: () => ({
@@ -80,11 +93,15 @@ export default {
         textAreaHeight: 0,
         isEditorOpen: false,
         availableHeight: '50vh',
+        imageCropAspectRatio: 1,
+        src: '/assets/images/EasyWrite.svg',
+        editorDefaults: getEditorDefaults(),
     }),
     components: {
         ChatBox,
         VueEditor,
-        ChatHead
+        ChatHead,
+        PinturaEditor,
     },
     computed: {
         pageInfo() {
@@ -119,7 +136,7 @@ export default {
                     this.isTextareaMsg = '';
                     this.combineMsg = [];
                     this.name = '';
-                    this.savedId = '';
+                    this.savedId = 0;
                     this.setTextAreaHeight();
                 });
         },
@@ -267,7 +284,29 @@ export default {
             let chatHeader = this.$refs.chatHeader.$el.clientHeight;
             // let bottomBarTextarea = this.$refs.bottomBarTextarea.$el.clientHeight;
             this.availableHeight = screen - (chatHeader + 270);
-            console.log(this.availableHeight);
+        },
+        handleEditorProcess(imageState) {
+            let file = imageState.detail.dest;
+
+            // Create a hidden link and set the URL using createObjectURL
+            const link = document.createElement('a');
+            link.style.display = 'none';
+            link.href = window.URL.createObjectURL(file);
+            link.download = file.name;
+
+            // We need to add the link to the DOM for "click()" to work
+            document.body.appendChild(link);
+            link.click();
+
+            // To make this work on Firefox we need to wait a short moment before clean up
+            setTimeout(() => {
+                URL.revokeObjectURL(link.href);
+                link.parentNode.removeChild(link);
+            }, 0);
+        },
+        onFileChange(e) {
+            let file = e.target.files[0];
+            this.src = window.URL.createObjectURL(file);
         }
     },
     mounted() {
