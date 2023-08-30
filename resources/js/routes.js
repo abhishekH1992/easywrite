@@ -11,6 +11,9 @@ import SavedDocument from './components/documents/SavedDocumentComponent.vue'
 import CustomChatList from './components/custom/CustomChatComponent.vue'
 import SpeechToText from './components/speech/SpeechToTextComponent.vue'
 import SavedSpeechToText from './components/speech/SavedSpeechToTextComponent.vue'
+import ChatSuite from './components/chatSuite/ChatSuite.vue'
+import ChatSuiteSections from './components/chatSuite/ChatSuiteSections.vue'
+import ChatSuiteChat from './components/chatSuite/ChatSuiteChat.vue'
 
 import isSubscribed from './middleware/isSubscribed'
 import isValidPlanSelected from './middleware/isValidPlanSelected'
@@ -122,6 +125,30 @@ const routes = [
         path: '/speech-to-text/:id',
         component: SavedSpeechToText,
         name: 'savedSpeechToText',
+        meta: {
+            middleware: isSubscribed,
+        },
+    },
+    {
+        path: '/chat-suite',
+        component: ChatSuite,
+        name: 'chatSuite',
+        meta: {
+            middleware: isSubscribed,
+        },
+    },
+    {
+        path: '/chat-suite/:slug',
+        component: ChatSuiteSections,
+        name: 'chatSuiteSections',
+        meta: {
+            middleware: isSubscribed,
+        },
+    },
+    {
+        path: '/chat-suite/:parent/:slug',
+        component: ChatSuiteChat,
+        name: 'chatSuiteChat',
         meta: {
             middleware: isSubscribed,
         },

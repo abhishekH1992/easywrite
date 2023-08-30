@@ -8,6 +8,7 @@ export default {
         saved: [],
         isSevenDayTrial: false,
         navMenu: [],
+        isAdmin: false,
     },
 
     getters: {},
@@ -27,6 +28,9 @@ export default {
         },
         set_nav_menu: (state, navMenu) => {
             state.navMenu = navMenu;
+        },
+        set_is_admin: (state, isAdmin) => {
+            state.isAdmin = isAdmin;
         },
     },
 
@@ -81,6 +85,12 @@ export default {
         get_nav_menu_models: (context, data) => {
             return axios.get('/api/site/get-nav-menu-models').then((response) => {
                 context.commit('set_nav_menu', response.data);
+            });
+        },
+
+        is_admin: (context, data) => {
+            return axios.get('/api/site/is-admin').then((response) => {
+                context.commit('set_is_admin', response.data);
             });
         },
     },

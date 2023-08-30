@@ -48,6 +48,15 @@ Route::group(['middleware' => ['auth', 'verified', 'isSubscribed']], function ()
     Route::get('/speech-to-text/{id}', function () {
         return view('layouts.app');
     });
+    Route::get('/chat-suite', function () {
+        return view('layouts.app');
+    });
+    Route::get('/chat-suite/{slug}', function () {
+        return view('layouts.app');
+    });
+    Route::get('/chat-suite/{slug}/{section}', function () {
+        return view('layouts.app');
+    });
 });
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/plans', function () {

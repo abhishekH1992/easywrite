@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="wrapper" v-for="(chat, i) in list" :key="i" :class="{blueBackground: i % 2 !== 0}">
-            <div class="chat" v-if="pageInfo.isFreechat || pageInfo.isSystem">
+            <div class="chat" v-if="pageInfo.isFreechat || pageInfo.isSystem || showUserIcons">
                 <div class="profile user" v-if="chat.user === `user` ">
                     <img src="/assets/images/user.svg">
                 </div>
@@ -41,7 +41,7 @@
         </div>
         <div class="wrapper blueBackground" v-if="typing">
             <div class="chat">
-                <div class="profile ai" v-if="pageInfo.isFreechat || pageInfo.isSystem">
+                <div class="profile ai" v-if="pageInfo.isFreechat || pageInfo.isSystem || showUserIcons">
                     <img src="/assets/images/bot.svg">
                 </div>
                 <div class="message">typing<span>...</span></div>
@@ -96,6 +96,9 @@ export default {
         translateLanguage: {
             required: true,
         },
+        showUserIcons: {
+            required: true,
+        }
     },
     methods: {
         copytxt(txt) {

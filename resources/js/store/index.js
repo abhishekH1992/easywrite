@@ -4,6 +4,7 @@ import subscription from './modules/subscription';
 import models from './modules/models';
 import documents from './modules/documents';
 import speech from './modules/speech';
+import chatSuite from './modules/chatSuite';
 
 const store = createStore({
     state: {
@@ -23,5 +24,6 @@ store.registerModule('subscription', subscription);
 store.registerModule('models', models);
 store.registerModule('documents', documents);
 store.registerModule('speech', speech);
+store.registerModule('chatSuite', chatSuite);
 
 export default store;

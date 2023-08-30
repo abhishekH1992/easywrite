@@ -28,9 +28,18 @@ class SiteController extends Controller
 
     public function getSearchModels(Request $request){
         if($request->term){
-            $data = Prompt::whereNull('isSystem')->whereNull('is_display_in_list')->where('name', 'LIKE', "%{$request->term}%")->get();
+            $data = Prompt::whereNull('isSystem')
+                        ->where(function ($query) {
+                            $query->where('is_display_in_list', 0)
+                                ->orWhereNull('is_display_in_list');
+                        })
+                        ->where('name', 'LIKE', "%{$request->term}%")->get();
         } else {
-            $data = Prompt::whereNull('isSystem')->whereNull('is_display_in_list')->get();
+            $data = Prompt::whereNull('isSystem')
+                        ->where(function ($query) {
+                            $query->where('is_display_in_list', 0)
+                                ->orWhereNull('is_display_in_list');
+                        })->get();
         }
         return response()->json($data);
     }
@@ -72,5 +81,9 @@ class SiteController extends Controller
 
     public function getNavMenuModels(Request $request){
         return response()->json(Prompt::where('isMenu', 1)->get());
+    }
+
+    public function isAdmin(){
+        return auth()->user()->role === 'admin' ? true : false;
     }
 }
