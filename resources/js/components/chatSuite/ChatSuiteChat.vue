@@ -86,20 +86,31 @@ export default {
                 });
             
             this.msg = '';
-            // let previouChat = '';
-            
-            // if(this.chatList.length){
-            //     this.chatList.map((l) => {
-            //         previouChat = previouChat+l.msg;
-            //     })
-            //     msg = previouChat;
-            // }
+            let previouChat = [];
 
-            let paylaod = {
-                msg: {
+            previouChat.push({
+                role: 'system',
+                content: this.pageInfo.system_msg
+            });
+            
+            if(this.chatList.length){
+                this.chatList.map((l) => {
+                    previouChat.push({
+                        role: l.user == 'ai' ? 'assistant' : 'user',
+                        content: l.msg
+                    });
+                })
+                msg = previouChat;
+            } else {
+                previouChat.push({
                     role: 'user',
                     content: msg
-                },
+                });
+                msg = previouChat;
+            }
+            
+            let paylaod = {
+                msg: msg,
                 id: this.pageInfo.id
             };
             this.$store

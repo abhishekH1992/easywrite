@@ -44,14 +44,9 @@ class ChatSuiteController extends Controller
             $data = ChatSuiteSections::where('id', $request->id)->first();
 
             $data = [
-                'model'     =>  $data->model,
-                'messages'  =>  [
-                    [
-                        "role"      =>  "system",
-                        "content"   =>  $data->system_msg
-                    ],
-                    $request->msg
-                ],
+                'model'         =>  $data->model,
+                'messages'      =>  $request->msg,
+                'temperature'   =>  0
             ];
 
             $auth = 'Authorization: Bearer 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';

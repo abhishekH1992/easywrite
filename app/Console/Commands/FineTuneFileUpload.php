@@ -15,7 +15,7 @@ class FineTuneFileUpload extends Command
      *
      * @var string
      */
-    protected $signature = 'finetune:file:upload {name} {slug} {outline} {filepath} {chat_suite_id}';
+    protected $signature = 'finetune:file:upload {filepath}';
 
     /**
      * The console command description.
@@ -41,13 +41,13 @@ class FineTuneFileUpload extends Command
 
         \Log::info($response->toArray());
 
-        ChatSuiteSections::create([
-            'name'          =>  $this->argument('name'),
-            'slug'          =>  $this->argument('slug'),
-            'outline'       =>  $this->argument('outline'),
-            'chat_suite_id' =>  $this->argument('chat_suite_id'),
-            'file_id'       =>  $response->id,
-        ]);
+        // ChatSuiteSections::create([
+        //     'name'          =>  $this->argument('name'),
+        //     'slug'          =>  $this->argument('slug'),
+        //     'outline'       =>  $this->argument('outline'),
+        //     'chat_suite_id' =>  $this->argument('chat_suite_id'),
+        //     'file_id'       =>  $response->id,
+        // ]);
 
         return Command::SUCCESS;
     }

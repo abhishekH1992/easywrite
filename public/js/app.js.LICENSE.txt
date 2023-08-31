@@ -11,6 +11,15 @@
  */
 
 /*!
+ * Pintura v8.64.1 - Test version
+ * (c) 2018-2023 PQINA Inc. - All Rights Reserved
+ * License: https://pqina.nl/pintura/license/
+ * 
+ * This version of Pintura is for testing purposes only.
+ * Visit https://pqina.nl/pintura/ to obtain a commercial license.
+ */
+
+/*!
  * Quill Editor v1.3.7
  * https://quilljs.com/
  * Copyright (c) 2014, Jason Chen
