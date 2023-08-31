@@ -65,6 +65,7 @@ class ChatSuiteController extends Controller
 
             return ltrim($response);
         } catch (\Exception $e) {
+            \Log::error('[Fine Tune Error]: '. var_export($e, true));
             return 'Error: Please refresh or reduce your text input';
         }
     }
