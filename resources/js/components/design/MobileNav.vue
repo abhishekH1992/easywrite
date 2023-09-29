@@ -20,8 +20,14 @@
                 <li class="nav-billing">
                     <router-link class="nav-link link_name" :to="{ name: 'speechToText'}"><i class="fa fa-file-audio" aria-hidden="true"></i>Speech To Text</router-link>
                 </li>
-                <li class="nav-billing" v-if="isAdmin">
+                <li class="nav-billing">
                     <router-link class="nav-link link_name" :to="{ name: 'chatSuite'}"><i class="fas fa-comment-alt" aria-hidden="true"></i>Chat Suite</router-link>
+                </li>
+                <li class="nav-billing" v-if="isAdmin">
+                    <router-link class="nav-link link_name" :to="{ name: 'fineTuneUi'}"><i class="fas fa-comment-alt" aria-hidden="true"></i>Fine Tune</router-link>
+                </li>
+                <li class="nav-billing" v-if="isAdmin">
+                    <router-link class="nav-link link_name" :to="{ name: 'freeDocumentChatList'}"><i class="fas fa-comment-alt" aria-hidden="true"></i>Free Document Chat</router-link>
                 </li>
                 <li class="nav-billing">
                     <router-link class="nav-link link_name" :to="{ name: 'archive'}"><i class="fa fa-database" aria-hidden="true"></i>Project</router-link>

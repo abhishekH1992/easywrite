@@ -14,10 +14,15 @@ import SavedSpeechToText from './components/speech/SavedSpeechToTextComponent.vu
 import ChatSuite from './components/chatSuite/ChatSuite.vue'
 import ChatSuiteSections from './components/chatSuite/ChatSuiteSections.vue'
 import ChatSuiteChat from './components/chatSuite/ChatSuiteChat.vue'
+import FineTuneUi from './components/fineTune/FineTuneUi.vue'
+import SavedFineTune from './components/fineTune/SavedFineTune.vue'
+import FreeDocumentChatList from './components/freeDocumentChat/FreeDocumentChatList.vue'
+import Support from './components/freeDocumentChat/Support.vue'
 
 import isSubscribed from './middleware/isSubscribed'
 import isValidPlanSelected from './middleware/isValidPlanSelected'
 import isLoggedInUser from './middleware/isLoggedInUser'
+import isAdmin from './middleware/isAdmin'
 
 const routes = [
     {
@@ -134,7 +139,7 @@ const routes = [
         component: ChatSuite,
         name: 'chatSuite',
         meta: {
-            middleware: isSubscribed,
+            middleware: isAdmin,
         },
     },
     {
@@ -142,7 +147,7 @@ const routes = [
         component: ChatSuiteSections,
         name: 'chatSuiteSections',
         meta: {
-            middleware: isSubscribed,
+            middleware: isAdmin,
         },
     },
     {
@@ -150,8 +155,37 @@ const routes = [
         component: ChatSuiteChat,
         name: 'chatSuiteChat',
         meta: {
-            middleware: isSubscribed,
+            middleware: isAdmin,
         },
+    },
+    {
+        path: '/fine-tune',
+        component: FineTuneUi,
+        name: 'fineTuneUi',
+        meta: {
+            middleware: isAdmin,
+        },
+    },
+    {
+        path: '/fine-tune/:id',
+        component: SavedFineTune,
+        name: 'savedFineTune',
+        meta: {
+            middleware: isAdmin,
+        },
+    },
+    {
+        path: '/free-document-chat',
+        component: FreeDocumentChatList,
+        name: 'freeDocumentChatList',
+        meta: {
+            middleware: isAdmin,
+        },
+    },
+    {
+        path: '/easychat/:slug',
+        component: Support,
+        name: 'support',
     },
 ]
 
