@@ -57,6 +57,15 @@ Route::group(['middleware' => ['auth', 'verified', 'isSubscribed']], function ()
     Route::get('/chat-suite/{slug}/{section}', function () {
         return view('layouts.app');
     });
+    Route::get('/fine-tune', function () {
+        return view('layouts.app');
+    });
+    Route::get('/fine-tune/{id}', function () {
+        return view('layouts.app');
+    });
+    Route::get('/free-document-chat', function () {
+        return view('layouts.app');
+    });
 });
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/plans', function () {
@@ -74,4 +83,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::get('/easychat/{slug}', function () {
+    return view('layouts.app');
 });

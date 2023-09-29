@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\ChatSuite;
+
 class ChatSuiteSections extends Model
 {
     use HasFactory;
@@ -22,5 +24,11 @@ class ChatSuiteSections extends Model
         'job_id',
         'chat_suite_id',
         'system_msg',
+        'file',
+        'processing'
     ];
+
+    public function chat_suite(){
+        return $this->hasOne(ChatSuite::class, 'id', 'chat_suite_id');
+    }
 }

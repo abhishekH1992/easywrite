@@ -84,6 +84,6 @@ class SiteController extends Controller
     }
 
     public function isAdmin(){
-        return auth()->user()->role === 'admin' ? true : false;
+        return response()->json(auth()->user()->role === 'admin' ? true : false);
     }
 }

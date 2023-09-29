@@ -93,5 +93,9 @@ export default {
                 context.commit('set_is_admin', response.data);
             });
         },
+
+        is_admin_without_state: (context, data) => {
+            return axios.get('/api/site/is-admin');
+        },
     },
 };

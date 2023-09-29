@@ -10,6 +10,9 @@ use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\TranslatorController;
 use App\Http\Controllers\SpeechToTextController;
 use App\Http\Controllers\ChatSuiteController;
+use App\Http\Controllers\FineTuneController;
+use App\Http\Controllers\FreeDocumentChatController;
+use App\Http\Controllers\SupportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +92,21 @@ Route::group(['middleware' => 'user'], function () {
     Route::get('/site/get-tone-list', [SiteController::class, 'getToneList']);
     Route::get('/site/get-language-list', [SiteController::class, 'getLanguagelist']);
     Route::get('/site/is-seven-day-trial', [SiteController::class, 'isSevenDayTrial']);
+
+    Route::get('/fine-tune/get-list', [FineTuneController::class, 'getList']);
+    Route::get('/fine-tune/get-chat-suite-list', [FineTuneController::class, 'getChatSuiteList']);
+    Route::post('/fine-tune/new-fine-tune', [FineTuneController::class, 'newFineTune']);
+    Route::get('/fine-tune/get-page-info', [FineTuneController::class, 'getPageInfo']);
+    Route::post('/fine-tune/set-processing', [FineTuneController::class, 'setProcessing']);
+    Route::post('/fine-tune/file-upload', [FineTuneController::class, 'upload']);
+    Route::post('/fine-tune/create-job', [FineTuneController::class, 'createJob']);
+
+    Route::get('/free-document-chat/get-list', [FreeDocumentChatController::class, 'getList']);
+    Route::post('/free-document-chat/create', [FreeDocumentChatController::class, 'create']);
+
+    Route::get('/free-document-chat/get-page-info', [SupportController::class, 'getPageInfo']);
 });
 
 Route::get('/user/is-user-logged-in', [SiteController::class, 'isUserLoggedIn']);
+Route::get('/free-document-chat/get-page-info', [SupportController::class, 'getPageInfo']);
+Route::post('/free-document-chat/chat', [SupportController::class, 'chat']);

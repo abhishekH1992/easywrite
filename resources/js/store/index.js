@@ -5,6 +5,8 @@ import models from './modules/models';
 import documents from './modules/documents';
 import speech from './modules/speech';
 import chatSuite from './modules/chatSuite';
+import finetune from './modules/finetune';
+import freeDocumentChat from './modules/freeDocumentChat';
 
 const store = createStore({
     state: {
@@ -25,5 +27,7 @@ store.registerModule('models', models);
 store.registerModule('documents', documents);
 store.registerModule('speech', speech);
 store.registerModule('chatSuite', chatSuite);
+store.registerModule('finetune', finetune);
+store.registerModule('freeDocumentChat', freeDocumentChat);
 
 export default store;
