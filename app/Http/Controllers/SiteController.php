@@ -60,12 +60,12 @@ class SiteController extends Controller
         if(!auth()->check()){
             return response()->json(false);
         }
-        $isEligible = strtotime('+1 days', strtotime(auth()->user()->created_at));
-        $currentDate = strtotime("now");
+        // $isEligible = strtotime('+1 days', strtotime(auth()->user()->created_at));
+        // $currentDate = strtotime("now");
         $data = false;
-        if($isEligible > $currentDate){
-            $data = true;
-        }
+        // if($isEligible > $currentDate){
+        //     $data = true;
+        // }
 
         return response()->json($data);
     }

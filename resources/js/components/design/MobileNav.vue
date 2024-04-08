@@ -12,6 +12,12 @@
                     <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'chat' }}"><i class="fa fa-commenting" aria-hidden="true"></i>Chat</router-link>
                 </li>
                 <li class="nav-billing">
+                    <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'chat-2.0' }}"><i class="fa fa-commenting" aria-hidden="true"></i>Chat 2.0</router-link>
+                </li>
+                <li class="nav-billing">
+                    <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'text-completion' }}"><i class="fa fa-book" aria-hidden="true"></i>Text Completion</router-link>
+                </li>
+                <li class="nav-billing">
                     <router-link class="nav-link link_name" :to="{ name: 'documentsList'}"><i class="fa fa-book" aria-hidden="true"></i>Chat Doc</router-link>
                 </li>
                 <li class="nav-billing">
@@ -27,7 +33,7 @@
                     <router-link class="nav-link link_name" :to="{ name: 'fineTuneUi'}"><i class="fas fa-comment-alt" aria-hidden="true"></i>Fine Tune</router-link>
                 </li>
                 <li class="nav-billing" v-if="isAdmin">
-                    <router-link class="nav-link link_name" :to="{ name: 'freeDocumentChatList'}"><i class="fas fa-comment-alt" aria-hidden="true"></i>Free Document Chat</router-link>
+                    <router-link class="nav-link link_name" :to="{ name: 'freeDocumentChatList'}"><i class="fas fa-comment-alt" aria-hidden="true"></i>Chatbot</router-link>
                 </li>
                 <li class="nav-billing">
                     <router-link class="nav-link link_name" :to="{ name: 'archive'}"><i class="fa fa-database" aria-hidden="true"></i>Project</router-link>

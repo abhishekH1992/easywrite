@@ -14,7 +14,7 @@ class FreeDocumentChatController extends Controller
     CONST DEFAULT_USER = '9593107c-32d7-424e-9b57-cba2089fafad';
 
     public function __construct(){
-        return $this->middleware('guest:api');
+        return $this->middleware('auth:api');
     }
 
     public function getList(Request $request){

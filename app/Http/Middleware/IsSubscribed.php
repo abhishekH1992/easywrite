@@ -19,11 +19,11 @@ class IsSubscribed
         if(auth()->user()->vip) {
             return $next($request);
         }
-        $isEligible = strtotime('+1 days', strtotime(auth()->user()->created_at));
-        $currentDate = strtotime("now");
-        if($isEligible > $currentDate){
-            return $next($request);
-        }
+        // $isEligible = strtotime('+1 days', strtotime(auth()->user()->created_at));
+        // $currentDate = strtotime("now");
+        // if($isEligible > $currentDate){
+        //     return $next($request);
+        // }
 
         if (auth()->user()->subscribed('default')) {
             return $next($request);

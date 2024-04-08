@@ -4,9 +4,9 @@
             <chat-head :name="chatName" :img="pageInfo.img" :outline="pageInfo.outline" :saved-id="savedId" @name-changes="nameChange" ref="chatHeader"/>
             <div class="chatbox-body">
                 <div class="chat-container" :class="{fillWidthChatContainer: isEditorOpen}">
-                    <div class="bottom-bar" v-if="!pageInfo.isTextarea">
+                    <div class="bottom-bar" :class="pageInfo.isPythonSuggestions ? `bottom-bar-python` : ``" v-if="!pageInfo.isTextarea">
                         <div class="chat">
-                            <textarea ref="textarea" class="chat-textarea" :placeholder="pageInfo.placeholder" v-model="msg" rows="1" @keydown.enter.exact.prevent="submit()"></textarea>
+                            <textarea ref="textarea" class="chat-textarea" :placeholder="pageInfo.placeholder" v-model="msg" rows="1" @keydown.enter.exact.prevent="submit()" v-if="!pageInfo.isPythonSuggestions"></textarea>
                             <div class="storeBtns">
                                 <div class="input-btn">
                                     {{ pageInfo.is_image_editor }}
@@ -14,7 +14,7 @@
                                     <button class="btn btn-clean btn-img" @click="clean"><i class="fa fa-refresh" aria-hidden="true"></i><span> Clear</span></button>
                                     <button class="btn btn-delete" @click="destroy" v-if="savedId"><i class="fa-solid fa-trash"></i><span> Delete</span></button>
                                 </div>
-                                <div class="submitBtn" @click="submit">
+                                <div class="submitBtn" @click="submit" v-if="!pageInfo.isPythonSuggestions">
                                     <i class="fa fa-paper-plane" aria-hidden="true"></i>
                                 </div>
                             </div>
@@ -48,11 +48,18 @@
                             </div>
                         </div>
                     </div>
-                    <chat-box :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" v-if="pageInfo && !pageInfo.isTextarea" />
+                    <chat-box :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" v-if="pageInfo && !pageInfo.isTextarea && !pageInfo.isPythonSuggestions" @related-question-selected="relatedQuestion"/>
                     <chat-box class="one" :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" v-if="pageInfo && pageInfo.isTextarea && availableHeight" :style="{ maxHeight: availableHeight + 'px' }"/>
-                    <div class="edit-tab" @click="isEditorOpen = !isEditorOpen"><i class="fa fa-pencil" aria-hidden="true"></i> Editor</div>
+                    <!-- <vue-editor v-model="editor" :editorToolbar="customToolbar" v-if="pageInfo.isPythonSuggestions" :class="`text-completion`" @keydown.tab.exact.prevent="submit()"/> -->
+                    <div class="chat-body">
+                        <div class="chat">
+                            <textarea v-model="editor" placeholder="Start typing and press tab for suggestions..." v-if="pageInfo.isPythonSuggestions" :class="`text-completion`" @keydown.tab.exact.prevent="submit()" :style="{ height: suggestionTextAreaHeight + 'px' }" />
+                        </div>
+                    </div>
+                    <div class="edit-tab" @click="isEditorOpen = !isEditorOpen" v-if="pageInfo.isPythonSuggestions"><i class="fa fa-pencil" aria-hidden="true"></i> Suggestions</div>
+                    <div class="edit-tab" @click="isEditorOpen = !isEditorOpen" v-else><i class="fa fa-pencil" aria-hidden="true"></i> Editor</div>
                 </div>
-                <div class="editor-section" :class="{editorHide: isEditorOpen, borderRight: pageInfo.is_image_editor}">
+                <div class="editor-section python-suggestions-section" :class="{editorHide: isEditorOpen, borderRight: pageInfo.is_image_editor}">
                     <PinturaEditor
                         v-bind="editorDefaults"
                         :src="src"
@@ -60,6 +67,15 @@
                         v-on:pintura:process="handleEditorProcess($event)"
                         v-if="pageInfo.is_image_editor"
                     ></PinturaEditor>
+                    <div class="python-suggestions m-4" v-else-if="pageInfo.isPythonSuggestions">
+                        <!-- <p class="suggestion-text-bold my-3">Suggestions: </p> -->
+                        <p class="message" v-if="typing">loading<span>...</span></p>
+                        <div v-if="!typing">
+                            <p v-for="(suggestion, key) in suggestions" :key="key">
+                                <input type="radio" name="suggestions" :value="suggestion" v-model="pickedSuggection" /> <span v-html="suggestion"></span>
+                            </p>
+                        </div>
+                    </div>
                     <vue-editor v-model="editor" :editorToolbar="customToolbar" v-else/>
                 </div>
             </div>
@@ -96,6 +112,8 @@ export default {
         imageCropAspectRatio: 1,
         src: '/assets/images/EasyWrite.svg',
         editorDefaults: getEditorDefaults(),
+        pickedSuggection: null,
+        suggestionTextAreaHeight: 500,
     }),
     components: {
         ChatBox,
@@ -119,6 +137,9 @@ export default {
         chatName() {
             return this.name ? this.name : this.pageInfo.name;
         },
+        suggestions() {
+            return this.$store.state.chat.suggestions;
+        },
     },
     methods: {
         async getPageInfo() {
@@ -132,6 +153,7 @@ export default {
                         this.isFirstMsg = this.pageInfo.isSystem ? true : false;
                     } else {
                         this.isFirstMsg = true;
+                        this.editor = null;
                     }
                     this.isTextareaMsg = '';
                     this.combineMsg = [];
@@ -144,7 +166,7 @@ export default {
             this.typing = true;
             let msg = this.msg;
             let user = '';
-            if (!this.pageInfo.isTextarea) this.$refs.textarea.style.height="auto";
+            if (!this.pageInfo.isTextarea && !this.pageInfo.isPythonSuggestions) this.$refs.textarea.style.height="auto";
             if(this.pageInfo.isFreechat){
                 user = {
                     msg: this.pageInfo.prefix ? this.pageInfo.prefix+' '+msg : msg,
@@ -168,7 +190,8 @@ export default {
             this.$store
                 .dispatch('chat/set_user_msg', user).then((response) => {
                     var container = this.$el.querySelector(".chat-body");
-                    container.scrollTop = container.scrollHeight;
+                    if(!this.pageInfo.isPythonSuggestions)
+                        container.scrollTop = container.scrollHeight;
                 });
 
             this.msg = '';
@@ -192,18 +215,21 @@ export default {
             // msg = localStorage.getItem('tone') ? msg+' Tone: '+localStorage.getItem('tone')+' ' : msg;
 
             let paylaod = {
-                msg: msg,
+                msg: this.pageInfo.isPythonSuggestions ? this.editor : msg,
                 slug: this.$route.fullPath,
                 history: this.pageInfo.history,
+                isPython: this.pageInfo.isPython,
+                isPythonSuggestions: this.pageInfo.isPythonSuggestions,
             };
             this.$store
                 .dispatch('chat/chat', paylaod).then((response) => {
                     var container = this.$el.querySelector(".chat-body");
-                    container.scrollTop = container.scrollHeight;
                     this.typing = false;
                     this.isTextareaMsg = '';
                     this.combineMsg = [];
                     this.isFirstMsg = false;
+                    if(!this.pageInfo.isPythonSuggestions)
+                        container.scrollTop = container.scrollHeight;
                 });
         },
         clean() {
@@ -212,6 +238,7 @@ export default {
             this.combineMsg = [];
             this.isFirstMsg = true;
             this.typing = false;
+            this.editor = null;
         },
         save(){
             let type = this.pageInfo.isSystem ? 'custom-chat' : 'model';
@@ -269,10 +296,11 @@ export default {
         },
         mountedList() {
             var container = this.$el.querySelector(".chat-body");
-            container.scrollTop = container.scrollHeight;
             this.$store.dispatch('chat/reset_state');
             this.$store.dispatch('chat/translate_language');
             this.getPageInfo();
+            if(!this.pageInfo.isPythonSuggestions)
+                container.scrollTop = container.scrollHeight;
         },
         nameChange(val) {
             this.name = val;
@@ -307,11 +335,14 @@ export default {
         onFileChange(e) {
             let file = e.target.files[0];
             this.src = window.URL.createObjectURL(file);
-        }
+        },
+        relatedQuestion(value) {
+            this.msg = value;
+        },
     },
     mounted() {
         this.mountedList();
-        
+        this.suggestionTextAreaHeight = window.innerHeight * (80/100);
     },
     watch: {
         $route(to, from) {
@@ -320,10 +351,17 @@ export default {
         msg() {
             this.$refs.textarea.style.height="auto";
             this.$nextTick(() => {
-                this.textAreaHeight = this.textAreaHeight <=93 ? this.$refs.textarea.scrollHeight : this.textAreaHeight;
-                this.$refs.textarea.style.height = this.textAreaHeight + 'px';
+                this.textAreaHeight = this.textAreaHeight <= 93 ? this.$refs.textarea.scrollHeight : this.textAreaHeight;
+                this.$refs.textarea.style.height = this.textAreaHeight > 109 ? '109px' : this.textAreaHeight + 'px';
             });
         },
+        pickedSuggection(newValue, oldValue) {
+            console.log(newValue, this.editor);
+            if(oldValue != newValue && newValue) {
+                this.editor = this.editor +' '+ newValue;
+                this.$store.commit('chat/set_suggestions', []);
+            }
+        }
     },
 }
 </script>

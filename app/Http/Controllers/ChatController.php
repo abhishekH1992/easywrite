@@ -8,17 +8,52 @@ use Illuminate\Http\Request;
 
 use \App\Models\Prompt;
 use \App\Models\Chats;
+use App\Http\Controllers\DocumentsController;
 
 class ChatController extends Controller
 {
+    public $documentController;
+
     public function __construct(){
+        $this->documentController = new DocumentsController();
         return $this->middleware('auth:api');
     }
     
     public function create(Request $request, \OpenAI\Client $client){
         try{
             $slug = explode('/', $request->slug);
-            if($request->slug === '/speech-to-text') {
+            if($request->isPython){
+                if(count($slug) > 3) {
+                    unset($slug[count($slug)-1]);
+                    $str = implode('/', $slug);
+                    $prompt = Prompt::where('slug', $str)->first();
+                } else {
+                    $prompt = Prompt::where('slug', $request->slug)->first();
+                }
+
+                $payload = [
+                    'msg'       =>  $request->msg,
+                    'user_id'   =>  auth()->id(),
+                ];
+                $response = $this->documentController->sendRequest($prompt->endpoint, $payload);
+                $data = [];
+                if($response->success) {
+                    if($request->isPythonSuggestions) {
+                        $data['suggestions'] = $response->data->suggestions;
+                    } else {
+                        // $isReference = strpos($response->data->text, "References:");
+                        // $isReference = !$isReference ? strpos($response->data->text, "References") : $isReference;
+                        // $data['text'] = $isReference ? preg_replace('/[[0-9].]/', '', substr($response->data->text, 0, $isReference)) : preg_replace('/[[0-9].]/', '', $response->data->text);
+                        $data['text'] = $response->data->text;
+                        $data['related_questions'] = $response->data->related_questions;
+                    }
+                } else {
+                    $data['text'] = 'Error: Please refresh or reduce your text input';
+                    $data['related_questions'] = [];
+                }
+                return $data;
+
+            } elseif($request->slug === '/speech-to-text') {
                 $prompt = Prompt::where('slug', $request->slug)->first();
             } elseif(count($slug) == 3) {
                 $prompt = Prompt::where('slug', $request->slug)->first();

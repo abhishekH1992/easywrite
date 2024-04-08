@@ -11,9 +11,9 @@ class SupportController extends Controller
     CONST REST_API = 'https://moanaai.com';
     CONST DEFAULT_USER = '9593107c-32d7-424e-9b57-cba2089fafad';
 
-    public function __construct(){
-        return $this->middleware('guest:api');
-    }
+    // public function __construct(){
+    //     return $this->middleware('guest:api');
+    // }
 
     public function getPageInfo(Request $request){
         return response()->json(FreeDocumentChats::where('slug', $request->slug)->first());

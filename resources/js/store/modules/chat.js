@@ -11,6 +11,7 @@ export default {
         toneList: [],
         languageList: [],
         translateLanguage: [],
+        suggestions: [],
     },
 
     getters: {},
@@ -35,6 +36,7 @@ export default {
             state.list = [];
             state.prompt = '';
             state.pageInfo = [];
+            state.suggestions = [];
         },
         set_tone: (state, tone) => {
             state.tone = tone;
@@ -51,6 +53,9 @@ export default {
         set_translate_language: (state, translateLanguage) => {
             state.translateLanguage = translateLanguage;
         },
+        set_suggestions: (state, suggestions) => {
+            state.suggestions = suggestions;
+        },
     },
 
     actions: {
@@ -61,12 +66,24 @@ export default {
             }
             return axios.post('/api/chat/chat', data).then((response) => {
                 let res = context.state.pageInfo.aiprefix != null ? context.state.pageInfo.aiprefix+' '+response.data : response.data;
-                let bot = {
-                    msg: res,
-                    user: 'ai'
-                };
-                context.commit('set_prompt', res);
-                context.commit('set_chat', bot);
+                if(data.isPythonSuggestions) {
+                    context.commit('set_suggestions', res.suggestions);
+                } else if(data.isPython && res.text) {
+                    let bot = {
+                        msg: res.text,
+                        user: 'ai',
+                        related: res.related_questions
+                    };
+                    context.commit('set_prompt', res);
+                    context.commit('set_chat', bot);
+                } else {
+                    let bot = {
+                        msg: res,
+                        user: 'ai'
+                    };
+                    context.commit('set_prompt', res);
+                    context.commit('set_chat', bot);
+                }
             });
         },
         chat_textarea: (context, data) => {
@@ -109,6 +126,7 @@ export default {
         clean_chat: (context, data) => {
             context.commit('set_reset_chat');
             context.commit('set_prompt', '');
+            context.commit('set_suggestions', []);
         },
         save: (context, data) => {
             return axios.post('/api/chat/save', data);

@@ -13,7 +13,15 @@
                 <div class="profile ai" v-else>
                     <img src="/assets/images/bot.svg">
                 </div>
-                <div class="message" v-html="chat.msg"></div>
+                <div class="message">
+                    <div v-html="chat.msg"></div>
+                    <div class="pl-2" v-if="chat.related && chat.related.length">
+                        <p class="related-text-bold my-3">Related Questions: </p>
+                        <p v-for="(related, key) in chat.related" :key="key">
+                            <input type="radio" :name="i" :value="related" v-model="picked" /> {{ related }}
+                        </p>
+                    </div>
+                </div>
                 <div class="copy">
                     <span @click="copytxt(chat.msg)">Copy</span>
                     <span @click="emailTxt(chat.msg)">Email</span>
@@ -81,6 +89,7 @@ export default {
                 code: 'sm',
                 name: 'Samoan'
             },
+            picked: null,
         }
     },
     props: {
@@ -127,7 +136,12 @@ export default {
 
             this.$store.dispatch('chat/translate_chat', payload);
             this.showModal = false;
-        }
+        },
     },
+    watch: {
+        picked(newValue, oldValue) {
+            if(oldValue != newValue && newValue) this.$emit('related-question-selected', newValue);
+        }
+    }
 }
 </script>

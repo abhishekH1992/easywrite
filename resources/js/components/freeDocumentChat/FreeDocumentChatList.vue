@@ -1,6 +1,6 @@
 <template>
 	<div class="chatbox-container document-container free-document-chat">
-        <chat-head :name="`Free Document Chat List`"/>
+        <chat-head :name="`Chatbot List`"/>
         <section class="dashbaord-section">
             <div class="container">
                 <div class="row">
@@ -28,7 +28,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">New Free Document Chat</h5>
+                                <h5 class="modal-title">New Chatbot</h5>
                                 <button type="button" class="btn-close" @click="showModal = false"></button>
                             </div>
                             <div class="modal-body">

@@ -8,22 +8,28 @@
                 <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'chat' }}"><i class="fa fa-commenting" aria-hidden="true"></i>Chat</router-link>
             </li>
             <li class="nav-font-main-section nav-div">
-                <router-link class="nav-link link_name" :to="{ name: 'documentsList'}"><i class="fa fa-book" aria-hidden="true"></i>Chat Doc</router-link>
+                <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'chat-2.0' }}"><i class="fa fa-commenting" aria-hidden="true"></i>Chat 2.0</router-link>
             </li>
             <li class="nav-font-main-section nav-div">
-                <router-link class="nav-link link_name" :to="{ name: 'customChatList'}"><i class="fa fa-comments" aria-hidden="true"></i>Custom Chat</router-link>
+                <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'text-completion' }}"><i class="fa fa-book" aria-hidden="true"></i>Text Completion</router-link>
             </li>
+            <li class="nav-font-main-section nav-div">
+                <router-link class="nav-link link_name" :to="{ name: 'documentsList'}"><i class="fa fa-book" aria-hidden="true"></i>Chat Doc</router-link>
+            </li>
+            <!-- <li class="nav-font-main-section nav-div">
+                <router-link class="nav-link link_name" :to="{ name: 'customChatList'}"><i class="fa fa-comments" aria-hidden="true"></i>Custom Chat</router-link>
+            </li> -->
             <li class="nav-font-main-section nav-div">
                 <router-link class="nav-link link_name" :to="{ name: 'speechToText'}"><i class="fa fa-file-audio" aria-hidden="true"></i>Speech To Text</router-link>
             </li>
-            <li class="nav-font-main-section nav-div">
+            <!-- <li class="nav-font-main-section nav-div">
                 <router-link class="nav-link link_name" :to="{ name: 'chatSuite'}"><i class="fas fa-comment-alt" aria-hidden="true"></i>Chat Suite</router-link>
-            </li>
+            </li> -->
             <li class="nav-font-main-section nav-div" v-if="isAdmin">
                 <router-link class="nav-link link_name" :to="{ name: 'fineTuneUi'}"><i class="fas fa-comment-alt" aria-hidden="true"></i>Fine Tune</router-link>
             </li>
             <li class="nav-font-main-section nav-div" v-if="isAdmin">
-                <router-link class="nav-link link_name" :to="{ name: 'freeDocumentChatList'}"><i class="fas fa-comment-alt" aria-hidden="true"></i>Free Document Chat</router-link>
+                <router-link class="nav-link link_name" :to="{ name: 'freeDocumentChatList'}"><i class="fas fa-comment-alt" aria-hidden="true"></i>Chatbot</router-link>
             </li>
             <li class="nav-font-main-section nav-div">
                 <router-link class="nav-link link_name" :to="{ name: 'archive'}"><i class="fa fa-database" aria-hidden="true"></i>Project</router-link>

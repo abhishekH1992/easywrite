@@ -22,9 +22,9 @@ class FineTuneController extends Controller
 
     public function getList(Request $request){
         if($request->term){
-            $data = ChatSuiteSections::latest()->with('chat_suite')->whereNotNull('model')->where('name', 'LIKE', "%{$request->term}%")->get();
+            $data = ChatSuiteSections::latest()->with('chat_suite')->where('name', 'LIKE', "%{$request->term}%")->get();
         } else {
-            $data = ChatSuiteSections::latest()->with('chat_suite')->whereNotNull('model')->get();
+            $data = ChatSuiteSections::latest()->with('chat_suite')->get();
         }
         return response()->json($data); 
     }

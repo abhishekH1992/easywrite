@@ -48,12 +48,12 @@ class PlanController extends Controller
         if(auth()->user()->vip) {
             return response()->json(true);
         }
-        $isEligible = strtotime('+1 days', strtotime(auth()->user()->created_at));
-        $currentDate = strtotime("now");
+        // $isEligible = strtotime('+1 days', strtotime(auth()->user()->created_at));
+        // $currentDate = strtotime("now");
         $data = false;
-        if($isEligible > $currentDate){
-            $data = true;
-        }
+        // if($isEligible > $currentDate){
+        //     $data = true;
+        // }
         if(!$data){
             $data = auth()->user()->subscribed('default');
         }

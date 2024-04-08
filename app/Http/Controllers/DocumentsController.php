@@ -46,7 +46,7 @@ class DocumentsController extends Controller
         return response()->json($data);
     }
 
-    private function sendRequest($endpoint, $payload) {
+    public function sendRequest($endpoint, $payload) {
         $endpoint = SELF::REST_API.$endpoint;
 
         $ch = curl_init();
@@ -60,7 +60,6 @@ class DocumentsController extends Controller
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
         $response = curl_exec($ch);
-
         curl_close($ch);
 
         return json_decode($response);
