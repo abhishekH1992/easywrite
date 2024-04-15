@@ -14,6 +14,18 @@
                         <router-link class="nav-link link_name" :to="nav.slug"><i class="fa-solid fa-arrow-right"></i> {{ nav.name }}</router-link>
                     </li>
                 </div>
+                <div class="header">
+                    Pre-built Template
+                    <li class="nav-font-main-section">
+                        <router-link class="nav-link link_name" to="/"><i class="fa-solid fa-arrow-right"></i> All Templates</router-link>
+                    </li>
+                </div>
+                <div class="header">
+                    Saved Projects
+                    <li class="nav-font-main-section">
+                        <router-link class="nav-link link_name" to="/archive"><i class="fa-solid fa-arrow-right"></i> Archive</router-link>
+                    </li>
+                </div>
                 <li class="nav-billing nav-font-main-section">
                     <router-link class="nav-link link_name" :to="{ name: 'plans'}">Billing</router-link>
                 </li>

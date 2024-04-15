@@ -87,6 +87,7 @@ class SiteController extends Controller
         foreach($data as $d){
             if(in_array($d->template, $this->templatesAllow))  $arr[$d->template][] = $d;
         }
+
         $arr ? ksort($arr) : $arr;
         return response()->json($arr);
     }
