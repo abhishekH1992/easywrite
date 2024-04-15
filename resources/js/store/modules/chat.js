@@ -72,7 +72,9 @@ export default {
                     let bot = {
                         msg: res.text,
                         user: 'ai',
-                        related: res.related_questions
+                        related: res.related_questions,
+                        source: res.source_urls,
+                        relatedUrl: res.related_urls
                     };
                     context.commit('set_prompt', res);
                     context.commit('set_chat', bot);

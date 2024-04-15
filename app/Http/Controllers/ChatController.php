@@ -44,12 +44,16 @@ class ChatController extends Controller
                         // $isReference = strpos($response->data->text, "References:");
                         // $isReference = !$isReference ? strpos($response->data->text, "References") : $isReference;
                         // $data['text'] = $isReference ? preg_replace('/[[0-9].]/', '', substr($response->data->text, 0, $isReference)) : preg_replace('/[[0-9].]/', '', $response->data->text);
-                        $data['text'] = $response->data->text;
+                        $data['text'] = str_replace("\n", '', $response->data->text);
                         $data['related_questions'] = $response->data->related_questions;
+                        $data['source_urls'] = $response->data->source_urls ? $this->objectToArray($response->data->source_urls) : [];
+                        $data['related_urls'] = $response->data->related_urls ? $this->objectToArray($response->data->related_urls) : [];
                     }
                 } else {
                     $data['text'] = 'Error: Please refresh or reduce your text input';
                     $data['related_questions'] = [];
+                    $data['source_urls'] = [];
+                    $data['related_urls'] = [];
                 }
                 return $data;
 
@@ -114,6 +118,7 @@ class ChatController extends Controller
 
             return ltrim($response);
         } catch (\Exception $e) {
+            dd($e);
             return 'Error: Please refresh or reduce your text input';
         }
     }
@@ -178,5 +183,13 @@ class ChatController extends Controller
 
     public function destroy(Request $request){
         return response()->json(Chats::where('id', $request->id)->where('user_id', auth()->id())->delete());
+    }
+
+    public function objectToArray($obj) {
+        $data = [];
+        foreach($obj as $k => $v) {
+            array_push($data, $v);
+        }
+        return $data;
     }
 }
