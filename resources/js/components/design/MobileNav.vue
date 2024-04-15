@@ -15,6 +15,12 @@
                     </li>
                 </div>
                 <div class="header">
+                    Document Analyzer
+                    <li class="nav-font-main-section">
+                        <router-link class="nav-link link_name" to="/documents"><i class="fa-solid fa-arrow-right"></i> Chat</router-link>
+                    </li>
+                </div>
+                <div class="header">
                     Pre-built Template
                     <li class="nav-font-main-section">
                         <router-link class="nav-link link_name" to="/"><i class="fa-solid fa-arrow-right"></i> All Templates</router-link>

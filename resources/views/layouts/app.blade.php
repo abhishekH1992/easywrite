@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-        <link rel="stylesheet" href="/css/app.css">
+        <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
         
     </head>
     <body class="font-sans antialiased">
@@ -34,6 +34,6 @@
             @endif
         </div>
 
-        <script src="/js/app.js"></script>
+        <script src="{{ mix('/js/app.js') }}"></script>
     </body>
 </html>

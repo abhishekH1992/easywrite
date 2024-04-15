@@ -45,9 +45,9 @@ class ChatController extends Controller
                         // $isReference = !$isReference ? strpos($response->data->text, "References") : $isReference;
                         // $data['text'] = $isReference ? preg_replace('/[[0-9].]/', '', substr($response->data->text, 0, $isReference)) : preg_replace('/[[0-9].]/', '', $response->data->text);
                         $data['text'] = str_replace("\n", '', $response->data->text);
-                        $data['related_questions'] = $response->data->related_questions;
-                        $data['source_urls'] = $response->data->source_urls ? $this->objectToArray($response->data->source_urls) : [];
-                        $data['related_urls'] = $response->data->related_urls ? $this->objectToArray($response->data->related_urls) : [];
+                        $data['related_questions'] = isset($response->data->related_questions) ? $response->data->related_questions : [];
+                        $data['source_urls'] = isset($response->data->source_urls) ? $this->objectToArray($response->data->source_urls) : [];
+                        $data['related_urls'] = isset($response->data->related_urls) ? $this->objectToArray($response->data->related_urls) : [];
                     }
                 } else {
                     $data['text'] = 'Error: Please refresh or reduce your text input';

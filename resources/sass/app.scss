@@ -323,6 +323,8 @@ body{
                 padding: 0.5rem 0.5rem 0.5rem 1rem;
                 font-size: 0.9rem;
                 margin: 0 1rem;
+                font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+                font-weight: 500;
             }
             li{
                 position: relative;
@@ -1399,9 +1401,9 @@ body{
                                     }
                                     &.logo{
                                         margin-bottom: 1.5rem;
-                                        max-width: 50px;
                                         img{
                                             display: block;
+                                            max-width: 200px;
                                         }
                                     }
                                     &.template{
