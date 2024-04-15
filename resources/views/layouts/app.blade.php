@@ -8,6 +8,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <meta name="user-id" content="{{ auth()->check() ? auth()->user()->id : 0 }}">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
         <link rel="stylesheet" href="/css/app.css">

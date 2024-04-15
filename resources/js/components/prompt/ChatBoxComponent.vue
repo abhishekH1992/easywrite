@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </div>
-                    <chat-box :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" v-if="pageInfo && !pageInfo.isTextarea && !pageInfo.isPythonSuggestions" @related-question-selected="relatedQuestion"/>
+                    <chat-box :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" v-if="pageInfo && !pageInfo.isTextarea && !pageInfo.isPythonSuggestions" @related-question-selected="relatedQuestion" @div-link="showInBrowser"/>
                     <chat-box class="one" :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" v-if="pageInfo && pageInfo.isTextarea && availableHeight" :style="{ maxHeight: availableHeight + 'px' }"/>
                     <!-- <vue-editor v-model="editor" :editorToolbar="customToolbar" v-if="pageInfo.isPythonSuggestions" :class="`text-completion`" @keydown.tab.exact.prevent="submit()"/> -->
                     <div class="chat-body">
@@ -57,6 +57,11 @@
                         </div>
                     </div>
                     <div class="edit-tab" @click="isEditorOpen = !isEditorOpen" v-if="pageInfo.isPythonSuggestions"><i class="fa fa-pencil" aria-hidden="true"></i> Suggestions</div>
+                    <!-- <div class="edit-tab" @click="isEditorOpen = !isEditorOpen" v-else><i class="fa fa-pencil" aria-hidden="true"></i> Editor</div> -->
+                    <div class="edit-tab-section" v-else-if="pageInfo.isWebpage">
+                        <div class="edit-tab-block" @click="showPanel('editor')"><i class="fa fa-pencil" aria-hidden="true"></i> Editor</div>
+                        <div class="edit-tab-block" @click="showPanel('webpage')"><i class="fa fa-snowflake" aria-hidden="true"></i> Webpage</div>
+                    </div>
                     <div class="edit-tab" @click="isEditorOpen = !isEditorOpen" v-else><i class="fa fa-pencil" aria-hidden="true"></i> Editor</div>
                 </div>
                 <div class="editor-section python-suggestions-section" :class="{editorHide: isEditorOpen, borderRight: pageInfo.is_image_editor}">
@@ -75,6 +80,11 @@
                                 <input type="radio" name="suggestions" :value="suggestion" v-model="pickedSuggection" /> <span v-html="suggestion"></span>
                             </p>
                         </div>
+                    </div>
+                    <!-- <vue-editor v-model="editor" :editorToolbar="customToolbar" v-else/> -->
+                    <vue-editor v-model="editor" :editorToolbar="customToolbar" v-else-if="isShowEditor && pageInfo.isWebpage"/>
+                    <div v-else-if="isBrowser && pageInfo.isWebpage" class="browser-frame">
+                        <iframe :src="browserLink"></iframe>
                     </div>
                     <vue-editor v-model="editor" :editorToolbar="customToolbar" v-else/>
                 </div>
@@ -114,6 +124,9 @@ export default {
         editorDefaults: getEditorDefaults(),
         pickedSuggection: null,
         suggestionTextAreaHeight: 500,
+        isBrowser: false,
+        isShowEditor: true,
+        browserLink: '',
     }),
     components: {
         ChatBox,
@@ -339,6 +352,41 @@ export default {
         relatedQuestion(value) {
             this.msg = value;
         },
+        showInBrowser(value) {
+            if(value.includes('https')) {
+                this.browserLink = value;
+            } else {
+                window.open(value, '_blank');
+            }
+        },
+        showPanel(type) {
+            // console.log(type);
+            // this.isEditorOpen = !this.isEditorOpen;
+            if (type == 'editor') {
+                // if(this.isShowEditor) {
+                //     this.isEditorOpen = false;
+                //     this.isShowEditor = false;
+                // } else {
+                //     this.isEditorOpen = true;
+                //     this.isShowEditor = true;
+                // }
+                this.isShowEditor = true;
+                this.isBrowser = false;
+            } else {
+                // if(this.isBrowser) {
+                //     this.isEditorOpen = false;
+                //     this.isBrowser = false;
+                // } else {
+                //     this.isEditorOpen = true;
+                //     this.isBrowser = true;
+                // }
+                // this.isShowEditor = false;
+                this.isShowEditor = false;
+                this.isBrowser = true;
+            }
+
+            return;
+        }
     },
     mounted() {
         this.mountedList();

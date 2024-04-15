@@ -4,39 +4,12 @@
             <img src="/assets/images/EasyWrite.svg">
         </div>
         <ul class="nav-links">
-            <li class="nav-font-main-section nav-div">
-                <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'chat' }}"><i class="fa fa-commenting" aria-hidden="true"></i>Chat</router-link>
-            </li>
-            <li class="nav-font-main-section nav-div">
-                <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'chat-2.0' }}"><i class="fa fa-commenting" aria-hidden="true"></i>Chat 2.0</router-link>
-            </li>
-            <li class="nav-font-main-section nav-div">
-                <router-link class="nav-link link_name" :to="{ name: 'chatBox', params: { prompt: 'text-completion' }}"><i class="fa fa-book" aria-hidden="true"></i>Text Completion</router-link>
-            </li>
-            <li class="nav-font-main-section nav-div">
-                <router-link class="nav-link link_name" :to="{ name: 'documentsList'}"><i class="fa fa-book" aria-hidden="true"></i>Chat Doc</router-link>
-            </li>
-            <!-- <li class="nav-font-main-section nav-div">
-                <router-link class="nav-link link_name" :to="{ name: 'customChatList'}"><i class="fa fa-comments" aria-hidden="true"></i>Custom Chat</router-link>
-            </li> -->
-            <li class="nav-font-main-section nav-div">
-                <router-link class="nav-link link_name" :to="{ name: 'speechToText'}"><i class="fa fa-file-audio" aria-hidden="true"></i>Speech To Text</router-link>
-            </li>
-            <!-- <li class="nav-font-main-section nav-div">
-                <router-link class="nav-link link_name" :to="{ name: 'chatSuite'}"><i class="fas fa-comment-alt" aria-hidden="true"></i>Chat Suite</router-link>
-            </li> -->
-            <li class="nav-font-main-section nav-div" v-if="isAdmin">
-                <router-link class="nav-link link_name" :to="{ name: 'fineTuneUi'}"><i class="fas fa-comment-alt" aria-hidden="true"></i>Fine Tune</router-link>
-            </li>
-            <li class="nav-font-main-section nav-div" v-if="isAdmin">
-                <router-link class="nav-link link_name" :to="{ name: 'freeDocumentChatList'}"><i class="fas fa-comment-alt" aria-hidden="true"></i>Chatbot</router-link>
-            </li>
-            <li class="nav-font-main-section nav-div">
-                <router-link class="nav-link link_name" :to="{ name: 'archive'}"><i class="fa fa-database" aria-hidden="true"></i>Project</router-link>
-            </li>
-            <li class="nav-font-main-section nav-div">
-                <router-link class="nav-link link_name" :to="{ name: 'dashboard'}"><i class="fa fa-list-alt" aria-hidden="true"></i>Template</router-link>
-            </li>
+            <div class="header" v-for="(navs, i) in navMenu" :key="i">
+                {{ i }}
+                <li v-for="nav in navs" :key="nav.id" class="nav-font-main-section">
+                    <router-link class="nav-link link_name" :to="nav.slug"><i class="fa-solid fa-arrow-right"></i> {{ nav.name }}</router-link>
+                </li>
+            </div>
             <div class="fixed-li">
                 <li class="nav-font-main-section" v-if="!isSevenDayTrial">
                     <router-link class="nav-link link_name" :to="{ name: 'billing'}" v-if="customerStripeId"><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
@@ -82,7 +55,7 @@ export default {
         isSevenDayTrial() {
             return this.$store.state.models.isSevenDayTrial;
         },
-        modelsIsMenu() {
+        navMenu() {
             return this.$store.state.models.navMenu;
         },
         customerStripeId() {

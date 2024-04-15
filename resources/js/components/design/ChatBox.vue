@@ -14,12 +14,24 @@
                     <img src="/assets/images/bot.svg">
                 </div>
                 <div class="message">
-                    <div v-html="chat.msg"></div>
+                    <div v-html="chat.msg" anchor></div>
+                    <div class="pl-2" v-if="chat.source && chat.source.length">
+                        <p class="related-text-bold my-3">Source Urls: </p>
+                        <div v-for="(source, key) in chat.source" :key="key">
+                            <p class="div-link" @click="linkClicked(source)">{{ source }}</p>
+                        </div>
+                    </div>
                     <div class="pl-2" v-if="chat.related && chat.related.length">
                         <p class="related-text-bold my-3">Related Questions: </p>
                         <p v-for="(related, key) in chat.related" :key="key">
                             <input type="radio" :name="i" :value="related" v-model="picked" /> {{ related }}
                         </p>
+                    </div>
+                    <div class="pl-2" v-if="chat.relatedUrl && chat.relatedUrl.length">
+                        <p class="related-text-bold my-3">Related Urls: </p>
+                        <div v-for="(relatedUrl, key) in chat.relatedUrl" :key="key">
+                            <p class="div-link" @click="linkClicked(relatedUrl)">{{ relatedUrl }}</p>
+                        </div>
                     </div>
                 </div>
                 <div class="copy">
@@ -137,6 +149,9 @@ export default {
             this.$store.dispatch('chat/translate_chat', payload);
             this.showModal = false;
         },
+        linkClicked(link) {
+            this.$emit('div-link', link);
+        }
     },
     watch: {
         picked(newValue, oldValue) {

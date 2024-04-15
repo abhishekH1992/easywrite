@@ -59,7 +59,7 @@ class DocumentsController extends Controller
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
-        $response = curl_exec($ch);
+        $response = curl_exec($ch);//dd($response);
         curl_close($ch);
 
         return json_decode($response);
