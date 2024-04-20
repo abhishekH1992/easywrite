@@ -1,7 +1,6 @@
 <template>
-    <div class="chat-head" :class="{noImgPadding: !img}">
+    <div class="chat-head noImgPadding">
         <mobile-nav :name="name"/>
-        <div class="img"><img :src="img" v-if="img"></div>
         <div class="content" v-if="!isInput">
             <div class="name">{{ name }}</div>
             <div class="outline" v-if="!savedId">{{ outline }}</div>

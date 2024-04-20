@@ -1,13 +1,15 @@
 <template>
 	<div class="chatbox-container document-container">
-        <chat-head :name="`Chat Suite`"/>
+        <div class="row head-title">
+            <chat-head :name="`Chat Suite`" class="sm:col-6"/>
+            <div class="sm:col-6 mt-4 sm:mt-0 input-search-box p-3">
+                <input type="text" v-model="term" @input="search" placeholder="Search for speech chat suite..."/>
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+        </div>
         <section class="dashbaord-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 input-search-box">
-                        <input type="text" v-model="term" @input="search" placeholder="Search for chat suite..."/>
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </div>
                     <div class="col-md-3 col-sm-6 col-xs-12 mb-3" v-for="(item, i) in list" :key="i">
                         <div class="model-section">
                             <router-link class="model" :to="{ name: 'chatSuiteSections', params: { slug: item.slug }}">

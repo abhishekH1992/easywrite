@@ -1,5 +1,5 @@
 <template>
-    <div class="chatbox-container">
+    <div class="chatbox-container container">
         <chat-head :name="`Billing`"/>
         <section class="pricing-section payment-section billing-section">
             <div class="container">

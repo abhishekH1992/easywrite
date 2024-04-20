@@ -6,44 +6,44 @@
         <ul class="nav-links">
             <div class="header" v-for="(navs, i) in navMenu" :key="i">
                 {{ i }}
-                <li v-for="nav in navs" :key="nav.id" class="nav-font-main-section">
-                    <router-link class="nav-link link_name" :to="nav.slug"><i class="fa-solid fa-arrow-right"></i> {{ nav.name }}</router-link>
+                <li v-for="nav in navs" :key="nav.id" class="nav-font-main-section nav-div">
+                    <router-link class="nav-link link_name nav-div" :to="nav.slug"> {{ nav.name }}</router-link>
                 </li>
             </div>
             <div class="header">
-                Document Analyzer
+                DOCUMENT ANALYZER
                 <li class="nav-font-main-section">
-                    <router-link class="nav-link link_name" to="/documents"><i class="fa-solid fa-arrow-right"></i> Chat</router-link>
+                    <router-link class="nav-link link_name nav-div" to="/documents"><i class="fa-solid fa-robot" aria-hidden="true"></i>Chat</router-link>
                 </li>
             </div>
             <div class="header">
-                Pre-built Template
+                PRE-BUILT TEMPLATE
                 <li class="nav-font-main-section">
-                    <router-link class="nav-link link_name" to="/"><i class="fa-solid fa-arrow-right"></i> All Templates</router-link>
+                    <router-link class="nav-link link_name nav-div" to="/"> <i class="fa fa-list-alt" aria-hidden="true"></i> All Templates</router-link>
                 </li>
             </div>
             <div class="header">
-                Saved Projects
+                SAVED PROJECTS
                 <li class="nav-font-main-section">
-                    <router-link class="nav-link link_name" to="/archive"><i class="fa-solid fa-arrow-right"></i> Archive</router-link>
+                    <router-link class="nav-link link_name nav-div" to="/archive"><i class="fa fa-database" aria-hidden="true"></i>Archive</router-link>
                 </li>
             </div>
-            <div class="fixed-li">
+            <div class="header">
                 <li class="nav-font-main-section" v-if="!isSevenDayTrial">
-                    <router-link class="nav-link link_name" :to="{ name: 'billing'}" v-if="customerStripeId"><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
-                    <router-link class="nav-link link_name" :to="{ name: 'plans'}" v-else><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
-                </li>
-                <li class="nav-font-main-section">
-                    <span class="text logout" @click="submit();">
-                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                        Logout
-                        <form id="logout-form" action="/logout" method="POSt" style="display: none;" ref="logout">
-                            <input type="hidden" name="_token" :value="csrf">
-                        </form>
-                    </span>
+                    <router-link class="nav-link link_name nav-div" :to="{ name: 'billing'}" v-if="customerStripeId"><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
+                    <router-link class="nav-link link_name nav-div" :to="{ name: 'plans'}" v-else><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
                 </li>
             </div>
         </ul>
+        <div class="fixed-li">
+            <span>My Workspace</span>
+            <span class="text logout" @click="submit();">
+                <i class="fa-solid fa-arrow-right-from-bracket" title="Log out"></i>
+                <form id="logout-form" action="/logout" method="POSt" style="display: none;" ref="logout">
+                    <input type="hidden" name="_token" :value="csrf">
+                </form>
+            </span>
+        </div>
     </div>
 </template>
 

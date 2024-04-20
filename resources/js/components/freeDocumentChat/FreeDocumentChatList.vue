@@ -1,15 +1,18 @@
 <template>
-	<div class="chatbox-container document-container free-document-chat">
-        <chat-head :name="`Chatbot List`"/>
+	<div class="chatbox-container document-container free-document-chat container">
+        <div class="row head-title">
+            <chat-head :name="`Chatbot List`" class="sm:col-6"/>
+            <div class="sm:col-6 mt-4 sm:mt-0 input-search-box p-3">
+                <input type="text" v-model="term" @input="search" placeholder="Search for chat document..."/>
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+        </div>
         <section class="dashbaord-section">
             <div class="container">
                 <div class="row">
                     <div class="col-12 new-document">
-                        <button class="btn btn-submit" @click="showModal = true"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</button>
-                    </div>
-                    <div class="col-12 input-search-box">
-                        <input type="text" v-model="term" @input="search" placeholder="Search for chat document..."/>
-                        <i class="fa fa-search" aria-hidden="true"></i>
+                        <button class="btn btn-submit" @click="showModal = true"><i class="fa fa-plus" aria-hidden="true"></i> 
+                        <span class="d-sm-inline-block d-none">New</span></button>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12 mb-3" v-for="(item, i) in list" :key="i">
                         <div class="model-section">
@@ -24,34 +27,34 @@
                             </router-link>
                         </div>
                     </div>
-                    <div class="modal" :class="{show: showModal}">
+                    <div class="modal chatbot-list-modal" :class="{show: showModal}">
                         <div class="modal-dialog">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">New Chatbot</h5>
+                            <div class="modal-content rounded-4">
+                            <div class="modal-header border-0">
+                                <h3 class="modal-title">New Chatbot</h3>
                                 <button type="button" class="btn-close" @click="showModal = false"></button>
                             </div>
                             <div class="modal-body">
-                                <div class="form-group">
-                                    <label>Name:</label>
-                                    <input type="text" class="form-control" v-model="name">
+                                <div class="form-group mb-3">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control bg-white" placeholder="Enter Name" v-model="name">
                                 </div>
-                                <div class="form-group mt-1">
-                                    <label>Slug:</label>
-                                    <input type="text" class="form-control" v-model="slug">
+                                <div class="form-group mb-3">
+                                    <label>Slug</label>
+                                    <input type="text" class="form-control bg-white" placeholder="Enter Slug"  v-model="slug">
                                 </div>
-                                <div class="form-group mt-1">
-                                    <label>Outline:</label>
-                                    <input type="text" class="form-control" v-model="outline">
+                                <div class="form-group mb-3">
+                                    <label>Outline</label>
+                                    <input type="text" class="form-control bg-white" placeholder="Enter outline"  v-model="outline">
                                 </div>
-                                <div class="form-group mt-1">
+                                <div class="form-group mb-3">
                                     <label>Document:</label>
-                                    <input type="file" ref="file" class="form-control" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
+                                    <input type="file" ref="file" class="form-control bg-white" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" @click="showModal = false">Close</button>
-                                <button type="button" class="btn btn-dark" @click="submit">Save changes</button>
+                            <div class="modal-footer border-0">
+                                <button type="button" class="btn footer-btn" @click="submit">Save</button>
+                                <button type="button" class="btn footer-btn  mr-3" @click="showModal = false">Cancel</button>
                             </div>
                             </div>
                         </div>

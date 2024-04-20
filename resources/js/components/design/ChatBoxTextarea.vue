@@ -11,20 +11,22 @@
                 <div class="chat">
                     <div class="message" :style="chat.user === `ai` && style ? style : ''" v-html="chat.msg"></div>
                     <div class="copy">
-                        <span @click="copytxt(chat.msg)">Copy</span>
-                        <span @click="emailTxt(chat.msg)">Email</span>
-                        <span @click="setTranslatePayload(chat.msg, i)">Translate</span>
+                        <span @click="copytxt(chat.msg)"><i class="far fa-copy" aria-hidden="true" title="Copy"></i></span>
+                        <span @click="emailTxt(chat.msg)"><i class="far fa-envelope" aria-hidden="true" title="Email"></i></span>
+                        <span @click="setTranslatePayload(chat.msg, i)"><i class="fa fa-language" aria-hidden="true" title="Translate"></i></span>
                     </div>
                     <div class="copy-inline">
-                        <span @click="copytxt(chat.msg)">Copy</span>
-                        <span @click="setTranslatePayload(chat.msg, i)">Translate</span>
-                        <span @click="emailTxt(chat.msg)">Email</span>
+                        <span @click="copytxt(chat.msg)"><i class="far fa-copy" aria-hidden="true" title="Copy"></i></span>
+                        <span @click="setTranslatePayload(chat.msg, i)"><i class="fa fa-language" aria-hidden="true" title="Translate"></i></span>
+                        <span @click="emailTxt(chat.msg)"><i class="far fa-envelope" aria-hidden="true" title="Email"></i></span>
                     </div>
                 </div>
             </div>
             <div class="wrapper" v-if="isTyping">
-                <div class="chat">
-                    <div class="message">typing<span>...</span></div>
+                <div class="chat flex">
+                    <div class='h-2.5 w-2.5 bg-current rounded-full mr-1 bounce 1s infinite'></div>
+                    <div class='h-2.5 w-2.5 bg-current rounded-full mr-1 bounce 1s infinite 200ms'></div>
+                    <div class='h-2.5 w-2.5 bg-current rounded-full bounce 1s infinite 400ms'></div>
                 </div>
             </div>
         </div>

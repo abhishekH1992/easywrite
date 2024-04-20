@@ -6,47 +6,48 @@
             <div class="bar3"></div>
             <ul class="mobile-menu">
                 <li class="logo">
-                    <img src="/assets/images/EasyWrite.svg">
+                    <img src="/assets/images/EasyWrite.svg" />
                 </li>
                 <div class="header" v-for="(navs, i) in navMenu" :key="i">
                     {{ i }}
                     <li v-for="nav in navs" :key="nav.id" class="nav-font-main-section ">
-                        <router-link class="nav-link link_name" :to="nav.slug"><i class="fa-solid fa-arrow-right"></i> {{ nav.name }}</router-link>
+                        <router-link class="nav-link link_name" :to="nav.slug"> {{ nav.name }}</router-link>
                     </li>
                 </div>
                 <div class="header">
-                    Document Analyzer
+                    DOCUMENT ANALYZER
                     <li class="nav-font-main-section">
-                        <router-link class="nav-link link_name" to="/documents"><i class="fa-solid fa-arrow-right"></i> Chat</router-link>
+                        <router-link class="nav-link link_name" to="/documents"><i class="fa-solid fa-robot" aria-hidden="true"></i> Chat</router-link>
                     </li>
                 </div>
                 <div class="header">
-                    Pre-built Template
+                    PRE-BUILT TEMPLATE
                     <li class="nav-font-main-section">
-                        <router-link class="nav-link link_name" to="/"><i class="fa-solid fa-arrow-right"></i> All Templates</router-link>
+                        <router-link class="nav-link link_name" to="/"><i class="fa fa-list-alt" aria-hidden="true"></i> All Templates</router-link>
                     </li>
                 </div>
                 <div class="header">
-                    Saved Projects
+                    SAVED PROJECTS                    
                     <li class="nav-font-main-section">
-                        <router-link class="nav-link link_name" to="/archive"><i class="fa-solid fa-arrow-right"></i> Archive</router-link>
+                        <router-link class="nav-link link_name" to="/archive"><i class="fa fa-database" aria-hidden="true"></i>Archive</router-link>
                     </li>
                 </div>
-                <li class="nav-billing nav-font-main-section">
-                    <router-link class="nav-link link_name" :to="{ name: 'plans'}">Billing</router-link>
-                </li>
-                <li class="nav-font-main-section">
-                    <router-link class="nav-link link_name" :to="{ name: 'archive'}">Archive</router-link>
-                </li>
-                <li class="nav-billing logout-btn nav-font-main-section">
-                    <span class="text logout" @click="submit();">
-                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                        Logout
-                        <form id="logout-form" action="/logout" method="POSt" style="display: none;" ref="logout">
-                            <input type="hidden" name="_token" :value="csrf">
-                        </form>
-                    </span>
-                </li>
+                <div class="header">
+                    <li class="nav-billing nav-font-main-section">
+                        <router-link class="nav-link link_name" :to="{ name: 'plans'}"><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
+                    </li>
+                </div>
+                <div class="header">
+                    <li class="nav-billing logout-btn nav-font-main-section">
+                        <span class="text logout" @click="submit();">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Logout
+                            <form id="logout-form" action="/logout" method="POSt" style="display: none;" ref="logout">
+                                <input type="hidden" name="_token" :value="csrf">
+                            </form>
+                        </span>
+                    </li>
+                </div>
             </ul>
         </div>
         <div class="page-name" v-if="!isActive">{{ name }}</div>

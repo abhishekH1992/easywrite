@@ -1,59 +1,68 @@
 <x-guest-layout>
-    <div class="auth-forms">
+    <div class="logo-block text-center">
+        <img src="/assets/images/EasyWrite.svg" width="300px" height="100px">
+    </div>
+    <div class="auth-forms register-form">
         <form method="POST" action="{{ route('register') }}">
             @csrf
-
-            <div class="logo-block">
-                <img src="/assets/images/EasyWrite.svg">
-            </div>
-
             <!-- Name -->
             <div class="row">
                 <div class="validate-input col-md-6">
                     <div class="wrap-input md:mr-1">
-                        <x-text-input id="fname" class="block mt-1 w-full input" type="text" name="fname" :value="old('fname')" required/>
-                        <span class="label" data-placeholder="First Name"></span>
+                        <label for="firstName" class="label-text">First name</label>
+                        <x-text-input id="fname" class="block mt-1 w-full input" type="text" 
+                        name="fname" :value="old('fname')" placeholder="Your first Name" autofocus=true required/>
+                        <!-- <span class="label" data-placeholder="First Name"></span> -->
                     </div>
-                    <x-input-error :messages="$errors->get('fname')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('fname')" class="mt-2 error-msg" />
                 </div>
                 <div class="validate-input col-md-6">
                     <div class="wrap-input md:ml-1">
-                        <x-text-input id="lname" class="block mt-1 w-full input" type="text" name="lname" :value="old('lname')" required/>
-                        <span class="label" data-placeholder="Last Name"></span>
+                        <label for="lastName" class="label-text">Last name</label>
+                        <x-text-input id="lname" class="block mt-1 w-full input" type="text" 
+                        name="lname" :value="old('lname')" placeholder="Your last Name" required/>
+                        <!-- <span class="label" data-placeholder="Last Name"></span> -->
                     </div>
-                    <x-input-error :messages="$errors->get('lname')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('lname')" class="mt-2 error-msg" />
                 </div>
             </div>
 
             <!-- Email Address -->
             <div class="validate-input">
                 <div class="wrap-input">
-                    <x-text-input id="email" class="block mt-1 w-full input" type="email" name="email" :value="old('email')" required/>
-                    <span class="label" data-placeholder="Email"></span>
+                    <label for="Email" class="label-text">Email</label>                    
+                    <x-text-input id="email" class="block mt-1 w-full input" type="email" name="email" 
+                    :value="old('email')" placeholder="Your email address" required/>
+                    <!-- <span class="label" data-placeholder="Email"></span> -->
                 </div>
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <x-input-error :messages="$errors->get('email')" class="mt-2 error-msg" />
             </div>
 
             <!-- Password -->
             <div class="validate-input">
                 <div class="wrap-input">
-                    <x-text-input id="password" class="block mt-1 w-full input" type="password" name="password" required autocomplete="current-password" />
-                    <span class="label" data-placeholder="Password"></span>
+                    <label for="password" class="label-text">Password</label>
+                    <x-text-input id="password" class="block mt-1 w-full input" type="password" name="password" 
+                    required autocomplete="current-password" placeholder="Your password"/>
+                    <!-- <span class="label" data-placeholder="Password"></span> -->
                 </div>
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <x-input-error :messages="$errors->get('password')" class="mt-2 error-msg" />
             </div>
 
             <!-- Confirm Password -->
             <div class="validate-input">
                 <div class="wrap-input">
-                    <x-text-input id="password_confirmation" class="block mt-1 w-full input" type="password" name="password_confirmation" required/>
-                    <span class="label" data-placeholder="Confirm Password"></span>
+                    <label for="confirm password" class="label-text">Confirm password</label>
+                    <x-text-input id="password_confirmation" class="block mt-1 w-full input" type="password" 
+                    name="password_confirmation" placeholder="Your confirm password" required/>
+                    <!-- <span class="label" data-placeholder="Confirm Password"></span> -->
                 </div>
-                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 error-msg" />
             </div>
 
             <div class="forget-password-link">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                <a class="underline hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
+                href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
             </div>

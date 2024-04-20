@@ -1,18 +1,22 @@
 <template>
-	<div class="chatbox-container document-container">
-        <chat-head :name="`Chat Documents List`"/>
+	<div class="chatbox-container document-container container">
+        <div class="row head-title">
+            <chat-head :name="`Chat Documents List`" class="sm:col-6"/>
+            <div class="sm:col-6 mt-4 sm:mt-0 input-search-box p-3">
+                <input type="text" v-model="term" @input="search" placeholder="Search for chat document..."/>
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+        </div>
+        
         <section class="dashbaord-section">
             <div class="container">
                 <div class="row">
                     <div class="col-12 new-document">
                         <input type="text" v-model="name" placeholder="New document chat name ..." v-if="isStore"/>
-                        <button class="btn btn-submit" @click="submit" v-if="isStore" :disable="!name">Save</button>
+                        <button class="btn btn-submit btn-save" @click="submit" v-if="isStore" :disable="!name">Save</button>
                         <button class="btn btn-submit" @click="isStore = false" v-if="isStore" :disable="!name">Cancel</button>
-                        <button class="btn btn-submit" @click="isStore = true" v-if="!isStore"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</button>
-                    </div>
-                    <div class="col-12 input-search-box">
-                        <input type="text" v-model="term" @input="search" placeholder="Search for chat document..."/>
-                        <i class="fa fa-search" aria-hidden="true"></i>
+                        <button class="btn btn-submit" @click="isStore = true" v-if="!isStore"><i class="fa fa-plus" aria-hidden="true"></i> 
+                        <span class="d-sm-inline-block d-none">New</span></button>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12 mb-3" v-for="(item, i) in list" :key="i">
                         <div class="model-section">

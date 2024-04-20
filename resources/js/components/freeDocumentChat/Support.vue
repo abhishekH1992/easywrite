@@ -10,7 +10,7 @@
                             <div class="storeBtns">
                                 <div class="input-btn"></div>
                                 <div class="submitBtn" @click="submit">
-                                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                    <i class="fa fa-paper-plane" aria-hidden="true" title="Send message"></i>
                                 </div>
                             </div>
                         </div>

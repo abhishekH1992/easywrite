@@ -10,12 +10,12 @@
                             <div class="storeBtns">
                                 <div class="input-btn">
                                     {{ pageInfo.is_image_editor }}
-                                    <button class="btn btn-bookmark btn-img" @click="save"><i class='fa fa-save'></i><span> Save</span></button>
-                                    <button class="btn btn-clean btn-img" @click="clean"><i class="fa fa-refresh" aria-hidden="true"></i><span> Clear</span></button>
-                                    <button class="btn btn-delete" @click="destroy" v-if="savedId"><i class="fa-solid fa-trash"></i><span> Delete</span></button>
+                                    <button class="btn btn-bookmark btn-img" @click="save"><i class='fa fa-save' title="Save"></i></button>
+                                    <button class="btn btn-clean btn-img" @click="clean"><i class="fa fa-refresh" aria-hidden="true" title="Clear"></i></button>
+                                    <button class="btn btn-delete" @click="destroy" v-if="savedId"><i class="fa-solid fa-trash" title="Delete"></i></button>
                                 </div>
                                 <div class="submitBtn" @click="submit" v-if="!pageInfo.isPythonSuggestions">
-                                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                    <i class="fa fa-paper-plane" aria-hidden="true" title="Send message"></i>
                                 </div>
                             </div>
                         </div>
@@ -38,17 +38,17 @@
                             </div>
                             <div class="textarea-btn">
                                 <div class="input-btn">
-                                    <button class="btn btn-bookmark btn-img" @click="save" v-if="!pageInfo.is_image_editor"><i class='fa fa-save'></i><span> Save</span></button>
-                                    <button class="btn btn-clean btn-img" @click="clean"><i class="fa fa-refresh" aria-hidden="true"></i><span> Clear</span></button>
-                                    <button class="btn btn-delete" @click="destroy" v-if="savedId"><i class="fa-solid fa-trash"></i><span> Delete</span></button>
+                                    <button class="btn btn-bookmark btn-img" @click="save" v-if="!pageInfo.is_image_editor"><i class='fa fa-save' title="Save"></i></button>
+                                    <button class="btn btn-clean btn-img" @click="clean"><i class="fa fa-refresh" aria-hidden="true" title="Clear"></i></button>
+                                    <button class="btn btn-delete" @click="destroy" v-if="savedId"><i class="fa-solid fa-trash" title="Delete"></i></button>
                                 </div>
                                 <div class="submitBtn" @click="submit">
-                                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                    <i class="fa fa-paper-plane" aria-hidden="true" title="Send message"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <chat-box :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" v-if="pageInfo && !pageInfo.isTextarea && !pageInfo.isPythonSuggestions" @related-question-selected="relatedQuestion" @div-link="showInBrowser"/>
+                    <chat-box :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" v-if="pageInfo && !pageInfo.isTextarea && !pageInfo.isPythonSuggestions" @related-question-selected="relatedQuestion"/>
                     <chat-box class="one" :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" v-if="pageInfo && pageInfo.isTextarea && availableHeight" :style="{ maxHeight: availableHeight + 'px' }"/>
                     <!-- <vue-editor v-model="editor" :editorToolbar="customToolbar" v-if="pageInfo.isPythonSuggestions" :class="`text-completion`" @keydown.tab.exact.prevent="submit()"/> -->
                     <div class="chat-body">
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="edit-tab" @click="isEditorOpen = !isEditorOpen" v-if="pageInfo.isPythonSuggestions"><i class="fa fa-pencil" aria-hidden="true"></i> Suggestions</div>
-                    <!-- <div class="edit-tab" @click="isEditorOpen = !isEditorOpen" v-else><i class="fa fa-pencil" aria-hidden="true"></i> Editor</div> -->
+<!-- <div class="edit-tab" @click="isEditorOpen = !isEditorOpen" v-else><i class="fa fa-pencil" aria-hidden="true"></i> Editor</div> -->
                     <div class="edit-tab-section" v-else-if="pageInfo.isWebpage">
                         <div class="edit-tab-block" @click="showPanel('editor')"><i class="fa fa-pencil" aria-hidden="true"></i> Editor</div>
                         <div class="edit-tab-block" @click="showPanel('webpage')"><i class="fa fa-snowflake" aria-hidden="true"></i> Webpage</div>
@@ -74,14 +74,14 @@
                     ></PinturaEditor>
                     <div class="python-suggestions m-4" v-else-if="pageInfo.isPythonSuggestions">
                         <!-- <p class="suggestion-text-bold my-3">Suggestions: </p> -->
-                        <p class="message" v-if="typing">loading<span>...</span></p>
+                                <p class="message" v-if="typing">loading<span>...</span></p>
                         <div v-if="!typing">
                             <p v-for="(suggestion, key) in suggestions" :key="key">
                                 <input type="radio" name="suggestions" :value="suggestion" v-model="pickedSuggection" /> <span v-html="suggestion"></span>
                             </p>
                         </div>
                     </div>
-                    <!-- <vue-editor v-model="editor" :editorToolbar="customToolbar" v-else/> -->
+<!-- <vue-editor v-model="editor" :editorToolbar="customToolbar" v-else/> -->
                     <vue-editor v-model="editor" :editorToolbar="customToolbar" v-else-if="isShowEditor && pageInfo.isWebpage"/>
                     <div v-else-if="isBrowser && pageInfo.isWebpage" class="browser-frame">
                         <iframe :src="browserLink"></iframe>
@@ -122,7 +122,7 @@ export default {
         imageCropAspectRatio: 1,
         src: '/assets/images/EasyWrite.svg',
         editorDefaults: getEditorDefaults(),
-        pickedSuggection: null,
+        pickedSuggestion: null,
         suggestionTextAreaHeight: 500,
         isBrowser: false,
         isShowEditor: true,
@@ -384,9 +384,14 @@ export default {
                 this.isShowEditor = false;
                 this.isBrowser = true;
             }
-
             return;
-        }
+        },
+        handlePickedSuggestion(suggestion) {
+            if (this.pickedSuggestion !== suggestion) {
+                this.editor = this.editor +' '+ suggestion;
+                this.$store.commit('chat/set_suggestions', []);
+            }
+        },
     },
     mounted() {
         this.mountedList();
@@ -403,8 +408,7 @@ export default {
                 this.$refs.textarea.style.height = this.textAreaHeight > 109 ? '109px' : this.textAreaHeight + 'px';
             });
         },
-        pickedSuggection(newValue, oldValue) {
-            console.log(newValue, this.editor);
+        pickedSuggestion(newValue, oldValue) {
             if(oldValue != newValue && newValue) {
                 this.editor = this.editor +' '+ newValue;
                 this.$store.commit('chat/set_suggestions', []);

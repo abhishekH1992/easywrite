@@ -9,7 +9,7 @@
                             <textarea ref="textarea" class="chat-textarea" :placeholder="`Ask..`" v-model="msg" rows="1" @keydown.enter.prevent="submit()"></textarea>
                             <div class="storeBtns">
                                 <div class="submitBtn" @click="submit()">
-                                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                    <i class="fa fa-paper-plane" aria-hidden="true" title="Send message"></i>
                                 </div>
                             </div>
                         </div>

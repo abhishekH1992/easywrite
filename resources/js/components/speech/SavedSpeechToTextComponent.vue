@@ -9,16 +9,16 @@
                             <textarea ref="textarea" class="chat-textarea" :placeholder="`Ask something about audio`" v-model="msg" rows="1" @keydown.enter.exact.prevent="submit()"></textarea>
                             <div class="storeBtns" v-if="pageInfo.id">
                                 <div class="input-btn">
-                                    <button class="btn btn-bookmark btn-img" @click="save"><i class='fa fa-save'></i><span> Save</span></button>
-                                    <button class="btn btn-clean btn-img" @click="clean"><i class="fa fa-refresh" aria-hidden="true"></i><span> Clear</span></button>
-                                    <button class="btn btn-delete" @click="remove()"><i class="fa-solid fa-trash"></i><span> Delete</span></button>
+                                    <button class="btn btn-bookmark btn-img" @click="save"><i class='fa fa-save' title="Save"></i></button>
+                                    <button class="btn btn-clean btn-img" @click="clean"><i class="fa fa-refresh" aria-hidden="true" title="Clear"></i></button>
+                                    <button class="btn btn-delete" @click="remove()"><i class="fa-solid fa-trash" title="Delete"></i></button>
                                 </div>
                                 <div class="storeBtnsInside">
                                     <div class="paperpin" @click="openDocument">
                                         <i class="fa-solid fa-microphone"></i>
                                     </div>
                                     <div class="submitBtn" @click="submit">
-                                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                        <i class="fa fa-paper-plane" aria-hidden="true" title="Send message"></i>
                                     </div>
                                 </div>
                             </div>

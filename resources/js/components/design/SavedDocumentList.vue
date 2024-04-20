@@ -1,5 +1,5 @@
 <template>
-    <div class="documents">
+	<div class="documents">
         <div class="formbold-mb-5 formbold-file-input">
             <input type="file" id="file" ref="file" @change="upload(false)" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf"/>
             <label for="file">
@@ -20,7 +20,7 @@
         <div class="document-list" v-if="documentList.length">
             <div class="list" v-for="(list, key) in documentList" :key="key">
                 <div class="name">{{ list.name }}</div>
-                <div class="remove" @click="remove(list.document_unique)"><i class="fa-solid fa-trash"></i></div>
+                    <div class="remove" @click="remove(list.document_unique)"><i class="fa-solid fa-trash"></i></div>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@ export default {
             link: '',
         }
     },
-    computed: {
+        computed: {
         documentList() {
             return this.$store.state.documents.documentList;
         },
@@ -45,7 +45,7 @@ export default {
                 formData = new FormData();
                 formData.append('file', this.$refs.file.files[0]);
                 formData.append('documentid', this.$route.params.documentid);
-            } else {
+        } else {
                 formData = {
                     'newlink': this.link,
                     'documentid': this.$route.params.documentid,
@@ -62,40 +62,40 @@ export default {
                     });
                     if(isLink) {
                         this.link = '';
-                    }
+}
                     this.getDocuments();
                 } else {
-                    this.$notify({
-                        group: 'error',
-                        text: 'Something went wrong! Please reload the page.',
-                        closeOnClick: true,
-                    });
-                }
+                this.$notify({
+                    group: 'error',
+                    text: 'Something went wrong! Please reload the page.',
+                    closeOnClick: true,
+                });
+            }
             });
         },
         getDocuments() {
-            this.$store.dispatch('documents/get_document_list', this.$route.params.documentid);
+                this.$store.dispatch('documents/get_document_list', this.$route.params.documentid);
         },
         remove(file_id) {
             this.$store
                 .dispatch('documents/remove_document_file', { file_id: file_id }).then((response) => {
-                if(response.data) {
-                    this.$notify({
-                        group: 'success',
-                        text: 'Removed!',
-                        closeOnClick: true,
-                    });
-                    this.getDocuments();
-                } else {
-                    this.$notify({
-                        group: 'error',
-                        text: 'Something went wrong! Please reload the page.',
-                        closeOnClick: true,
-                    });
-                }
-            });
-        }
-    },
+                    if(response.data) {
+                        this.$notify({
+                            group: 'success',
+                            text: 'Removed!',
+                            closeOnClick: true,
+                        });
+                        this.getDocuments();
+                    } else {
+                        this.$notify({
+                            group: 'error',
+                            text: 'Something went wrong! Please reload the page.',
+                            closeOnClick: true,
+                        });
+                    }
+                });
+            }
+            },
     mounted() {
         this.getDocuments();
     },

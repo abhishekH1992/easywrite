@@ -3,10 +3,10 @@
         <chat-head :name="`Choose a Plan`"/>
         <section class="pricing-section payment-section">
             <div class="container">
-                <div class="sec-title text-center">
-                    <span class="title">Subscribe</span>
+                <div class="sec-title">
+                    <span class="title text-center">Subscribe</span>
                     <span class="title-1">You will be charged NZD {{ plans.price }} for {{ plans.name }}/Month Plan</span>
-                    <div class="free-trial-end">
+                    <div class="free-trial-end text-justify">
                         <p>
                             We hope you've enjoyed your free trial with us and have been able to explore the exciting features of our platform. We are writing to inform you that your trial period has now concluded. To continue accessing our extensive range of services, we'll need to transition you to a full membership. This requires updated payment information, specifically your credit card details.
                         </p>
@@ -95,7 +95,7 @@ export default {
                         iconColor: '#666EE8',
                         color: '#555555',
                         lineHeight: '1.2',
-                        fontSize: '15px',
+                        fontSize: '14px',
                         '::placeholder': {
                             color: '#CFD7E0',
                         },

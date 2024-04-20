@@ -1,70 +1,78 @@
 <template>
     <div class="chat-body" :class="{isTextarea : pageInfo.isTextarea}">
-        <div class="wrapper" v-if="pageInfo.pretext && !pageInfo.isTextarea">
+        <div class="how-div" v-if="!list.length && !pageInfo.isTextarea">
+            <h2>Welcome to chat by EasyWrite</h2>
+            <h5>How can I help you today?</h5>
+        </div>
+        <div class="wrapper user-chat" v-if="pageInfo.pretext && !pageInfo.isTextarea">
             <div class="chat">
                 <div class="message">{{ pageInfo.pretext }}</div>
             </div>
         </div>
-        <div class="wrapper" v-for="(chat, i) in list" :key="i" :class="{blueBackground: i % 2 !== 0}">
+        <div class="wrapper" v-for="(chat, i) in list" :key="i" :class="{'blueBackground':i % 2 !== 0,'user-chat':i % 2 == 0}">
             <div class="chat" v-if="pageInfo.isFreechat || pageInfo.isSystem || showUserIcons">
                 <div class="profile user" v-if="chat.user === `user` ">
                     <img src="/assets/images/user.svg">
                 </div>
                 <div class="profile ai" v-else>
-                    <img src="/assets/images/bot.svg">
+                    <span class="e-logo">e</span>
                 </div>
                 <div class="message">
-                    <div v-html="chat.msg" anchor></div>
-                    <div class="pl-2" v-if="chat.source && chat.source.length">
-                        <p class="related-text-bold my-3">Source Urls: </p>
-                        <div v-for="(source, key) in chat.source" :key="key">
-                            <p class="div-link" @click="linkClicked(source)">{{ source }}</p>
-                        </div>
-                    </div>
+                    <div v-html="chat.msg"></div>
                     <div class="pl-2" v-if="chat.related && chat.related.length">
-                        <p class="related-text-bold my-3">Related Questions: </p>
-                        <p v-for="(related, key) in chat.related" :key="key">
-                            <input type="radio" :name="i" :value="related" v-model="picked" /> {{ related }}
-                        </p>
-                    </div>
-                    <div class="pl-2" v-if="chat.relatedUrl && chat.relatedUrl.length">
-                        <p class="related-text-bold my-3">Related Urls: </p>
-                        <div v-for="(relatedUrl, key) in chat.relatedUrl" :key="key">
-                            <p class="div-link" @click="linkClicked(relatedUrl)">{{ relatedUrl }}</p>
-                        </div>
+                        <h4 class="related-text-bold my-2 pb-2"><i class="fa-solid fa-layer-group"></i>Related</h4>
+                        <ul class="p-0">
+                            <li v-for="(related, key) in chat.related" :key="key" 
+                                class="related-option py-2 flex justiy-between" @click="handleOptionClick(related)">
+                                <span>{{ related }}</span> <i class="fa fa-plus"></i>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="copy">
-                    <span @click="copytxt(chat.msg)">Copy</span>
-                    <span @click="emailTxt(chat.msg)">Email</span>
-                    <span @click="setTranslatePayload(chat.msg, i)">Translate</span>
+                    <span @click="copytxt(chat.msg)">
+                        <i class="far fa-copy" aria-hidden="true" title="Copy"></i>
+                    </span>
+                    <span @click="emailTxt(chat.msg)">
+                        <i class="far fa-envelope" aria-hidden="true" title="Email"></i>
+                    </span>
+                    <span @click="setTranslatePayload(chat.msg, i)">
+                        <i class="fa fa-language" aria-hidden="true" title="Translate"></i>
+                    </span>
                 </div>
                 <div class="copy-inline">
-                    <span @click="copytxt(chat.msg)">Copy</span>
-                    <span @click="setTranslatePayload(chat.msg, i)">Translate</span>
-                    <span @click="emailTxt(chat.msg)">Email</span>
+                    <span @click="copytxt(chat.msg)"><i class="far fa-copy" aria-hidden="true" title="Copy"></i></span>
+                    <span @click="setTranslatePayload(chat.msg, i)"><i class="fa fa-language" aria-hidden="true" title="Translate"></i></span>
+                    <span @click="emailTxt(chat.msg)"><i class="far fa-envelope" aria-hidden="true" title="Email"></i></span>
                 </div>
             </div>
             <div class="chat" v-else>
                 <div class="message" v-html="chat.msg"></div>
                 <div class="copy">
-                    <span @click="copytxt(chat.msg)">Copy</span>
-                    <span @click="emailTxt(chat.msg)">Email</span>
-                    <span @click="setTranslatePayload(chat.msg, i)">Translate</span>
+                    <span @click="copytxt(chat.msg)"><i class="far fa-copy" aria-hidden="true" title="Copy"></i></span>
+                    <span @click="emailTxt(chat.msg)"><i class="far fa-envelope" aria-hidden="true" title="Email"></i></span>
+                    <span @click="setTranslatePayload(chat.msg, i)"><i class="fa fa-language" aria-hidden="true" title="Translate"></i></span>
                 </div>
                 <div class="copy-inline">
-                    <span @click="copytxt(chat.msg)">Copy</span>
-                    <span @click="setTranslatePayload(chat.msg, i)">Translate</span>
-                    <span @click="emailTxt(chat.msg)">Email</span>
+                    <span @click="copytxt(chat.msg)"><i class="far fa-copy" aria-hidden="true" title="Copy"></i></span>
+                    <span @click="setTranslatePayload(chat.msg, i)"><i class="fa fa-language" aria-hidden="true" title="Translate"></i></span>
+                    <span @click="emailTxt(chat.msg)"><i class="far fa-envelope" aria-hidden="true" title="Email"></i></span>
                 </div>
             </div>
         </div>
         <div class="wrapper blueBackground" v-if="typing">
             <div class="chat">
                 <div class="profile ai" v-if="pageInfo.isFreechat || pageInfo.isSystem || showUserIcons">
-                    <img src="/assets/images/bot.svg">
+                    <span class="e-logo">e</span>
                 </div>
-                <div class="message">typing<span>...</span></div>
+                <div class="message">
+                    <div class="loader-outer">
+                        <div class="loader-header"></div>
+                        <div class="loader-body"></div>
+                        <div class="loader-body"></div>
+                        <div class="loader-body"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="modal-mask" v-if="showModal">
@@ -151,11 +159,17 @@ export default {
         },
         linkClicked(link) {
             this.$emit('div-link', link);
+        },
+        handleOptionClick(option) {
+            if (this.picked !== option) {
+                this.$emit('related-question-selected', option);
+            }
         }
     },
     watch: {
         picked(newValue, oldValue) {
-            if(oldValue != newValue && newValue) this.$emit('related-question-selected', newValue);
+            if(oldValue != newValue && newValue) 
+                this.$emit('related-question-selected', newValue);
         }
     }
 }
