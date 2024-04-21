@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DOMDocument;
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
@@ -44,7 +45,9 @@ class ChatController extends Controller
                         // $isReference = strpos($response->data->text, "References:");
                         // $isReference = !$isReference ? strpos($response->data->text, "References") : $isReference;
                         // $data['text'] = $isReference ? preg_replace('/[[0-9].]/', '', substr($response->data->text, 0, $isReference)) : preg_replace('/[[0-9].]/', '', $response->data->text);
-                        $data['text'] = str_replace("\n", '', $response->data->text);
+                        $text = str_replace("\n", '', $response->data->text);
+                        $text = $this->setTargerToAnchor($text);
+                        $data['text'] = $text;
                         $data['related_questions'] = isset($response->data->related_questions) ? $response->data->related_questions : [];
                         $data['source_urls'] = isset($response->data->source_urls) ? $this->objectToArray($response->data->source_urls) : [];
                         $data['related_urls'] = isset($response->data->related_urls) ? $this->objectToArray($response->data->related_urls) : [];
@@ -118,7 +121,6 @@ class ChatController extends Controller
 
             return ltrim($response);
         } catch (\Exception $e) {
-            dd($e);
             return 'Error: Please refresh or reduce your text input';
         }
     }
@@ -191,5 +193,17 @@ class ChatController extends Controller
             array_push($data, '['.$k.'] '.$v);
         }
         return $data;
+    }
+
+    public function setTargerToAnchor($content) {
+        $doc = new DOMDocument();
+        $doc->loadHTML($content);
+        $links = $doc->getElementsByTagName('a');
+        foreach ($links as $item) {
+            if (!$item->hasAttribute('target'))
+                $item->setAttribute('target','_blank');  
+        }
+        $content = $doc->saveHTML();
+        return $content;
     }
 }

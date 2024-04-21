@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </div>
-                    <chat-box :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" v-if="pageInfo && !pageInfo.isTextarea && !pageInfo.isPythonSuggestions" @related-question-selected="relatedQuestion"/>
+                    <chat-box :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" v-if="pageInfo && !pageInfo.isTextarea && !pageInfo.isPythonSuggestions" @related-question-selected="relatedQuestion" @div-link="showInBrowser"/>
                     <chat-box class="one" :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" v-if="pageInfo && pageInfo.isTextarea && availableHeight" :style="{ maxHeight: availableHeight + 'px' }"/>
                     <!-- <vue-editor v-model="editor" :editorToolbar="customToolbar" v-if="pageInfo.isPythonSuggestions" :class="`text-completion`" @keydown.tab.exact.prevent="submit()"/> -->
                     <div class="chat-body">

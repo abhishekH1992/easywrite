@@ -18,7 +18,7 @@
                     <span class="e-logo">e</span>
                 </div>
                 <div class="message">
-                    <div v-html="chat.msg" anchor></div>
+                    <div v-html="chat.msg"></div>
                     <div class="pl-2" v-if="chat.source && chat.source.length">
                         <p class="related-text-bold my-3">Source Urls: </p>
                         <div v-for="(source, key) in chat.source" :key="key">
@@ -121,14 +121,6 @@ export default {
             picked: null,
         }
     },
-    directives: {
-        anchor: {
-            inserted: function(el) {
-                const anchors = el.querySelectorAll('a')
-                anchors.forEach((anchor) => anchor.target = "_blank")
-            }
-        }
-    },
     props: {
         pageInfo: {
             required: true,
@@ -187,7 +179,10 @@ export default {
         picked(newValue, oldValue) {
             if(oldValue != newValue && newValue) 
                 this.$emit('related-question-selected', newValue);
-        }
+        },
+        $route(to, from) {
+            console.log(to, from);
+        },
     }
 }
 </script>
