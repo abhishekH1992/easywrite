@@ -18,15 +18,24 @@
                     <span class="e-logo">e</span>
                 </div>
                 <div class="message">
-                    <div v-html="chat.msg"></div>
+                    <div v-html="chat.msg" anchor></div>
+                    <div class="pl-2" v-if="chat.source && chat.source.length">
+                        <p class="related-text-bold my-3">Source Urls: </p>
+                        <div v-for="(source, key) in chat.source" :key="key">
+                            <p class="div-link" @click="linkClicked(source)">{{ '['+key+']'+' '+source }}</p>
+                        </div>
+                    </div>
                     <div class="pl-2" v-if="chat.related && chat.related.length">
-                        <h4 class="related-text-bold my-2 pb-2"><i class="fa-solid fa-layer-group"></i>Related</h4>
-                        <ul class="p-0">
-                            <li v-for="(related, key) in chat.related" :key="key" 
-                                class="related-option py-2 flex justiy-between" @click="handleOptionClick(related)">
-                                <span>{{ '['+key+']'+' '+related }}</span> <i class="fa fa-plus"></i>
-                            </li>
-                        </ul>
+                        <p class="related-text-bold my-3">Related Questions: </p>
+                        <p v-for="(related, key) in chat.related" :key="key">
+                            <input type="radio" :name="i" :value="related" v-model="picked" /> {{ '['+key+']'+' '+related }}
+                        </p>
+                    </div>
+                    <div class="pl-2" v-if="chat.relatedUrl && chat.relatedUrl.length">
+                        <p class="related-text-bold my-3">Related Urls: </p>
+                        <div v-for="(relatedUrl, key) in chat.relatedUrl" :key="key">
+                            <p class="div-link" @click="linkClicked(relatedUrl)">{{ '['+key+']'+' '+relatedUrl }}</p>
+                        </div>
                     </div>
                 </div>
                 <div class="copy">
