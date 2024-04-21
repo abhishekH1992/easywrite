@@ -22,19 +22,19 @@
                     <div class="pl-2" v-if="chat.source && chat.source.length">
                         <p class="related-text-bold my-3">Source Urls: </p>
                         <div v-for="(source, key) in chat.source" :key="key">
-                            <p class="div-link" @click="linkClicked(source)">{{ '['+key+']'+' '+source }}</p>
+                            <p class="div-link" @click="linkClicked(source)">{{ source }}</p>
                         </div>
                     </div>
                     <div class="pl-2" v-if="chat.related && chat.related.length">
                         <p class="related-text-bold my-3">Related Questions: </p>
                         <p v-for="(related, key) in chat.related" :key="key">
-                            <input type="radio" :name="i" :value="related" v-model="picked" /> {{ '['+key+']'+' '+related }}
+                            <input type="radio" :name="i" :value="related" v-model="picked" /> {{ related }}
                         </p>
                     </div>
                     <div class="pl-2" v-if="chat.relatedUrl && chat.relatedUrl.length">
                         <p class="related-text-bold my-3">Related Urls: </p>
                         <div v-for="(relatedUrl, key) in chat.relatedUrl" :key="key">
-                            <p class="div-link" @click="linkClicked(relatedUrl)">{{ '['+key+']'+' '+relatedUrl }}</p>
+                            <p class="div-link" @click="linkClicked(relatedUrl)">{{ relatedUrl }}</p>
                         </div>
                     </div>
                 </div>
@@ -119,6 +119,14 @@ export default {
                 name: 'Samoan'
             },
             picked: null,
+        }
+    },
+    directives: {
+        anchor: {
+            inserted: function(el) {
+                const anchors = el.querySelectorAll('a')
+                anchors.forEach((anchor) => anchor.target = "_blank")
+            }
         }
     },
     props: {
