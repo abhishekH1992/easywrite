@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="logo-block text-center">
-        <h3 class="text-center my-2">ARLO+</h3>
+        <img src="/assets/images/arlo-logo.svg">
     </div>
     <div class="auth-forms">
         <form method="POST" action="{{ route('login') }}">
@@ -11,7 +11,6 @@
                     <label for="Email" class="label-text">Email</label>
                     <x-text-input id="email" class="block mt-1 w-full input" type="email" 
                     name="email" placeholder="Your email address" autofocus=true required/>
-                    <!-- <span class="label" data-placeholder="Email"></span> -->
                 </div>
                 <x-input-error :messages="$errors->get('email')" class="mt-2 error-msg" />
             </div>
@@ -22,7 +21,6 @@
                     <label for="password" class="label-text">Password</label>
                     <x-text-input id="password" class="block mt-1 w-full input" placeholder="Your password"
                     type="password" name="password" required autocomplete="current-password" />
-                    <!-- <span class="label" data-placeholder="Password"></span> -->
                 </div>
                 <x-input-error :messages="$errors->get('password')" class="mt-2 error-msg" />
             </div>

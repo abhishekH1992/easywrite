@@ -1,40 +1,42 @@
 <x-guest-layout>
+    <div class="logo-block text-center">
+        <img src="/assets/images/arlo-logo.svg">
+    </div>
+
     <div class="auth-forms">
         <form method="POST" action="{{ route('password.update') }}">
             @csrf
-
-            <div class="logo-block">
-                <h3 class="text-center my-2">ARLO+</h3>
-            </div>
-
             <!-- Password Reset Token -->
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
             <!-- Email Address -->
             <div class="validate-input">
                 <div class="wrap-input">
-                    <x-text-input id="email" class="block mt-1 w-full input" type="email" name="email" :value="old('email', $request->email)" required/>
-                    <span class="label" data-placeholder="Email"></span>
+                    <label for="Email" class="label-text">Email</label>
+                    <x-text-input id="email" class="block mt-1 w-full input" type="email" 
+                    name="email" :value="old('email', $request->email)" required/>
                 </div>
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <x-input-error :messages="$errors->get('email')" class="mt-2 error-msg" />
             </div>
 
             <!-- Password -->
             <div class="validate-input">
                 <div class="wrap-input">
-                    <x-text-input id="email" class="block mt-1 w-full input" type="password" name="password" required/>
-                    <span class="label" data-placeholder="Password"></span>
+                    <label for="password" class="label-text">New password</label>
+                    <x-text-input id="password" class="block mt-1 w-full input" type="password" 
+                    name="password" placeholder="New password" required/>
                 </div>
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <x-input-error :messages="$errors->get('password')" class="mt-2 error-msg" />
             </div>
 
             <!-- Confirm Password -->
             <div class="validate-input">
                 <div class="wrap-input">
-                    <x-text-input id="email" class="block mt-1 w-full input" type="password" name="password_confirmation" required/>
-                    <span class="label" data-placeholder="Confirm Password"></span>
+                <label for="password" class="label-text">Confirm new password</label>
+                    <x-text-input id="confirmPassword" class="block mt-1 w-full input" type="password" 
+                    name="password_confirmation" placeholder="Confirm new password" required/>
                 </div>
-                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 error-msg" />
             </div>
 
             <div class="flex items-center justify-end mt-4 submit-btn-block">

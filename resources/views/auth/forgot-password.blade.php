@@ -1,10 +1,10 @@
 <x-guest-layout>
     <div class="logo-block text-center">
-        <h3 class="text-center my-2">ARLO+</h3>
+        <img src="/assets/images/arlo-logo.svg">
     </div>
 
     <div class="auth-forms">
-        <h4 class="mb-3 forgot-pwd-title">Forgot your password?</h4>
+        <h4 class="m-3 forgot-pwd-title">Forgot your password?</h4>
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
             <div class="mb-4 pwd-text-line">
@@ -12,7 +12,7 @@
             </div>
 
             <!-- Session Status -->
-            <x-auth-session-status class="mb-4 pwd-text-line" :status="session('status')" />
+            <x-auth-session-status class="mb-4 pwd-text-line fw-bold" :status="session('status')" />
 
             <!-- Email Address -->
             <div class="validate-input">
@@ -20,7 +20,6 @@
                     <label for="Email" class="label-text">Email</label>
                     <x-text-input id="email" class="block mt-1 w-full input" type="email" 
                     name="email" placeholder="Your email address" autofocus=true required/>
-                    <!-- <span class="label" data-placeholder="Email"></span> -->
                 </div>
                 <x-input-error :messages="$errors->get('email')" class="mt-2 error-msg" />
             </div>

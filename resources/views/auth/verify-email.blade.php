@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="logo-block text-center">
-        <h3 class="text-center my-2">ARLO+</h3>
+        <img src="/assets/images/arlo-logo.svg">
     </div>
     <div class="auth-forms">
         <form method="POST" action="{{ route('verification.send') }}">

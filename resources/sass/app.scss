@@ -60,6 +60,15 @@ body{
     background: $body;
     font-family: $font-family-plus-sans;
 }
+.logo-block {
+    img{
+        width: 100px;
+        transform: scale(2);
+        @media (max-width:768px) {
+            width: 70px;
+        }
+    }
+}
 .auth-forms{
     color: $textBlack;
     margin: 2rem auto;
@@ -245,11 +254,11 @@ body{
                 color: $hoverPurple;
             }
         }
-        @media screen and (max-width: 768px) {
+        @media (max-width: 768px) {
             padding: 1.5rem;
         }
     }
-    @media screen and (max-width: 768px) {
+    @media (max-width: 768px) {
         width: 90%;
         box-shadow: none;
         background: transparent;
@@ -258,7 +267,10 @@ body{
     }
 }
 .register-form {
-    top: 55%;
+    margin-top: 5rem;
+    @media (max-width: 768px) {
+        margin-top: 8rem;
+    }
 }
 .sidebar.close ~ .main-content{
 	left: 78px;
@@ -281,13 +293,6 @@ body{
         margin-top: 15px;
         &.close{
             width: 78px;
-            .logo-details{
-                .logo_name{
-                    transition-delay: 0s;
-                    opacity: 0;
-                    pointer-events: none;
-                }
-            }
             .nav-links{
                 overflow: visible;
                 li, .header{
@@ -355,6 +360,8 @@ body{
             border-bottom: 1px solid #32265926;
             img{
                 width: 100%;
+                transform: scale(2);
+                height: 80px;
             }
             i{
                 font-size: 30px;
@@ -363,14 +370,6 @@ body{
                 min-width: 78px;
                 text-align: center;
                 line-height: 50px;
-            }
-            .logo_name{
-                font-size: 22px;
-                color: #fff;
-                font-weight: 600;
-                transition: 0.3s ease;
-                transition-delay: 0.1s;
-                width: 100%;
             }
         }
         .nav-links{
@@ -853,6 +852,14 @@ body{
                                 -ms-overflow-style: none;
                                 scrollbar-width: none;
                                 margin: auto;
+                                a{
+                                    color: $white;
+                                    background: $hoverPurple;
+                                    padding: 1px 4px;
+                                    border-radius: 30px;
+                                    font-size: 12px;
+                                    text-decoration: none;
+                                }
                                 ul {
                                     padding: 0;
                                     li {
@@ -861,6 +868,32 @@ body{
                                 }
                                 @media (max-width: 768px){
                                     overflow-wrap: break-word;
+                                }
+                                .accordion-item{
+                                    background-color: $purple1 !important;
+                                    border: 1px solid $purple6 !important;
+                                    .accordion-button{
+                                        background-color: $purple1;
+                                        border: 1px solid $purple6;
+                                    }
+                                    .accordion-button:focus {
+                                        box-shadow: none;
+                                    }
+                                    .accordion-button:not(.collapsed) {
+                                        color: $white;
+                                        background: linear-gradient(15.46deg, $purple5 26.3%, $purple6 86.4%);
+                                    }
+                                }
+                                .source-link{
+                                    border-bottom: 1px solid #e2e8f0;
+                                    .div-link {
+                                        color: $purple10;
+                                        text-decoration: none;
+                                        cursor: pointer;
+                                    }
+                                    &:hover{
+                                        background-color: #f0f0f0;
+                                    }
                                 }
                             }
                             .copy {
@@ -1438,7 +1471,9 @@ body{
                 left: 0;
                 position: fixed;
                 padding: 0 !important;
-                background-color: transparent;
+                background: #fff;
+                font-size: 1.4rem;
+                font-weight: 600;
                 .img, .content{
                     display: none;
                 }
@@ -1507,11 +1542,11 @@ body{
                                     }
                                     &.logo{
                                         border-bottom: 1px solid #32265926;
-                                        // padding: 1rem 0;
                                         img{
                                             display: block;
-                                            width: 150px;
-                                            height: 80px;
+                                            transform: scale(2);
+                                            height: 65px;
+                                            margin: auto;
                                         }
                                     }
                                     &.template{
@@ -1635,8 +1670,8 @@ body{
                 display: block;
                 font-size: 1.5rem;
                 line-height: 1em;
-                color: $text;
-                font-weight: 500;
+                color: $purple7;
+                font-weight: 700;
                 text-transform: uppercase;
                 letter-spacing: 5px;
                 margin-bottom: 15px;
@@ -1644,8 +1679,8 @@ body{
             .title-1 {
                 position: relative;
                 display: block;
-                font-size: 1rem;
-                color: $text;
+                font-size: 0.9rem;
+                color: $purple5;
                 font-weight: 600;
                 text-align: center;
                 padding: 0 0.5rem 1rem 0.5rem;
@@ -1948,11 +1983,12 @@ body{
                                 -ms-transition: all 400ms ease;
                                 -o-transition: all 400ms ease;
                                 transition: all 300ms ease;
-                                border: 2px solid $contrast;
-                                color: $contrast;
+                                color: $white;
+                                border-radius: 20px;
+                                background: linear-gradient(15.46deg, $purple5 26.3%, $purple6 86.4%);
                                 &:hover{
-                                    color: #ffffff;
-                                    background-color: $contrast;
+                                    color: $white;
+                                    background: $purple9;
                                 }
                             }
                             &:hover{
@@ -2574,6 +2610,8 @@ body{
     @media (min-width: 768px){
         max-width: 750px;
         margin: auto;
+        color: $purple10;
+        text-align: justify;
     }
     p{
         font-size: 0.9rem;

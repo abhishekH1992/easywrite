@@ -1,11 +1,15 @@
 <template>
 	<div class="admin sidebar" :class="{close: isActive}">
-        <h3 class="logo-details text-center my-5">
-            ARLO+
-        </h3>
+        <div class="logo-details">
+            <img src="/assets/images/arlo-logo.svg">
+        </div>
         <ul class="nav-links">
             <li v-for="nav in navMenu" :key="nav.id" class="nav-font-main-section nav-div">
-                <router-link class="nav-link link_name nav-div" :to="nav.slug"> {{ nav.name }}</router-link>
+                <router-link class="nav-link link_name nav-div" :to="nav.slug"> 
+                    <i class="fas fa-graduation-cap" v-if="nav.name == 'Talanoa Law 2.0'"></i>
+                    <i class="fa fa-legal" v-if="nav.name == 'Talanoa Law'"></i> 
+                   {{ nav.name }}
+                </router-link>
             </li>
             <div class="header">
                 <li class="nav-font-main-section" v-if="!isSevenDayTrial">
