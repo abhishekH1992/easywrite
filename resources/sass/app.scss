@@ -1377,6 +1377,22 @@ body{
                     border-left: 1px solid #F3F4F9;
                 }
             }
+            .edit-tab-section {
+                position: absolute;
+                right: 0;
+                top: 25%;
+                .edit-tab-block {
+                    background: linear-gradient(15.46deg, $purple5 26.3%, $purple6 86.4%);
+                    border-bottom-left-radius: .75rem;
+                    border-top-left-radius: .75rem;
+                    color: $white;
+                    cursor: pointer;
+                    margin-bottom: 1rem;
+                    padding: 1rem .5rem;
+                    text-orientation: mixed;
+                    writing-mode: vertical-rl;
+                }
+            }
         }
         .chat-head{
             position: relative;
