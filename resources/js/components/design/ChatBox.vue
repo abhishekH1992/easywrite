@@ -1,7 +1,7 @@
 <template>
     <div class="chat-body" :class="{isTextarea : pageInfo.isTextarea}">
         <div class="how-div" v-if="!list.length && !pageInfo.isTextarea">
-            <h2>Welcome to chat by EasyWrite</h2>
+            <h2>Welcome to chat by ARLO+</h2>
             <h5>How can I help you today?</h5>
         </div>
         <div class="wrapper user-chat" v-if="pageInfo.pretext && !pageInfo.isTextarea">
@@ -24,7 +24,7 @@
                         <ul class="p-0">
                             <li v-for="(related, key) in chat.related" :key="key" 
                                 class="related-option py-2 flex justiy-between" @click="handleOptionClick(related)">
-                                <span>{{ related }}</span> <i class="fa fa-plus"></i>
+                                <span>{{ '['+key+']'+' '+related }}</span> <i class="fa fa-plus"></i>
                             </li>
                         </ul>
                     </div>

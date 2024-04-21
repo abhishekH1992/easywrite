@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="logo-block text-center">
-        <img src="/assets/images/EasyWrite.svg" width="300px" height="100px">
+        <h3 class="text-center my-2">ARLO+</h3>
     </div>
 
     <div class="auth-forms">

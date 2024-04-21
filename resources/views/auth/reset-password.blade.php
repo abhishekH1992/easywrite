@@ -4,7 +4,7 @@
             @csrf
 
             <div class="logo-block">
-                <img src="/assets/images/EasyWrite.svg">
+                <h3 class="text-center my-2">ARLO+</h3>
             </div>
 
             <!-- Password Reset Token -->

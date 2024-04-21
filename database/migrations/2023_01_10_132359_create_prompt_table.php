@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->text('settings');
+            $table->text('settings')->nullable();
             $table->string('placeholder')->nullable();
             $table->string('prefix')->nullable();
             $table->string('aiprefix')->nullable();

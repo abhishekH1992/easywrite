@@ -104,7 +104,6 @@ export default {
         },
         submitPayment(){
             this.isDisabled = true;
-console.log(this.intent.client_secret);
             this.stripe.confirmCardSetup(
                 this.intent.client_secret, {
                     payment_method: {

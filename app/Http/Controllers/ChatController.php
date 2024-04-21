@@ -188,7 +188,7 @@ class ChatController extends Controller
     public function objectToArray($obj) {
         $data = [];
         foreach($obj as $k => $v) {
-            array_push($data, $v);
+            $data[$k] = $v;
         }
         return $data;
     }

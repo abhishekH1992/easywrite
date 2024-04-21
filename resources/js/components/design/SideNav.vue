@@ -1,33 +1,12 @@
 <template>
 	<div class="admin sidebar" :class="{close: isActive}">
-        <div class="logo-details">
-            <img src="/assets/images/EasyWrite.svg">
-        </div>
+        <h3 class="logo-details text-center my-5">
+            ARLO+
+        </h3>
         <ul class="nav-links">
-            <div class="header" v-for="(navs, i) in navMenu" :key="i">
-                {{ i }}
-                <li v-for="nav in navs" :key="nav.id" class="nav-font-main-section nav-div">
-                    <router-link class="nav-link link_name nav-div" :to="nav.slug"> {{ nav.name }}</router-link>
-                </li>
-            </div>
-            <div class="header">
-                DOCUMENT ANALYZER
-                <li class="nav-font-main-section">
-                    <router-link class="nav-link link_name nav-div" to="/documents"><i class="fa-solid fa-robot" aria-hidden="true"></i>Chat</router-link>
-                </li>
-            </div>
-            <div class="header">
-                PRE-BUILT TEMPLATE
-                <li class="nav-font-main-section">
-                    <router-link class="nav-link link_name nav-div" to="/"> <i class="fa fa-list-alt" aria-hidden="true"></i> All Templates</router-link>
-                </li>
-            </div>
-            <div class="header">
-                SAVED PROJECTS
-                <li class="nav-font-main-section">
-                    <router-link class="nav-link link_name nav-div" to="/archive"><i class="fa fa-database" aria-hidden="true"></i>Archive</router-link>
-                </li>
-            </div>
+            <li v-for="nav in navMenu" :key="nav.id" class="nav-font-main-section nav-div">
+                <router-link class="nav-link link_name nav-div" :to="nav.slug"> {{ nav.name }}</router-link>
+            </li>
             <div class="header">
                 <li class="nav-font-main-section" v-if="!isSevenDayTrial">
                     <router-link class="nav-link link_name nav-div" :to="{ name: 'billing'}" v-if="customerStripeId"><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>

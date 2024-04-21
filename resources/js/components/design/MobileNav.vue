@@ -6,32 +6,11 @@
             <div class="bar3"></div>
             <ul class="mobile-menu">
                 <li class="logo">
-                    <img src="/assets/images/EasyWrite.svg" />
+                    ARLO+
                 </li>
-                <div class="header" v-for="(navs, i) in navMenu" :key="i">
-                    {{ i }}
-                    <li v-for="nav in navs" :key="nav.id" class="nav-font-main-section ">
-                        <router-link class="nav-link link_name" :to="nav.slug"> {{ nav.name }}</router-link>
-                    </li>
-                </div>
-                <div class="header">
-                    DOCUMENT ANALYZER
-                    <li class="nav-font-main-section">
-                        <router-link class="nav-link link_name" to="/documents"><i class="fa-solid fa-robot" aria-hidden="true"></i> Chat</router-link>
-                    </li>
-                </div>
-                <div class="header">
-                    PRE-BUILT TEMPLATE
-                    <li class="nav-font-main-section">
-                        <router-link class="nav-link link_name" to="/"><i class="fa fa-list-alt" aria-hidden="true"></i> All Templates</router-link>
-                    </li>
-                </div>
-                <div class="header">
-                    SAVED PROJECTS                    
-                    <li class="nav-font-main-section">
-                        <router-link class="nav-link link_name" to="/archive"><i class="fa fa-database" aria-hidden="true"></i>Archive</router-link>
-                    </li>
-                </div>
+                <li v-for="nav in navMenu" :key="nav.id" class="nav-font-main-section nav-div">
+                    <router-link class="nav-link link_name nav-div" :to="nav.slug"> {{ nav.name }}</router-link>
+                </li>
                 <div class="header">
                     <li class="nav-billing nav-font-main-section">
                         <router-link class="nav-link link_name" :to="{ name: 'plans'}"><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>

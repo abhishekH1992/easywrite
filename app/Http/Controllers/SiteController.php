@@ -13,7 +13,7 @@ use Laravel\Passport\HasApiTokens;
 
 class SiteController extends Controller
 {
-    public $templatesAllow = ['Conversational AI', 'Legal AI', 'Workspace'];
+    public $templatesAllow = ['Legal AI'];
 
     public function __construct(){
         return $this->middleware('auth:api');
@@ -82,14 +82,14 @@ class SiteController extends Controller
     }
 
     public function getNavMenuModels(Request $request){
-        $data = Prompt::where('isMenu', 1)->get();
-        $arr = [];
-        foreach($data as $d){
-            if(in_array($d->template, $this->templatesAllow))  $arr[$d->template][] = $d;
-        }
+        $data = Prompt::all();
+        // $arr = [];
+        // foreach($data as $d){
+        //     if(in_array($d->template, $this->templatesAllow))  $arr[$d->template][] = $d;
+        // }
 
-        $arr ? ksort($arr) : $arr;
-        return response()->json($arr);
+        // $arr ? ksort($arr) : $arr;
+        return response()->json($data);
     }
 
     public function isAdmin(){
