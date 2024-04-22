@@ -190,9 +190,9 @@ class ChatController extends Controller
     public function objectToArray($obj) {
         $data = [];
         foreach($obj as $k => $v) {
-            array_push($data, '['.$k.'] '.$v);
+            $data[] = ['txt' => '['.$k.'] '.$v, 'link' => $v];
         }
-        return $data;
+        return $data ? json_decode(json_encode($data, true)) : [];
     }
 
     public function setTargerToAnchor($content) {

@@ -11,8 +11,14 @@
                 <div class="header">
                     <li v-for="nav in navMenu" :key="nav.id" class="nav-font-main-section nav-div">
                         <router-link class="nav-link link_name nav-div mb-3" :to="nav.slug"> 
-                            <i class="fas fa-graduation-cap" v-if="nav.name == 'Talanoa Law 2.0'"></i>
-                            <i class="fa fa-legal" v-if="nav.name == 'Talanoa Law'"></i> {{ nav.name }}
+                            <i :class="nav.img"></i>
+                            {{ nav.name }}
+                        </router-link>
+                    </li>
+                    <li class="nav-font-main-section nav-div">
+                        <router-link class="nav-link link_name nav-div" :to="`/archive`"> 
+                            <i class="fa fa-archive"></i>
+                        Archive
                         </router-link>
                     </li>
                 </div>

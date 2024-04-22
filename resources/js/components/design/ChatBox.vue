@@ -31,7 +31,7 @@
                                     <div class="accordion-body bg-white">
                                         <ul class="p-0">
                                             <li v-for="(source, key) in chat.source" :key="key" class="source-link">
-                                                <p class="div-link m-0 py-2" @click="linkClicked(source)">{{ source }}</p>
+                                                <p class="div-link m-0 py-2" @click="linkClicked(source.link)">{{ source.txt }}</p>
                                             </li>
                                         </ul>
                                     </div>
@@ -61,7 +61,7 @@
                                     <div class="accordion-body bg-white">
                                         <ul class="p-0">
                                             <li v-for="(relatedUrl, key) in chat.relatedUrl" :key="key" class="source-link">
-                                                <p class="div-link m-0 py-2" @click="linkClicked(relatedUrl)">{{ relatedUrl }}</p>
+                                                <p class="div-link m-0 py-2" @click="linkClicked(relatedUrl.link)">{{ relatedUrl.txt }}</p>
                                             </li>
                                         </ul>
                                     </div>

@@ -10780,6 +10780,16 @@ body {
   font-family: "Plus Jakarta Sans", sans-serif;
 }
 
+.logo-block img {
+  width: 100px;
+  transform: scale(2);
+}
+@media (max-width: 768px) {
+  .logo-block img {
+    width: 70px;
+  }
+}
+
 .auth-forms {
   color: #202020;
   margin: 2rem auto;
@@ -10955,7 +10965,7 @@ body {
 .auth-forms form a:hover {
   color: #5b36c3;
 }
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .auth-forms form {
     padding: 1.5rem;
   }
@@ -10969,7 +10979,12 @@ body {
 }
 
 .register-form {
-  top: 55%;
+  margin-top: 5rem;
+}
+@media (max-width: 768px) {
+  .register-form {
+    margin-top: 8rem;
+  }
 }
 
 .sidebar.close ~ .main-content {
@@ -10993,11 +11008,6 @@ body {
 }
 .admin.sidebar.close {
   width: 78px;
-}
-.admin.sidebar.close .logo-details .logo_name {
-  transition-delay: 0s;
-  opacity: 0;
-  pointer-events: none;
 }
 .admin.sidebar.close .nav-links {
   overflow: visible;
@@ -11060,6 +11070,8 @@ body {
 }
 .admin.sidebar .logo-details img {
   width: 100%;
+  transform: scale(2);
+  height: 80px;
 }
 .admin.sidebar .logo-details i {
   font-size: 30px;
@@ -11068,14 +11080,6 @@ body {
   min-width: 78px;
   text-align: center;
   line-height: 50px;
-}
-.admin.sidebar .logo-details .logo_name {
-  font-size: 22px;
-  color: #fff;
-  font-weight: 600;
-  transition: 0.3s ease;
-  transition-delay: 0.1s;
-  width: 100%;
 }
 .admin.sidebar .nav-links {
   height: 100%;
@@ -11554,6 +11558,14 @@ body {
   scrollbar-width: none;
   margin: auto;
 }
+.main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .message a {
+  color: #fff;
+  background: #5b36c3;
+  padding: 1px 4px;
+  border-radius: 30px;
+  font-size: 12px;
+  text-decoration: none;
+}
 .main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .message ul {
   padding: 0;
 }
@@ -11564,6 +11576,32 @@ body {
   .main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .message {
     overflow-wrap: break-word;
   }
+}
+.main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .message .accordion-item {
+  background-color: #faf5ff !important;
+  border: 1px solid #805AD5 !important;
+}
+.main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .message .accordion-item .accordion-button {
+  background-color: #faf5ff;
+  border: 1px solid #805AD5;
+}
+.main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .message .accordion-item .accordion-button:focus {
+  box-shadow: none;
+}
+.main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .message .accordion-item .accordion-button:not(.collapsed) {
+  color: #fff;
+  background: linear-gradient(15.46deg, #9F7AEA 26.3%, #805AD5 86.4%);
+}
+.main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .message .source-link {
+  border-bottom: 1px solid #e2e8f0;
+}
+.main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .message .source-link .div-link {
+  color: #322659;
+  text-decoration: none;
+  cursor: pointer;
+}
+.main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .message .source-link:hover {
+  background-color: #f0f0f0;
 }
 .main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .copy {
   position: absolute;
@@ -12033,6 +12071,22 @@ body {
 .main-content .chatbox-container .chatbox-body .editor-section.borderRight {
   border-left: 1px solid #F3F4F9;
 }
+.main-content .chatbox-container .chatbox-body .edit-tab-section {
+  position: absolute;
+  right: 0;
+  top: 25%;
+}
+.main-content .chatbox-container .chatbox-body .edit-tab-section .edit-tab-block {
+  background: linear-gradient(15.46deg, #9F7AEA 26.3%, #805AD5 86.4%);
+  border-bottom-left-radius: 0.75rem;
+  border-top-left-radius: 0.75rem;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  padding: 1rem 0.5rem;
+  text-orientation: mixed;
+  writing-mode: vertical-rl;
+}
 .main-content .chatbox-container .chat-head {
   position: relative;
   top: 0;
@@ -12128,7 +12182,9 @@ body {
     left: 0;
     position: fixed;
     padding: 0 !important;
-    background-color: transparent;
+    background: #fff;
+    font-size: 1.4rem;
+    font-weight: 600;
   }
   .main-content .chatbox-container .chat-head .img, .main-content .chatbox-container .chat-head .content {
     display: none;
@@ -12204,8 +12260,9 @@ body {
   }
   .main-content .chatbox-container .chat-head .hamburger-menu .hamburger.open .mobile-menu li.logo img {
     display: block;
-    width: 150px;
-    height: 80px;
+    transform: scale(2);
+    height: 65px;
+    margin: auto;
   }
   .main-content .chatbox-container .chat-head .hamburger-menu .hamburger.open .mobile-menu li.template {
     padding: 1rem 0.5rem 0.5rem 0;
@@ -12318,8 +12375,8 @@ body {
   display: block;
   font-size: 1.5rem;
   line-height: 1em;
-  color: #425C81;
-  font-weight: 500;
+  color: #6B46C1;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 5px;
   margin-bottom: 15px;
@@ -12327,8 +12384,8 @@ body {
 .main-content .pricing-section .sec-title .title-1 {
   position: relative;
   display: block;
-  font-size: 1rem;
-  color: #425C81;
+  font-size: 0.9rem;
+  color: #9F7AEA;
   font-weight: 600;
   text-align: center;
   padding: 0 0.5rem 1rem 0.5rem;
@@ -12588,12 +12645,13 @@ body {
   padding: 8px 30px;
   border-radius: 0;
   transition: all 300ms ease;
-  border: 2px solid #425C81;
-  color: #425C81;
+  color: #fff;
+  border-radius: 20px;
+  background: linear-gradient(15.46deg, #9F7AEA 26.3%, #805AD5 86.4%);
 }
 .main-content .pricing-section.payment-section .outer-box .pricing-block .inner-box .submit-btn-block .submit-btn:hover {
-  color: #ffffff;
-  background-color: #425C81;
+  color: #fff;
+  background: #44337A;
 }
 .main-content .pricing-section.payment-section .outer-box .pricing-block .inner-box .submit-btn-block:hover {
   left: 0;
@@ -13178,6 +13236,8 @@ body {
   .free-trial-end {
     max-width: 750px;
     margin: auto;
+    color: #322659;
+    text-align: justify;
   }
 }
 .free-trial-end p {

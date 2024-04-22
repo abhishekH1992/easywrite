@@ -82,7 +82,7 @@ class SiteController extends Controller
     }
 
     public function getNavMenuModels(Request $request){
-        $data = Prompt::all();
+        $data = Prompt::where('isMenu', 1)->get();
         // $arr = [];
         // foreach($data as $d){
         //     if(in_array($d->template, $this->templatesAllow))  $arr[$d->template][] = $d;
