@@ -5,15 +5,21 @@
             <div class="bar2"></div>
             <div class="bar3"></div>
             <ul class="mobile-menu">
-                <li class="logo">
-                    ARLO+
-                </li>
-                <li v-for="nav in navMenu" :key="nav.id" class="nav-font-main-section nav-div">
-                    <router-link class="nav-link link_name nav-div" :to="nav.slug"> {{ nav.name }}</router-link>
+                <li class="logo mb-4">
+                    <img src="/assets/images/arlo-logo.svg">
                 </li>
                 <div class="header">
+                    <li v-for="nav in navMenu" :key="nav.id" class="nav-font-main-section nav-div">
+                        <router-link class="nav-link link_name nav-div mb-3" :to="nav.slug"> 
+                            <i class="fas fa-graduation-cap" v-if="nav.name == 'Talanoa Law 2.0'"></i>
+                            <i class="fa fa-legal" v-if="nav.name == 'Talanoa Law'"></i> {{ nav.name }}
+                        </router-link>
+                    </li>
+                </div>
+                <div class="header">
                     <li class="nav-billing nav-font-main-section">
-                        <router-link class="nav-link link_name" :to="{ name: 'plans'}"><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
+                        <router-link class="nav-link link_name" :to="{ name: 'plans'}">
+                        <i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
                     </li>
                 </div>
                 <div class="header">

@@ -20,22 +20,54 @@
                 <div class="message">
                     <div v-html="chat.msg"></div>
                     <div class="pl-2" v-if="chat.source && chat.source.length">
-                        <p class="related-text-bold my-3">Source Urls: </p>
-                        <div v-for="(source, key) in chat.source" :key="key">
-                            <p class="div-link" @click="linkClicked(source)">{{ source }}</p>
-                        </div>
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header related-text-bold collapsed" id="headingOne">
+                                    <button class="accordion-button related-text-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <i class="fa-solid fa-link me-2"></i>Source Urls
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body bg-white">
+                                        <ul class="p-0">
+                                            <li v-for="(source, key) in chat.source" :key="key" class="source-link">
+                                                <p class="div-link m-0 py-2" @click="linkClicked(source)">{{ source }}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>       
                     </div>
                     <div class="pl-2" v-if="chat.related && chat.related.length">
-                        <p class="related-text-bold my-3">Related Questions: </p>
-                        <p v-for="(related, key) in chat.related" :key="key">
-                            <input type="radio" :name="i" :value="related" v-model="picked" /> {{ related }}
-                        </p>
+                        <h4 class="related-text-bold my-2 pb-2 mt-4"><i class="fa-solid fa-layer-group me-2"></i>Related questions</h4>
+                        <ul class="p-0 mb-4">
+                            <li v-for="(related, key) in chat.related" :key="key" 
+                                class="related-option py-2 flex justiy-between" @click="handleOptionClick(related)">
+                                <span>{{ related }}</span> <i class="fa fa-plus"></i>
+                            </li>
+                        </ul>
                     </div>
                     <div class="pl-2" v-if="chat.relatedUrl && chat.relatedUrl.length">
-                        <p class="related-text-bold my-3">Related Urls: </p>
-                        <div v-for="(relatedUrl, key) in chat.relatedUrl" :key="key">
-                            <p class="div-link" @click="linkClicked(relatedUrl)">{{ relatedUrl }}</p>
-                        </div>
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header related-text-bold" id="headingUrl">
+                                    <button class="accordion-button related-text-bold collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#collapseUrl" aria-expanded="false" aria-controls="collapseUrl">
+                                        <i class="fa-solid fa-link me-2"></i>Related Urls
+                                    </button>
+                                </h2>
+                                <div id="collapseUrl" class="accordion-collapse collapse" aria-labelledby="headingUrl" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body bg-white">
+                                        <ul class="p-0">
+                                            <li v-for="(relatedUrl, key) in chat.relatedUrl" :key="key" class="source-link">
+                                                <p class="div-link m-0 py-2" @click="linkClicked(relatedUrl)">{{ relatedUrl }}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>     
                     </div>
                 </div>
                 <div class="copy">
