@@ -2170,7 +2170,7 @@ body{
                     background-color: rgb(228, 237, 241);
                     padding: 0.8rem 0.9rem;
                     border: 2px solid $contrast;
-                    font-size: 30px;
+                    font-size: 20px;
                 }
             }
             .content{
@@ -2714,6 +2714,16 @@ body{
             }
         }
     }
+    &.country-court-form {
+        .modal-wrapper {
+            .modal-container {
+                width: 30%;
+                @media screen and (max-width: 768px) {
+                    width: 75%;
+                }
+            }
+        }
+    }
 }
 
 .chatbot-list-modal {
@@ -2967,4 +2977,81 @@ body{
       100% {
         opacity: 1;
       }
+}
+
+.court-form {
+    color: #202020;
+    margin: 2rem auto;
+    border: 1px solid #d8d8d8;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    background: #fefefe;
+    width: 50%;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    h4 {
+        text-decoration: none;
+        outline: none;
+        box-shadow: none;
+        color: #9F7AEA;
+    }
+    label {
+        font-size: 14px;
+        color: #202020;
+        font-weight: 600;
+        line-height: 2;
+    }
+    select {
+        font-size: 14px;
+        color: #555555;
+        display: block;
+        width: 100%;
+        background: transparent;
+        border: 1px solid #d8d8d8;
+        border-radius: 9px;
+    }
+    .theme-btn {
+        color: #fff !important;
+        line-height: 1.2;
+        text-transform: uppercase;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 40px;
+        border-radius: 9px;
+        padding: 0.25rem 1rem;
+        font-weight: 600;
+        font-size: 0.875rem;
+        letter-spacing: 0.25px;
+        background: linear-gradient(15.46deg, #9F7AEA 26.3%, #805AD5 86.4%);
+    }
+}
+
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    .loader {
+        border: 6px solid #f3f3f3;
+        border-top: 6px solid $contrast;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 2s linear infinite;
+    }
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

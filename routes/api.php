@@ -38,6 +38,7 @@ Route::group(['middleware' => 'user', 'isSubscribed'], function () {
     Route::get('/chat/get-user-chat', [ChatController::class, 'getUserChat']);
     Route::get('/chat/get-user-chats', [ChatController::class, 'getUserChats']);
     Route::post('/chat/destroy', [ChatController::class, 'destroy']);
+    Route::post('/chat/source-law/set-country-court', [ChatController::class, 'setCountryCourt']);
 
     Route::get('/documents/get-documents', [DocumentsController::class, 'getUserDocuments']);
     Route::post('/documents/create', [DocumentsController::class, 'store']);

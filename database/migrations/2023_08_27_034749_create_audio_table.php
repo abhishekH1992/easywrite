@@ -16,8 +16,11 @@ return new class extends Migration
         Schema::create('audio', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('link');
             $table->bigInteger('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->bigInteger('speech_id')->unsigned()->index();
+            $table->foreign('speech_id')->references('id')->on('speech_to_text')->onDelete('cascade');
             $table->timestamps();
         });
     }

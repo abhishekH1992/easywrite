@@ -6,13 +6,14 @@
                 <div class="chat-container" :class="{fillWidthChatContainer: isEditorOpen}">
                     <div class="bottom-bar" :class="pageInfo.isPythonSuggestions ? `bottom-bar-python` : ``" v-if="!pageInfo.isTextarea">
                         <div class="chat">
-                            <textarea ref="textarea" class="chat-textarea" :placeholder="pageInfo.placeholder" v-model="msg" rows="1" @keydown.enter.exact.prevent="submit()" v-if="!pageInfo.isPythonSuggestions"></textarea>
+                            <textarea ref="textarea" class="chat-textarea" :placeholder="pageInfo.placeholder" v-model="msg" rows="1" @keydown.enter.exact.prevent="submit()" v-if="!pageInfo.isPythonSuggestions" :disabled="!showTextArea"></textarea>
                             <div class="storeBtns">
                                 <div class="input-btn">
                                     {{ pageInfo.is_image_editor }}
                                     <button class="btn btn-bookmark btn-img" @click="save"><i class='fa fa-save' title="Save"></i></button>
                                     <button class="btn btn-clean btn-img" @click="clean"><i class="fa fa-refresh" aria-hidden="true" title="Clear"></i></button>
                                     <button class="btn btn-delete" @click="destroy" v-if="savedId"><i class="fa-solid fa-trash" title="Delete"></i></button>
+                                    <button class="btn btn-clean btn-img" @click="showModal = true" v-if="selectedCountry"><i class="fa fa-globe" aria-hidden="true"></i> {{ selectedCountry }}</button>
                                 </div>
                                 <div class="submitBtn" @click="submit" v-if="!pageInfo.isPythonSuggestions">
                                     <i class="fa fa-paper-plane" aria-hidden="true" title="Send message"></i>
@@ -48,8 +49,41 @@
                             </div>
                         </div>
                     </div>
-                    <chat-box :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" v-if="pageInfo && !pageInfo.isTextarea && !pageInfo.isPythonSuggestions" @related-question-selected="relatedQuestion" @div-link="showInBrowser"/>
+                    <chat-box :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" :country-court-list="countryCourtList" :show-court-form="!showTextArea ? true : false" v-if="pageInfo && !pageInfo.isTextarea && !pageInfo.isPythonSuggestions" @related-question-selected="relatedQuestion" @div-link="showInBrowser" @selected-country-court="selectedCountryCourt"/>
                     <chat-box class="one" :list="list" :page-info="pageInfo" :typing="typing" :translate-language="translateLanguage" v-if="pageInfo && pageInfo.isTextarea && availableHeight" :style="{ maxHeight: availableHeight + 'px' }"/>
+                    <div class="modal-mask country-court-form" v-if="showModal">
+                        <div class="modal-wrapper">
+                            <div class="modal-container">
+                                <div class="modal-header">
+                                    <h6 class="text-center">Select Country & Court</h6>
+                                </div>  
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="form-group row">
+                                            <label>Country</label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control" v-model="selectedCountryModal">
+                                                    <option v-for="(items, key) in countryCourtList" :key="key" :value="key">{{ key }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label>Court</label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control" v-model="selectedCourtModal" :disabled="!selectedCountryModal" multiple>
+                                                    <option v-for="(items, key) in countryCourtList[selectedCountryModal]" :key="key" :value="items">{{ items }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn theme-btn" @click="setCountryCourtData()">Update</button>
+                                    <button class="btn theme-btn" @click="showModal = false">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- <vue-editor v-model="editor" :editorToolbar="customToolbar" v-if="pageInfo.isPythonSuggestions" :class="`text-completion`" @keydown.tab.exact.prevent="submit()"/> -->
                     <div class="chat-body">
                         <div class="chat">
@@ -90,6 +124,9 @@
                 </div>
             </div>
         </div>
+        <div class="loader-container" v-if="setLoader">
+            <div class="loader"></div>
+        </div>
     </div>
 </template>
 <script>
@@ -127,6 +164,12 @@ export default {
         isBrowser: false,
         isShowEditor: true,
         browserLink: '',
+        selectedCountry: null,
+        selectedCourt: [],
+        selectedCountryModal: null,
+        selectedCourtModal: [],
+        showModal: false,
+        setLoader: false,
     }),
     components: {
         ChatBox,
@@ -137,6 +180,9 @@ export default {
     computed: {
         pageInfo() {
             return this.$store.state.chat.pageInfo;
+        },
+        countryCourtList() {
+            return this.$store.state.chat.countryCourt;
         },
         fieldSet() {
             return JSON.parse(this.pageInfo.fieldset);
@@ -153,6 +199,16 @@ export default {
         suggestions() {
             return this.$store.state.chat.suggestions;
         },
+        showTextArea() {
+            console.log(this.selectedCountry);
+            console.log(this.selectedCourt);
+            if(!this.pageInfo.country_court_endpoint) {
+                return true;
+            } else if(!this.selectedCountry || !this.selectedCourt.length) {
+                return false;
+            }
+            return true;
+        }
     },
     methods: {
         async getPageInfo() {
@@ -176,6 +232,7 @@ export default {
                 });
         },
         submit() {
+            if(!this.showTextArea) return false;
             this.typing = true;
             let msg = this.msg;
             let user = '';
@@ -246,6 +303,7 @@ export default {
                 });
         },
         clean() {
+            if(!this.showTextArea) return false;
             this.$store.dispatch('chat/clean_chat');
             this.isTextareaMsg = '';
             this.combineMsg = [];
@@ -254,6 +312,10 @@ export default {
             this.editor = null;
         },
         save(){
+            if(!this.showTextArea) return false;
+
+            let country_court = this.selectedCountry ? { country: this.selectedCountry, court: this.selectedCourt } : {};
+
             let type = this.pageInfo.isSystem ? 'custom-chat' : 'model';
             let payload = {
                 editor: this.editor,
@@ -263,6 +325,7 @@ export default {
                 name: this.name,
                 tone: localStorage.getItem('tone'),
                 language: localStorage.getItem('language'),
+                country_court: country_court,
             };
 
             this.$store.dispatch('chat/save', payload).then((response) => {
@@ -291,10 +354,15 @@ export default {
                     if (response.data.tone) {
                         localStorage.setItem('tone', response.data.tone);
                     }
+                    if(this.pageInfo.country_court_endpoint) {
+                        let data = JSON.parse(response.data.country_court);
+                        this.selectedCountryCourt(data);
+                    }
                 }
             });
         },
         destroy() {
+            if(!this.showTextArea) return false;
             let payload = {
                 id: this.savedId
             };
@@ -392,6 +460,34 @@ export default {
                 this.$store.commit('chat/set_suggestions', []);
             }
         },
+        setCountryCourtData() {
+            let payload = {
+                country: this.selectedCountryModal,
+                court: this.selectedCourtModal,
+            };
+
+            this.selectedCountryCourt(payload);
+        },
+        selectedCountryCourt(value) {
+            this.setLoader = true;
+            let payload = {
+                country: value.country,
+                court: value.court,
+                endpoint: this.pageInfo.country_court_endpoint
+            }
+            this.$store.dispatch('chat/change_country_court', payload)
+                .then((response) => {
+                    this.selectedCountry = response.data.country;
+                    this.selectedCourt = response.data.court;
+                    this.setLoader = false;
+                        this.showModal = false;
+                    this.$notify({
+                        group: response.data.success,
+                        text: response.data.success == 'success' ? 'Country & Court set successfully.' : 'Oops! Something went wrong. Please refresh the page.',
+                        closeOnClick: true,
+                    });
+                });
+        }
     },
     mounted() {
         this.mountedList();

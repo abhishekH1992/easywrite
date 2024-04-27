@@ -20,7 +20,8 @@ class Chats extends Model
         'editor',
         'list',
         'language',
-        'tone'
+        'tone',
+        'country_court'
     ];
 
     public function prompt(){
