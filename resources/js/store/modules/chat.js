@@ -12,6 +12,8 @@ export default {
         languageList: [],
         translateLanguage: [],
         suggestions: [],
+        countryCourt: [],
+        court: [],
     },
 
     getters: {},
@@ -55,6 +57,12 @@ export default {
         },
         set_suggestions: (state, suggestions) => {
             state.suggestions = suggestions;
+        },
+        set_country_court_list: (state, countryCourt) => {
+            state.countryCourt = countryCourt;
+        },
+        set_court: (state, court) => {
+            state.court.push(court);
         },
     },
 
@@ -119,7 +127,8 @@ export default {
 
         get_page_info: (context, data) => {
             return axios.post('/api/chat/page-info', data).then((response) => {
-                context.commit('set_page_info', response.data);
+                context.commit('set_page_info', response.data.prompt);
+                context.commit('set_country_court_list', response.data.countryCourt);
             });
         },
         reset_state: (context, data) => {
@@ -170,6 +179,9 @@ export default {
             return axios.post('/api/chat/translate/language', data).then((response) => {
                 context.commit('set_translate_language', response.data);
             });
+        },
+        change_country_court: (context, data) => {
+            return axios.post('/api/chat/source-law/set-country-court', data);
         }
     },
 };

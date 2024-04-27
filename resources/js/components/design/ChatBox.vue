@@ -1,8 +1,34 @@
 <template>
     <div class="chat-body" :class="{isTextarea : pageInfo.isTextarea}">
-        <div class="how-div" v-if="!list.length && !pageInfo.isTextarea">
+        <div class="how-div" v-if="!list.length && !pageInfo.isTextarea && !showCourtForm">
             <h2>Welcome to chat by ARLO+</h2>
             <h5>How can I help you today?</h5>
+        </div>
+        <div class="court-form" v-if="showCourtForm">
+            <h5 class="text-center">Select Country & Court</h5>
+            <div class="row">
+                <div class="form-group row mb-2">
+                    <label class="pb-2">Country</label>
+                    <div class="col-sm-12">
+                        <select class="form-control" v-model="selectedCountry">
+                            <option v-for="(items, key) in countryCourtList" :key="key" :value="key">{{ key }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row mb-2">
+                    <label class="pb-2">Court</label>
+                    <div class="col-sm-12">
+                        <select class="form-control" v-model="selectedCourt" :disabled="!selectedCountry" multiple>
+                            <option v-for="(items, key) in countryCourtList[selectedCountry]" :key="key" :value="items">{{ items }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row mt-2">
+                    <div class="col-sm-12">
+                        <button class="btn theme-btn" @click="setCountryCourtData()">Submit</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="wrapper user-chat" v-if="pageInfo.pretext && !pageInfo.isTextarea">
             <div class="chat">
@@ -151,6 +177,8 @@ export default {
                 name: 'Samoan'
             },
             picked: null,
+            selectedCountry: null,
+            selectedCourt: [],
         }
     },
     props: {
@@ -167,6 +195,12 @@ export default {
             required: true,
         },
         showUserIcons: {
+            required: false,
+        },
+        showCourtForm: {
+            required: false,
+        },
+        countryCourtList: {
             required: false,
         }
     },
@@ -205,6 +239,13 @@ export default {
             if (this.picked !== option) {
                 this.$emit('related-question-selected', option);
             }
+        },
+        setCountryCourtData() {
+            let data = {
+                'country': this.selectedCountry,
+                'court': this.selectedCourt
+            };
+            this.$emit('selected-country-court', data);
         }
     },
     watch: {

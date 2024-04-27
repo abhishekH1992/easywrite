@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use \App\Models\Prompt;
 use \App\Models\Chats;
+use \App\Models\CountryCourt;
 use App\Http\Controllers\DocumentsController;
 
 class ChatController extends Controller
@@ -132,7 +133,18 @@ class ChatController extends Controller
             unset($slug[count($slug)-1]);
             $data = implode('/', $slug);
         }
-        return response()->json(Prompt::where('slug', $data)->first());
+
+        $prompt = Prompt::where('slug', $data)->first();
+        $countryCourt = [];
+
+        if($prompt->country_court_endpoint) {
+            $list = CountryCourt::all();
+            foreach($list as $l) {
+                $countryCourt[$l->country][] = $l->court;
+            }
+        }
+
+        return response()->json(['prompt' => $prompt, 'countryCourt' => $countryCourt]);
     }
 
     public function getModels(){
@@ -155,6 +167,7 @@ class ChatController extends Controller
                 'list'          =>  json_encode($request->list),
                 'language'      =>  $request->language,
                 'tone'          =>  $request->tone,
+                'country_court' =>  json_encode($request->country_court),
             ]
         );
 
@@ -205,5 +218,30 @@ class ChatController extends Controller
         }
         $content = $doc->saveHTML();
         return $content;
+    }
+
+    public function setCountryCourt(Request $request) {
+        try{
+            $payload = [
+                'country'   =>  $request->country,
+                'courts'    =>  $request->court,
+            ];
+            $response = $this->documentController->sendRequest($request->endpoint, $payload);
+            if($response->success) {
+                $data['country'] = $response->data->country;
+                $data['court'] = $response->data->courts;
+                $data['success'] = 'success';
+            } else {
+                $data['country'] = null;
+                $data['court'] = [];
+                $data['success'] = 'error';
+            }
+            return $data;
+        } catch (\Exception $e) {
+            $data['country'] = null;
+            $data['court'] = [];
+            $data['success'] = 'success';
+            return $data;
+        }
     }
 }

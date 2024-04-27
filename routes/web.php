@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth', 'verified', 'isSubscribed']], function () {
     Route::get('/', function () {
-        return view('layouts.app');
+        return redirect('/model/arlo-law-2');
     })->name('dashboard');
     Route::get('/model/{model}', function () {
         return view('layouts.app');
