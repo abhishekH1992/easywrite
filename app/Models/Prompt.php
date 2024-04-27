@@ -41,6 +41,7 @@ class Prompt extends Model
         'is_display_in_list',
         'is_image_editor',
         'isPython',
-        'isPythonSuggestions'
+        'isPythonSuggestions',
+        'country_court_endpoint',
     ];
 }

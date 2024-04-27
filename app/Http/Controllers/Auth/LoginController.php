@@ -26,7 +26,11 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/model/arlo-law-2';
+
+    // public function redirectTo() {
+    //     return '/model/arlo-law-2';
+    // }
 
     /**
      * Create a new controller instance.

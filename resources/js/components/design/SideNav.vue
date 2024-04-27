@@ -4,18 +4,24 @@
             <img src="/assets/images/arlo-logo.svg">
         </div>
         <ul class="nav-links">
-            <li v-for="nav in navMenu" :key="nav.id" class="nav-font-main-section nav-div">
-                <router-link class="nav-link link_name nav-div" :to="nav.slug"> 
-                    <i :class="nav.img"></i>
-                   {{ nav.name }}
-                </router-link>
-            </li>
-            <li class="nav-font-main-section nav-div">
-                <router-link class="nav-link link_name nav-div" :to="`/archive`"> 
-                    <i class="fa fa-archive"></i>
-                   Archive
-                </router-link>
-            </li>
+            <div class="header" v-for="(navs, i) in navMenu" :key="i">
+                {{ i }}
+                <li v-for="nav in navs" :key="nav.id" class="nav-font-main-section">
+                    <router-link class="nav-link link_name" :to="nav.slug"><i :class="nav.img"></i> {{ nav.name }}</router-link>
+                </li>
+            </div>
+            <div class="header">
+                Document Analyzer
+                <li class="nav-font-main-section">
+                    <router-link class="nav-link link_name" to="/documents"><i class="fa-solid fa-arrow-right"></i> Chat</router-link>
+                </li>
+            </div>
+            <div class="header">
+                Saved Projects
+                <li class="nav-font-main-section">
+                    <router-link class="nav-link link_name" to="/archive"><i class="fa-solid fa-arrow-right"></i> Saved Projects</router-link>
+                </li>
+            </div>
             <div class="header">
                 <li class="nav-font-main-section" v-if="!isSevenDayTrial">
                     <router-link class="nav-link link_name nav-div" :to="{ name: 'billing'}" v-if="customerStripeId"><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>

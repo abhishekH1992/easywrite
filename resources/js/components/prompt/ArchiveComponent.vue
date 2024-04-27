@@ -13,7 +13,7 @@
                     <div class="col-md-3 col-sm-6 col-xs-12 mb-3" v-for="(model, i) in models" :key="i">
                         <div class="model-section">
                             <router-link class="model" :to="{ name: 'savedChatBox', params: { prompt: model.prompt.slug.split('/')[2], id: model.id }}" v-if="!model.prompt.isSystem">
-                                <div class="img"><img :src="model.prompt.img" :style="{ 'border': '2px solid '+model.prompt.background }"></div>
+                                <div class="img"><i :class="model.prompt.img"></i></div>
                                 <div class="content">
                                     <div class="name">{{ model.name }}</div>
                                     <div class="outline">{{ model.prompt.outline }}</div>
@@ -21,7 +21,7 @@
                                 </div>
                             </router-link>
                             <router-link class="model" :to="{ name: 'savedCustomChatBox', params: { prompt: model.prompt.slug.split('/')[2], id: model.id }}" v-else>
-                                <div class="img"><img :src="model.prompt.img" :style="{ 'border': '2px solid '+model.prompt.background }"></div>
+                                <div class="img"><i :class="model.prompt.img"></i></div>
                                 <div class="content">
                                     <div class="name">{{ model.name }}</div>
                                     <div class="outline">{{ model.prompt.outline }}</div>

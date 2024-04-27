@@ -8,18 +8,22 @@
                 <li class="logo mb-4">
                     <img src="/assets/images/arlo-logo.svg">
                 </li>
-                <div class="header">
-                    <li v-for="nav in navMenu" :key="nav.id" class="nav-font-main-section nav-div">
-                        <router-link class="nav-link link_name nav-div mb-3" :to="nav.slug"> 
-                            <i :class="nav.img"></i>
-                            {{ nav.name }}
-                        </router-link>
+                <div class="header" v-for="(navs, i) in navMenu" :key="i">
+                    {{ i }}
+                    <li v-for="nav in navs" :key="nav.id" class="nav-font-main-section ">
+                        <router-link class="nav-link link_name" :to="nav.slug"><i :class="nav.img"></i> {{ nav.name }}</router-link>
                     </li>
-                    <li class="nav-font-main-section nav-div">
-                        <router-link class="nav-link link_name nav-div" :to="`/archive`"> 
-                            <i class="fa fa-archive"></i>
-                        Archive
-                        </router-link>
+                </div>
+                <div class="header">
+                    Document Analyzer
+                    <li class="nav-font-main-section">
+                        <router-link class="nav-link link_name" to="/documents"><i class="fa-solid fa-arrow-right"></i> Chat</router-link>
+                    </li>
+                </div>
+                <div class="header">
+                    Saved Projects
+                    <li class="nav-font-main-section">
+                        <router-link class="nav-link link_name" to="/archive"><i class="fa-solid fa-arrow-right"></i> Saved Projects</router-link>
                     </li>
                 </div>
                 <div class="header">
