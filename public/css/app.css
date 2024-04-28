@@ -11184,6 +11184,10 @@ body {
 .admin.sidebar .nav-links li.nav-font-main-section {
   color: #322659;
 }
+.admin.sidebar .nav-links li.doc-analyzer {
+  background: rgba(255, 235, 59, 0.7019607843);
+  border-radius: 8px;
+}
 .admin.sidebar .nav-links li .setting {
   font-weight: 600;
 }
@@ -12278,6 +12282,11 @@ body {
     font-size: 0.75rem;
     font-weight: 600;
   }
+  .main-content .chatbox-container .chat-head .hamburger-menu .hamburger.open .mobile-menu li.doc-analyzer {
+    background: rgba(255, 235, 59, 0.7019607843);
+    border-radius: 8px;
+    padding: 5px;
+  }
   .main-content .chatbox-container .chat-head .hamburger-menu .hamburger.open .mobile-menu .header {
     text-align: left;
     margin: 0.5rem 0;
@@ -12799,6 +12808,7 @@ body {
 .dashbaord-section .model-section {
   padding: 1rem;
   margin: 0.5rem;
+  height: 180px;
   border-radius: 20px;
   background-color: #fff;
   border: 2px solid #9a60ca;
@@ -13559,12 +13569,12 @@ body {
   }
 }
 .court-form {
-  color: #202020;
-  margin: 2rem auto;
-  border: 1px solid #d8d8d8;
+  color: #322659;
+  margin: 0 auto;
+  border: none;
   box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
-  padding: 3rem;
-  background: #fefefe;
+  padding: 1rem;
+  background: #fff;
   width: 50%;
   position: absolute;
   left: 50%;
@@ -13580,18 +13590,24 @@ body {
 }
 .court-form label {
   font-size: 14px;
-  color: #202020;
+  color: #322659;
   font-weight: 600;
   line-height: 2;
 }
 .court-form select {
   font-size: 14px;
-  color: #555555;
+  color: #322659;
   display: block;
   width: 100%;
   background: transparent;
   border: 1px solid #d8d8d8;
   border-radius: 9px;
+}
+.court-form select:focus {
+  color: #322659;
+  background: #faf5ff;
+  border: 1px solid #6B46C1;
+  box-shadow: none;
 }
 .court-form .theme-btn {
   color: #fff !important;
@@ -13602,12 +13618,12 @@ body {
   align-items: center;
   width: 100%;
   height: 40px;
-  border-radius: 9px;
   padding: 0.25rem 1rem;
   font-weight: 600;
   font-size: 0.875rem;
   letter-spacing: 0.25px;
   background: linear-gradient(15.46deg, #9F7AEA 26.3%, #805AD5 86.4%);
+  border-radius: 20px;
 }
 
 .loader-container {
@@ -13638,4 +13654,13 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+.select-country-option {
+  background-color: #E9D8FD;
+}
+
+.btn-select-country {
+  border-radius: 20px;
+  border: 1px solid #815bd5;
+  padding: 4px 10px;
 }

@@ -36,8 +36,10 @@ class ChatController extends Controller
                 $payload = [
                     'msg'       =>  $request->msg,
                     'user_id'   =>  auth()->id(),
+                    'country'   =>  $request->country,
+                    'courts'    =>  $request->court,
                 ];
-                $response = $this->documentController->sendRequest($prompt->endpoint, $payload);
+                $response = $this->documentController->sendRequest($prompt->endpoint, $payload);//dd($response);
                 $data = [];
                 if($response->success) {
                     if($request->isPythonSuggestions) {
@@ -52,12 +54,14 @@ class ChatController extends Controller
                         $data['related_questions'] = isset($response->data->related_questions) ? $response->data->related_questions : [];
                         $data['source_urls'] = isset($response->data->source_urls) ? $this->objectToArray($response->data->source_urls) : [];
                         $data['related_urls'] = isset($response->data->related_urls) ? $this->objectToArray($response->data->related_urls) : [];
+                        $data['answer_sources'] = isset($response->data->answer_sources) ? $this->objectToArray($response->data->answer_sources, true) : [];
                     }
                 } else {
                     $data['text'] = 'Error: Please refresh or reduce your text input';
                     $data['related_questions'] = [];
                     $data['source_urls'] = [];
                     $data['related_urls'] = [];
+                    $data['answer_sources'] = [];
                 }
                 return $data;
 
@@ -200,10 +204,10 @@ class ChatController extends Controller
         return response()->json(Chats::where('id', $request->id)->where('user_id', auth()->id())->delete());
     }
 
-    public function objectToArray($obj) {
+    public function objectToArray($obj, $isAnswer = false) {
         $data = [];
         foreach($obj as $k => $v) {
-            $data[] = ['txt' => '['.$k.'] '.$v, 'link' => $v];
+            $data[] = $isAnswer ? $v : ['txt' => '['.$k.'] '.$v, 'link' => $v];
         }
         return $data ? json_decode(json_encode($data, true)) : [];
     }

@@ -82,7 +82,8 @@ export default {
                         user: 'ai',
                         related: res.related_questions,
                         source: res.source_urls,
-                        relatedUrl: res.related_urls
+                        relatedUrl: res.related_urls,
+                        answer: res.answer_sources,
                     };
                     context.commit('set_prompt', res);
                     context.commit('set_chat', bot);

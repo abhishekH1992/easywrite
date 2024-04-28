@@ -205,8 +205,6 @@ export default {
             return this.$store.state.chat.suggestions;
         },
         showTextArea() {
-            console.log(this.selectedCountry);
-            console.log(this.selectedCourt);
             if(!this.pageInfo.country_court_endpoint) {
                 return true;
             } else if(!this.selectedCountry || !this.selectedCourt.length) {
@@ -295,6 +293,8 @@ export default {
                 history: this.pageInfo.history,
                 isPython: this.pageInfo.isPython,
                 isPythonSuggestions: this.pageInfo.isPythonSuggestions,
+                country: this.selectedCountry,
+                court: this.selectedCourt,
             };
             this.$store
                 .dispatch('chat/chat', paylaod).then((response) => {
@@ -474,24 +474,26 @@ export default {
             this.selectedCountryCourt(payload);
         },
         selectedCountryCourt(value) {
-            this.setLoader = true;
-            let payload = {
-                country: value.country,
-                court: value.court,
-                endpoint: this.pageInfo.country_court_endpoint
-            }
-            this.$store.dispatch('chat/change_country_court', payload)
-                .then((response) => {
-                    this.selectedCountry = response.data.country;
-                    this.selectedCourt = response.data.court;
-                    this.setLoader = false;
-                        this.showModal = false;
-                    this.$notify({
-                        group: response.data.success,
-                        text: response.data.success == 'success' ? 'Country & Court set successfully.' : 'Oops! Something went wrong. Please refresh the page.',
-                        closeOnClick: true,
-                    });
-                });
+            this.selectedCountry = value.country;
+            this.selectedCourt = value.court;
+            // this.setLoader = true;
+            // let payload = {
+            //     country: value.country,
+            //     court: value.court,
+            //     endpoint: this.pageInfo.country_court_endpoint
+            // }
+            // this.$store.dispatch('chat/change_country_court', payload)
+            //     .then((response) => {
+            //         this.selectedCountry = response.data.country;
+            //         this.selectedCourt = response.data.court;
+            //         this.setLoader = false;
+            //             this.showModal = false;
+            //         this.$notify({
+            //             group: response.data.success,
+            //             text: response.data.success == 'success' ? 'Country & Court set successfully.' : 'Oops! Something went wrong. Please refresh the page.',
+            //             closeOnClick: true,
+            //         });
+            //     });
         }
     },
     mounted() {

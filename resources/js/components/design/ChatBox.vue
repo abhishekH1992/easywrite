@@ -97,6 +97,29 @@
                             </div>
                         </div>     
                     </div>
+                    <div class="pl-2" v-if="chat.answer && chat.answer.length">
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header related-text-bold" id="headingUrl">
+                                    <button class="accordion-button related-text-bold collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#collapseUrl" aria-expanded="false" aria-controls="collapseUrl">
+                                        <i class="fa-solid fa-link me-2"></i>Answer Sources
+                                    </button>
+                                </h2>
+                                <div id="collapseUrl" class="accordion-collapse collapse" aria-labelledby="headingUrl" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body bg-white">
+                                        <ul class="p-0">
+                                            <li v-for="(answer, key) in chat.answer" :key="key" class="source-link py-2">
+                                                <h5 class="">{{ answer.title }}</h5>
+                                                <p>{{ answer.snippet }}</p>
+                                                <p class="div-link m-0" @click="linkClicked(answer.link)">{{ answer.link }}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>     
+                    </div>
                 </div>
                 <div class="copy">
                     <span @click="copytxt(chat.msg)">
