@@ -15,7 +15,7 @@
                     </li>
                 </div>
                 <div class="header">
-                    <li class="nav-font-main-section doc-analyzer">
+                    <li class="nav-font-main-section">
                         <router-link class="nav-link link_name" to="/documents"><i class="fa-solid fa-message"></i>Document Analyzer</router-link>
                     </li>
                 </div>
