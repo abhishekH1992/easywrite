@@ -13,7 +13,7 @@
                                     <button class="btn btn-bookmark btn-img" @click="save"><i class='fa fa-save' title="Save"></i></button>
                                     <button class="btn btn-clean btn-img" @click="clean"><i class="fa fa-refresh" aria-hidden="true" title="Clear"></i></button>
                                     <button class="btn btn-delete" @click="destroy" v-if="savedId"><i class="fa-solid fa-trash" title="Delete"></i></button>
-                                    <button class="btn btn-clean btn-img" @click="showModal = true" v-if="selectedCountry"><i class="fa fa-globe" aria-hidden="true"></i> {{ selectedCountry }}</button>
+                                    <button class="btn btn-clean btn-img btn-select-country" @click="showModal = true" v-if="selectedCountry"><i class="fa fa-globe" aria-hidden="true"></i> {{ selectedCountry }}</button>
                                 </div>
                                 <div class="submitBtn" @click="submit" v-if="!pageInfo.isPythonSuggestions">
                                     <i class="fa fa-paper-plane" aria-hidden="true" title="Send message"></i>
@@ -55,7 +55,7 @@
                         <div class="modal-wrapper">
                             <div class="modal-container">
                                 <div class="modal-header">
-                                    <h6 class="text-center">Select Country & Court</h6>
+                                    <h5 class="text-center">Select Country & Court</h5>
                                 </div>  
                                 <div class="modal-body">
                                     <div class="row">
@@ -63,7 +63,10 @@
                                             <label>Country</label>
                                             <div class="col-sm-12">
                                                 <select class="form-control" v-model="selectedCountryModal">
-                                                    <option v-for="(items, key) in countryCourtList" :key="key" :value="key">{{ key }}</option>
+                                                    <option value="selectedCountry">{{selectedCountry}}</option>
+                                                    <option v-for="(items, key) in countryCourtList"
+                                                    :key="key" :class="{ 'select-country-option': selectedCountry === key }"
+                                                    :value="key">{{ key }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -71,7 +74,9 @@
                                             <label>Court</label>
                                             <div class="col-sm-12">
                                                 <select class="form-control" v-model="selectedCourtModal" :disabled="!selectedCountryModal" multiple>
-                                                    <option v-for="(items, key) in countryCourtList[selectedCountryModal]" :key="key" :value="items">{{ items }}</option>
+                                                    <option v-for="(items, key) in countryCourtList[selectedCountryModal]" 
+                                                    :key="key" :class="{ 'select-court-option': selectedCourt === key }"
+                                                    :value="items">{{ items }}</option>
                                                 </select>
                                             </div>
                                         </div>

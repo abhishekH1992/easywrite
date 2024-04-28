@@ -11,26 +11,19 @@
                 </li>
             </div>
             <div class="header">
-                Document Analyzer
-                <li class="nav-font-main-section">
-                    <router-link class="nav-link link_name" to="/documents"><i class="fa-solid fa-arrow-right"></i> Chat</router-link>
+                <li class="nav-font-main-section doc-analyzer">
+                    <router-link class="nav-link link_name" to="/documents"><i class="fa-solid fa-message"></i>Document Analyzer</router-link>
                 </li>
             </div>
             <div class="header">
-                Saved Projects
-                <li class="nav-font-main-section">
-                    <router-link class="nav-link link_name" to="/archive"><i class="fa-solid fa-arrow-right"></i> Saved Projects</router-link>
-                </li>
-            </div>
-            <div class="header">
-                <li class="nav-font-main-section" v-if="!isSevenDayTrial">
+                <li class="nav-font-main-section billing-list" v-if="!isSevenDayTrial">
                     <router-link class="nav-link link_name nav-div" :to="{ name: 'billing'}" v-if="customerStripeId"><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
                     <router-link class="nav-link link_name nav-div" :to="{ name: 'plans'}" v-else><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
                 </li>
             </div>
         </ul>
         <div class="fixed-li">
-            <span>My Workspace</span>
+            <router-link class="nav-link link_name" to="/archive">Saved Projects</router-link>
             <span class="text logout" @click="submit();">
                 <i class="fa-solid fa-arrow-right-from-bracket" title="Log out"></i>
                 <form id="logout-form" action="/logout" method="POSt" style="display: none;" ref="logout">

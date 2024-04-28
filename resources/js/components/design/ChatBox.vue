@@ -8,23 +8,25 @@
             <h5 class="text-center">Select Country & Court</h5>
             <div class="row">
                 <div class="form-group row mb-2">
-                    <label class="pb-2">Country</label>
-                    <div class="col-sm-12">
-                        <select class="form-control" v-model="selectedCountry">
+                    <label class="pb-1">Country</label>
+                    <div class="col-sm-12 pe-0">
+                        <select class="form-control" v-model="selectedCountry" required>
+                            <option value="" disabled selected>Select country</option>
                             <option v-for="(items, key) in countryCourtList" :key="key" :value="key">{{ key }}</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row mb-2">
-                    <label class="pb-2">Court</label>
-                    <div class="col-sm-12">
+                    <label class="pb-1">Court</label>
+                    <div class="col-sm-12 pe-0">
                         <select class="form-control" v-model="selectedCourt" :disabled="!selectedCountry" multiple>
+                            <option value="" disabled selected>Select court</option>
                             <option v-for="(items, key) in countryCourtList[selectedCountry]" :key="key" :value="items">{{ items }}</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row mt-2">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 pe-0">
                         <button class="btn theme-btn" @click="setCountryCourtData()">Submit</button>
                     </div>
                 </div>
