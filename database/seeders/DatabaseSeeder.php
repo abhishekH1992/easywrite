@@ -86,7 +86,7 @@ class DatabaseSeeder extends Seeder
                 'name'          =>  'Chat 2.0',
                 'slug'          =>  '/model/chat-2.0',
                 'placeholder'   =>  'Start by typing "Generate me a ..." or "Write me a ..."',
-                'img'           =>  'fa fa-comment',
+                'img'           =>  'fa-solid fa-comments',
                 'isFreechat'    =>  1,
                 'background'    =>  '#dd5ce5',
                 'template'      =>  'Conversational AI',

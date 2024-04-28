@@ -15,15 +15,13 @@
                     </li>
                 </div>
                 <div class="header">
-                    Document Analyzer
-                    <li class="nav-font-main-section">
-                        <router-link class="nav-link link_name" to="/documents"><i class="fa-solid fa-arrow-right"></i> Chat</router-link>
+                    <li class="nav-font-main-section doc-analyzer">
+                        <router-link class="nav-link link_name" to="/documents"><i class="fa-solid fa-message"></i>Document Analyzer</router-link>
                     </li>
                 </div>
                 <div class="header">
-                    Saved Projects
                     <li class="nav-font-main-section">
-                        <router-link class="nav-link link_name" to="/archive"><i class="fa-solid fa-arrow-right"></i> Saved Projects</router-link>
+                        <router-link class="nav-link link_name" to="/archive"><i class="fa-solid fa-database"></i> Saved Projects</router-link>
                     </li>
                 </div>
                 <div class="header">
