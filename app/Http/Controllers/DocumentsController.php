@@ -11,7 +11,7 @@ use App\Models\DocumentList;
 
 class DocumentsController extends Controller
 {
-    CONST REST_API = 'http://moanaai.com:3001';
+    CONST REST_API = 'https://moanaai.com';
     CONST DEFAULT_USER = '9593107c-32d7-424e-9b57-cba2089fafad';
 
     public $client;
