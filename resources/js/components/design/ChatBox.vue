@@ -43,7 +43,7 @@
                     <img src="/assets/images/user.svg">
                 </div>
                 <div class="profile ai" v-else>
-                    <span class="e-logo">e</span>
+                    <span class="e-logo">a</span>
                 </div>
                 <div class="message">
                     <div v-html="chat.msg"></div>
@@ -106,8 +106,9 @@
                                         <i class="fa-solid fa-link me-2"></i>Answer Sources
                                     </button>
                                 </h2>
-                                <div id="collapseUrl" class="accordion-collapse collapse" aria-labelledby="headingUrl" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body bg-white">
+                                <div id="collapseUrl" class="accordion-collapse collapse" 
+                                    aria-labelledby="headingUrl" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body bg-white accordion-ans-source">
                                         <ul class="p-0">
                                             <li v-for="(answer, key) in chat.answer" :key="key" class="source-link py-2">
                                                 <h5 class="">{{ answer.title }}</h5>
@@ -155,7 +156,7 @@
         <div class="wrapper blueBackground" v-if="typing">
             <div class="chat">
                 <div class="profile ai" v-if="pageInfo.isFreechat || pageInfo.isSystem || showUserIcons">
-                    <span class="e-logo">e</span>
+                    <span class="e-logo">a</span>
                 </div>
                 <div class="message">
                     <div class="loader-outer">
