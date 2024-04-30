@@ -1,10 +1,13 @@
 <template>
     <div class="chatbox-container">
         <div class="chatbox-body-main">
-            <chat-head :name="chatName" :img="pageInfo.img" :outline="pageInfo.outline" :saved-id="savedId" @name-changes="nameChange" ref="chatHeader"/>
-            <div class="chatbox-body">
+            <div class="row head-title">
+                <chat-head :name="chatName" :img="pageInfo.img" :outline="pageInfo.outline" 
+                :saved-id="savedId" @name-changes="nameChange" ref="chatHeader" class="sm:col-6"/>
+            </div>
+            <div class="chatbox-body mt-5 mt-sm-0">
                 <div class="chat-container" :class="{fillWidthChatContainer: isEditorOpen}">
-                    <div class="bottom-bar" :class="pageInfo.isPythonSuggestions ? `bottom-bar-python` : ``" v-if="!pageInfo.isTextarea">
+                    <div class="bottom-bar" :class="pageInfo.isPythonSuggestions ? `bottom-bar-python mt-1` : ``" v-if="!pageInfo.isTextarea">
                         <div class="chat">
                             <textarea ref="textarea" class="chat-textarea" :placeholder="pageInfo.placeholder" v-model="msg" rows="1" @keydown.enter.exact.prevent="submit()" v-if="!pageInfo.isPythonSuggestions" :disabled="!showTextArea"></textarea>
                             <div class="storeBtns">
@@ -92,7 +95,7 @@
                     <!-- <vue-editor v-model="editor" :editorToolbar="customToolbar" v-if="pageInfo.isPythonSuggestions" :class="`text-completion`" @keydown.tab.exact.prevent="submit()"/> -->
                     <div class="chat-body">
                         <div class="chat">
-                            <textarea v-model="editor" placeholder="Start typing and press tab for suggestions..." v-if="pageInfo.isPythonSuggestions" :class="`text-completion`" @keydown.tab.exact.prevent="submit()" :style="{ height: suggestionTextAreaHeight + 'px' }" />
+                            <textarea v-model="editor" placeholder="Start typing and press tab for suggestions..." v-if="pageInfo.isPythonSuggestions" :class="`text-completion p-3`" @keydown.tab.exact.prevent="submit()" :style="{ height: suggestionTextAreaHeight + 'px' }" />
                         </div>
                     </div>
                     <div class="edit-tab" @click="isEditorOpen = !isEditorOpen" v-if="pageInfo.isPythonSuggestions"><i class="fa fa-pencil" aria-hidden="true"></i> Suggestions</div>
@@ -112,12 +115,19 @@
                         v-if="pageInfo.is_image_editor"
                     ></PinturaEditor>
                     <div class="python-suggestions m-4" v-else-if="pageInfo.isPythonSuggestions">
-                        <!-- <p class="suggestion-text-bold my-3">Suggestions: </p> -->
-                                <p class="message" v-if="typing">loading<span>...</span></p>
+                        <div class="loader-outer" v-if="typing">
+                            <div class="loader-header"></div>
+                            <div class="loader-body"></div>
+                            <div class="loader-body"></div>
+                            <div class="loader-body"></div>
+                        </div>
                         <div v-if="!typing">
-                            <p v-for="(suggestion, key) in suggestions" :key="key">
-                                <input type="radio" name="suggestions" :value="suggestion" v-model="pickedSuggection" /> <span v-html="suggestion"></span>
-                            </p>
+                            <ul class="p-0">
+                                <li v-for="(suggestion, key) in suggestions" :key="key" 
+                                    class="related-option py-2 flex justiy-between" @click="handlePickedSuggestion(suggestion)">
+                                    <span>{{ suggestion }}</span> <i class="fa fa-plus"></i>
+                                </li>
+                            </ul>
                         </div>
                     </div>
 <!-- <vue-editor v-model="editor" :editorToolbar="customToolbar" v-else/> -->

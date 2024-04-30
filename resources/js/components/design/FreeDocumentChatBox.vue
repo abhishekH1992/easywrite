@@ -6,7 +6,7 @@
                     <img src="/assets/images/user.svg">
                 </div>
                 <div class="profile ai" v-else>
-                    <span class="e-logo">e</span>
+                    <span class="e-logo">a</span>
                 </div>
                 <div class="message" v-html="chat.msg"></div>
                 <div class="copy">
@@ -22,7 +22,7 @@
         <div class="wrapper blueBackground" v-if="typing">
             <div class="chat">
                 <div class="profile ai">
-                   <span class="e-logo">e</span>
+                   <span class="e-logo">a</span>
                 </div>
                 <div class="message">typing<span>...</span></div>
             </div>

@@ -96,6 +96,19 @@ class DatabaseSeeder extends Seeder
                 'isPython'      =>  1
             ],
             [
+                'name'          =>  'Chat 3.0',
+                'slug'          =>  '/model/chat-3.0',
+                'placeholder'   =>  'Start by typing "Generate me a ..." or "Write me a ..."',
+                'img'           =>  'fas fa-comment-dots',
+                'isFreechat'    =>  1,
+                'background'    =>  '#dd5ce5',
+                'template'      =>  'Conversational AI',
+                'isMenu'        =>  1,
+                'isFreechat'    =>  1,
+                'endpoint'      =>  '/api/web_gpt/chat',
+                'isPython'      =>  1
+            ],
+            [
                 'name'          =>  'ARLO Law 2.0',
                 'slug'          =>  '/model/arlo-law-2',
                 'placeholder'   =>  'Type a message...',

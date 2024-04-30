@@ -8,25 +8,22 @@
             </div>
         </div>
         
-        <section class="dashbaord-section">
+        <section class="dashbaord-section p-0">
             <div class="container">
                 <div class="row">
                     <div class="col-12 new-document">
-                        <input type="text" v-model="name" placeholder="New document chat name ..." v-if="isStore"/>
-                        <button class="btn btn-submit btn-save" @click="submit" v-if="isStore" :disable="!name">Save</button>
-                        <button class="btn btn-submit" @click="isStore = false" v-if="isStore" :disable="!name">Cancel</button>
-                        <button class="btn btn-submit" @click="isStore = true" v-if="!isStore"><i class="fa fa-plus" aria-hidden="true"></i> 
-                        <span class="d-sm-inline-block d-none">New</span></button>
+                        <input type="text" class="speech-input" v-model="name" placeholder="New document chat name..." v-if="isStore"/>
+                        <button class="btn btn-submit btn-save mx-3" @click="submit" v-if="isStore" :disable="!name">Save</button>
+                        <button class="btn btn-submit btn-cancel" @click="isStore = false" v-if="isStore" :disable="!name">Cancel</button>
+                        <button class="btn btn-submit" @click="isStore = true" v-if="!isStore"><i class="fa fa-plus-circle me-2" aria-hidden="true"></i>New</button>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12 mb-3" v-for="(item, i) in list" :key="i">
                         <div class="model-section">
                             <router-link class="model" :to="{ name: 'savedDocument', params: { documentid: item.document_id }}">
                                 <div class="content">
-                                    <div class="img"><img :src="`/assets/images/document.png`" :style="{ 'border': '2px solid #fff' }"></div>
-                                    <div class="name">
-                                        {{ item.name }}
-                                        <span class="created-date">Created: {{ item.human_readable_date }}</span>
-                                    </div>
+                                    <div class="img speech-text-img"><i class="fa fa-pencil-square" aria-hidden="true"></i></div>
+                                    <div class="name">{{ item.name }}</div>
+                                    <div class="created-date">Created: {{ item.human_readable_date }}</div>
                                 </div>
                             </router-link>
                         </div>
