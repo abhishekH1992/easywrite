@@ -476,6 +476,7 @@ export default {
         selectedCountryCourt(value) {
             this.selectedCountry = value.country;
             this.selectedCourt = value.court;
+            this.showModal = false;
             // this.setLoader = true;
             // let payload = {
             //     country: value.country,
