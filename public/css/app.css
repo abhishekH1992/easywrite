@@ -11067,9 +11067,9 @@ body {
 }
 .admin.sidebar .logo-details {
   border-bottom: 1px solid rgba(50, 38, 89, 0.1490196078);
+  text-align: center;
 }
 .admin.sidebar .logo-details img {
-  width: 100%;
   transform: scale(2);
   height: 80px;
 }
@@ -11184,10 +11184,6 @@ body {
 .admin.sidebar .nav-links li.nav-font-main-section {
   color: #322659;
 }
-.admin.sidebar .nav-links li.doc-analyzer {
-  background: rgba(255, 235, 59, 0.7019607843);
-  border-radius: 8px;
-}
 .admin.sidebar .nav-links li .setting {
   font-weight: 600;
 }
@@ -11215,7 +11211,7 @@ body {
   font-weight: 600;
 }
 .admin.sidebar .nav-links .header li {
-  padding: 8px 12px;
+  padding: 6px 12px;
   font-size: 0.9rem;
 }
 .admin.sidebar .fixed-li {
@@ -11523,9 +11519,9 @@ body {
 }
 @media (max-width: 768px) {
   .main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat {
-    display: block;
     display: flex;
     flex-direction: row;
+    gap: 0;
   }
 }
 .main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .profile {
@@ -11592,9 +11588,17 @@ body {
 .main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .message .accordion-item .accordion-button:focus {
   box-shadow: none;
 }
+.main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .message .accordion-item .accordion-button:not(.collapsed)::after {
+  background-image: url(/images/up-arrow-icon.svg?9e279108e08b1f0965b6dbaab6b3e4df);
+  transform: none;
+}
 .main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .message .accordion-item .accordion-button:not(.collapsed) {
   color: #fff;
   background: linear-gradient(15.46deg, #9F7AEA 26.3%, #805AD5 86.4%);
+}
+.main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .message .accordion-item .accordion-ans-source {
+  overflow-y: scroll;
+  height: 300px;
 }
 .main-content .chatbox-container .chatbox-body .chat-container .chat-body .wrapper .chat .message .source-link {
   border-bottom: 1px solid #e2e8f0;
@@ -11795,8 +11799,7 @@ body {
   display: flex;
   background: #faf5ff;
   color: #fff;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-radius: 20px;
 }
 .main-content .chatbox-container .chatbox-body .chat-container .bottom-bar .chat .storeBtns .input-btn {
   padding: 0.5rem;
@@ -12050,6 +12053,7 @@ body {
   background-color: #faf5ff;
   border-radius: 20px;
   border: 1px solid #E2E8F0;
+  overflow-y: scroll;
 }
 .main-content .chatbox-container .chatbox-body .editor-section.editorHide {
   width: 0;
@@ -12106,6 +12110,7 @@ body {
   font-weight: 700;
   font-size: 34px;
   color: #322659;
+  margin-left: 1rem;
 }
 .main-content .chatbox-container .chat-head.noImgPadding {
   padding: 1rem;
@@ -12130,6 +12135,7 @@ body {
   font-size: 1rem;
   color: #808080;
   font-weight: 600;
+  margin-left: 1rem;
 }
 .main-content .chatbox-container .chat-head .content:has(input) {
   display: flex;
@@ -12281,11 +12287,6 @@ body {
   .main-content .chatbox-container .chat-head .hamburger-menu .hamburger.open .mobile-menu li.nav-font-main-section {
     font-size: 0.75rem;
     font-weight: 600;
-  }
-  .main-content .chatbox-container .chat-head .hamburger-menu .hamburger.open .mobile-menu li.doc-analyzer {
-    background: rgba(255, 235, 59, 0.7019607843);
-    border-radius: 8px;
-    padding: 5px;
   }
   .main-content .chatbox-container .chat-head .hamburger-menu .hamburger.open .mobile-menu .header {
     text-align: left;
@@ -12833,21 +12834,23 @@ body {
 }
 .dashbaord-section .model-section .model .img svg {
   border-radius: 50%;
-  background-color: rgb(228, 237, 241);
-  padding: 0.8rem 0.9rem;
-  border: 2px solid #425C81;
-  font-size: 20px;
+  font-size: 40px;
+  margin-bottom: 2rem;
 }
-.dashbaord-section .model-section .model .content .name {
+.dashbaord-section .model-section .model .content .name, .dashbaord-section .model-section .model .content .created-date {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 1.125rem;
+  font-size: 1rem;
   color: #44337A;
   font-weight: 700;
-  margin-bottom: 8px;
+}
+.dashbaord-section .model-section .model .content .created-date {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #44337A;
 }
 .dashbaord-section .model-section .model .content .outline {
   font-size: 0.875rem;
@@ -12982,6 +12985,33 @@ body {
 }
 .document-container .new-document .btn-save {
   margin-right: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+@media (max-width: 768px) {
+  .document-container .new-document .btn-save {
+    right: 120px;
+  }
+}
+.document-container .new-document .btn-cancel {
+  margin-left: 0;
+}
+.document-container .new-document .speech-input {
+  width: 75%;
+  padding: 8px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  border-radius: 10px;
+  background: #faf5ff;
+  border: 1px solid rgba(50, 38, 89, 0.1490196078);
+}
+.document-container .new-document .speech-input:focus {
+  border-color: #6B46C1;
+}
+@media (max-width: 768px) {
+  .document-container .new-document .speech-input {
+    width: 100%;
+  }
 }
 .document-container .dashbaord-section .model-section {
   padding: 1rem;
@@ -13034,6 +13064,9 @@ body {
   box-shadow: 8px 28px 50px rgba(39, 44, 49, 0.07), 1px 6px 12px rgba(39, 44, 49, 0.04);
   cursor: pointer;
   background-color: #f0e8fe;
+}
+.document-container .speech-text-img {
+  color: #6B46C1;
 }
 
 .main-content .document-container-chat .editor-section {
@@ -13510,14 +13543,17 @@ body {
 }
 
 .text-completion {
-  border: 1px solid #F3F4F9;
+  border: 1px solid rgba(50, 38, 89, 0.1490196078);
   width: 100%;
-  padding: 5%;
+  border-radius: 20px;
 }
 .text-completion:focus {
   outline: none;
 }
 
+.python-suggestions-section {
+  font-size: 0.875rem;
+}
 .python-suggestions-section:has(.python-suggestions) {
   border-left: 1px solid #F3F4F9;
 }
@@ -13581,6 +13617,9 @@ body {
   top: 40%;
   transform: translate(-50%, -50%);
   border-radius: 20px;
+}
+.court-form .form-group .form-control:disabled {
+  background-color: #faf5ff;
 }
 .court-form h4, .court-form .h4 {
   text-decoration: none;

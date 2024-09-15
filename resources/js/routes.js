@@ -26,7 +26,7 @@ import isAdmin from './middleware/isAdmin'
 
 const routes = [
     {
-        path: '/',
+        path: '/dashboard',
         component: Dashboard,
         name: 'dashboard',
         meta: {

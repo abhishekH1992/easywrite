@@ -16,6 +16,11 @@
                 </li>
             </div>
             <div class="header">
+                <li class="nav-font-main-section">
+                    <router-link class="nav-link link_name" to="/dashboard"><i class="fa-solid fa-list"></i>Custom Chat</router-link>
+                </li>
+            </div>
+            <div class="header">
                 <li class="nav-font-main-section billing-list" v-if="!isSevenDayTrial">
                     <router-link class="nav-link link_name nav-div" :to="{ name: 'billing'}" v-if="customerStripeId"><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>
                     <router-link class="nav-link link_name nav-div" :to="{ name: 'plans'}" v-else><i class="fa fa-credit-card" aria-hidden="true"></i>Billing</router-link>

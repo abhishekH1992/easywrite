@@ -14,7 +14,7 @@
                     <div class="col-md-3 col-sm-6 col-xs-12 p-0" v-for="(model, i) in models" :key="i">
                         <div class="model-section">
                             <router-link class="model" :to="{ name: 'chatBox', params: { prompt: model.slug.split('/')[2] }}">
-                                <div class="img"><i :class="model.img"></i></div>
+                                <div class="img dashboard-section-img"><i class="fa fa-pencil-square" aria-hidden="true"></i></div>
                                 <div class="content">
                                     <div class="name">{{ model.name }}</div>
                                     <div class="outline">{{ model.outline }}</div>

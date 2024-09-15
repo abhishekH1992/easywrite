@@ -18,6 +18,9 @@ Route::group(['middleware' => ['auth', 'verified', 'isSubscribed']], function ()
     Route::get('/', function () {
         return redirect('/model/arlo-law-2');
     })->name('dashboard');
+    Route::get('/dashboard', function () {
+        return view('layouts.app');
+    });
     Route::get('/model/{model}', function () {
         return view('layouts.app');
     });
